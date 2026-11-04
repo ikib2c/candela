@@ -144,18 +144,20 @@ urgencia honesta (regalo limitado, no inventado) · proceso de pedido en 1 panta
 10. Modo de uso en 3 pasos + 4 tips.
 11. Estadísticas de percepción con nota legal.
 12. Testimonios con "compradora verificada".
-13. Historias reales: galería masonry con 6 piezas UGC de la marca (estrías normales, posparto, ritual de uso, cambios de peso, oferta del día y tarro abierto, todas con dimensiones intrínsecas para evitar saltos de layout).
-14. Oferta: strip de creatividades (los 3 banners reales de la campaña: "Lleva 3 paga 2", "Paga 2 lleva 3", "OFERTA EXCLUSIVA paga 2 lleva 1") presentados como piezas de redes + nota aclaratoria de que el precio vigente es el del selector; selector de packs (1/2/3 tarros) con packshots del producto real, anclaje y ahorro visible.
+13. Historias reales: galería en cuadrícula uniforme 3×2 (2×3 en móvil) con 6 piezas UGC de la marca (estrías normales, posparto, ritual de uso, cambios de peso, oferta del día y tarro abierto), todas en la misma caja 9:16 (object-fit cover) y con dimensiones intrínsecas para evitar saltos de layout.
+14. Oferta: strip de creatividades uniforme (3 banners de la campaña: "Oferta de lanzamiento — una sola crema $69.900", "Paga 2 lleva 3" y "Lleva 3 paga 2") presentados como piezas de redes + nota aclaratoria de que el precio vigente es el del selector; selector de packs (1/2/3 tarros) con packshots del producto real, anclaje y ahorro visible.
 15. Formulario COD (estilo Releasit): datos de envío + totales en vivo + compromiso +
     envío del pedido a WhatsApp, con foto real del tarro en el resumen.
 16. FAQ (8 preguntas) · CTA final · footer con advertencia cosmética.
 17. Barra sticky móvil con precio del pack de 3.
 
-**Nota sobre los banners de oferta:** las piezas "Lleva 3 paga 2", "Paga 2 lleva 3"
-y "Paga 2 lleva 1" se muestran ahora en la sección de oferta como **visuales de
-campaña** (tal como circulan en redes), con una nota que aclara que el precio vigente
-es el del selector: pack de 3 tarros por $99.900 ($33.300 c/u) + regalo sorpresa.
-Decisión de oct 2026: mostrar las creatividades sin alterar la tabla de precios.
+**Nota sobre los banners de oferta:** las piezas "Lleva 3 paga 2" y "Paga 2 lleva 3"
+se muestran en la sección de oferta como **visuales de campaña** (tal como circulan en
+redes), con una nota que aclara que el precio vigente es el del selector. La pieza de
+**oferta de lanzamiento (1 tarro por $69.900)** se creó para la landing replicando el
+estilo de los anuncios (misma paleta y tipografía, foto real del tarro) porque en los
+anuncios originales no existía una pieza de tarro individual. Decisión de oct 2026:
+mostrar las creatividades sin alterar la tabla de precios.
 
 ### Oferta y precios (fuente: ESTUDIO PRECIOS CANDELA.xlsx)
 | Pack | Precio | Precio unitario | Anclaje | Ahorro visible |

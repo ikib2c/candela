@@ -161,11 +161,11 @@ section{padding:84px 0}
 .ad-figure img{width:100%;height:auto;border-radius:18px}
 .ad-nota{text-align:center;color:var(--vino-soft);font-size:12.5px;margin-top:14px;padding:0 8px}
 
-/* ============ Historias reales (galería masonry) ============ */
+/* ============ Historias reales (cuadrícula uniforme 9:16) ============ */
 .historias{background:var(--crema-2)}
-.galeria-historias{columns:3;column-gap:20px;margin-top:44px}
-.galeria-historias figure{margin:0 0 20px;break-inside:avoid;background:#fff;border:1px solid rgba(72,16,31,.07);border-radius:22px;padding:10px;box-shadow:var(--sombra)}
-.galeria-historias img{width:100%;height:auto;border-radius:14px;display:block;transition:transform .3s}
+.galeria-historias{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
+.galeria-historias figure{margin:0;background:#fff;border:1px solid rgba(72,16,31,.07);border-radius:22px;padding:10px;box-shadow:var(--sombra)}
+.galeria-historias img{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:14px;display:block;transition:transform .3s}
 .galeria-historias figure:hover img{transform:scale(1.02)}
 
 /* ============ 5 soluciones ============ */
@@ -350,8 +350,8 @@ footer .copy{opacity:.6;font-size:11.5px}
   .sticker.descuento{width:88px;height:88px;right:0;bottom:12px}
   .sticker.descuento b{font-size:23px}
   .sticker.descuento span{font-size:9.5px}
-  .galeria-historias{columns:2;column-gap:12px}
-  .galeria-historias figure{border-radius:16px;padding:7px;margin-bottom:12px}
+  .galeria-historias{grid-template-columns:repeat(2,1fr);gap:12px}
+  .galeria-historias figure{border-radius:16px;padding:7px}
   .video-marco{max-width:calc(60vh * .5625)}
   .creativos{padding:24px 18px 16px}
   .creativos-row{gap:12px;justify-content:flex-start;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x mandatory}
