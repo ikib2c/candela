@@ -1,0 +1,190 @@
+# CANDELA — Brief de Branding
+
+## Documento maestro de identidad de marca (versión landing)
+
+**Producto:** Crema reductora de estrías y celulitis · 300 ml · Pimienta Rosa
+**Categoría:** Cosmética corporal / cuidado del cuerpo
+**Mercado:** Colombia (venta directa e-commerce, pago contraentrega)
+**Modelo comercial:** Landing de conversión directa (Meta Ads → landing → WhatsApp)
+**Público principal:** Mujeres de 25 a 45 años (postparto, cambios de peso, celulitis y flacidez)
+**Posicionamiento:** Medio — eficacia percibida alta a precio accesible
+**Eslogan:** *Enciende la transformación de tu piel.*
+
+> **Dirección creativa:** CANDELA es calor, ritmo y constancia. Una marca femenina y
+> energética que convierte un tratamiento corporal en un ritual nocturno de 5 minutos
+> ("el reto de las 21 noches"). Comunicación honesta y cálida: promete lo que un
+> cosmético puede cumplir y celebra el progreso, no la perfección.
+
+---
+
+## 1. Esencia de marca
+
+### Significado
+"Candela" es el fuego, la llama que enciende. La Pimienta Rosa genera un efecto calor
+real sobre la piel: ese calor es la metáfora central de la marca — la transformación
+se enciende noche a noche, con constancia.
+
+### Propósito
+Que cada mujer recupere la confianza de mostrarse: piel más firme, suave y uniforme
+mediante un ritual simple, sensorial y sostenible.
+
+### Diferenciadores
+- Efecto calor perceptible desde el primer uso (el producto "se siente trabajando").
+- Fórmula completa: estrías rojas y blancas, celulitis, flacidez y medidas en un solo tarro.
+- Tarro de 300 ml: mucho más contenido que una crema reductora tradicional.
+- Ritual educativo: reto de 21 noches + tips de aplicación, no solo venta.
+- Compra sin riesgo: envío gratis, pago contraentrega y garantía de 30 días.
+
+### Personalidad
+Cálida, femenina, directa, motivadora y honesta. CANDELA no debe sentirse clínica,
+fría ni exagerada: se parece más a una amiga que ya lo probó y te lo cuenta claro.
+
+---
+
+## 2. Identidad verbal
+
+### Eslogan principal
+**Enciende la transformación de tu piel.**
+
+### Mensajes alternativos
+- Dile adiós a la piel flácida.
+- Tu ritual de 5 minutos, tu transformación.
+- El calor que reactiva tu piel.
+- Te retamos a 21 noches conmigo.
+
+### Tono de voz
+- **Cercano:** habla de tú a tú, como una amiga (usa "te retamos", "y me cuentas").
+- **Sensorial:** describe calor, textura sedosa, aroma suave, momento nocturno.
+- **Honesto:** sin promesas médicas ni resultados garantizados; siempre "ayuda a",
+  "apariencia", "percibido por clientas".
+- **Energético:** emojis de fuego/gift con moderación, ritmo corto, verbos de acción.
+
+### Reglas de comunicación
+No usar afirmaciones médicas, de curación ni adelgazamiento sistémico. Las cifras de
+eficacia se presentan siempre como *percepción de clientas* ("98% les gustó…") con nota
+de que los resultados varían. El término correcto del producto es "crema reductora de
+estrías y celulitis" (nunca "quemagrasa" ni "adelgazante").
+
+---
+
+## 3. Identidad visual
+
+### 3.1 Paleta cromática oficial (extraída del envase y los anuncios)
+
+| Color | HEX | Uso recomendado |
+|---|---|---|
+| Rojo Candela | `#D31E3C` | Color principal: logo, CTAs, acentos de conversión |
+| Rojo oscuro | `#A3122B` | Hover y profundidad del rojo |
+| Rosa pimienta | `#F2547D` | Acento secundario: subrayados, iconos, detalles |
+| Niebla rosa | `#FBD3DE` | Fondos de tarjetas, chips, estados suaves |
+| Crema | `#FFF6F3` | Fondo principal de la landing |
+| Crema rosada | `#FDEBEF` | Fondos de secciones alternas |
+| Vino | `#48101F` | Texto, secciones oscuras, footer |
+| Vino suave | `#8A5A64` | Texto secundario sobre crema |
+| Oro regalo | `#F2A93B` | Estrellas, "regalo sorpresa", urgencia cálida |
+| Verde éxito | `#1E9E6A` | Checkmarks de confianza y ahorro |
+
+**Distribución orientativa:** 45% crema/rosada · 25% vino (texto y secciones oscuras) ·
+15% rojo Candela · 10% rosa pimienta/niebla · 5% oro. El rojo se reserva para lo que
+debe pulsarse o recordarse: CTAs, precios y sellos.
+
+### 3.2 Tipografía
+
+**Display: Anton (Google Fonts)**
+- Uso: logotipo, titulares H1/H2, precios, números de paso.
+- Personalidad: condensada, alta e impactante — replica el rotulado "CANDELA" de la etiqueta.
+- Siempre en mayúsculas con tracking normal.
+
+**Cuerpo: Poppins (400/500/600/700)**
+- Uso: párrafos, bullets, formularios, botones, badges.
+- Personalidad: geométrica, redondeada, moderna y muy legible en móvil.
+
+**Acento manuscrito: Caveat 600**
+- Uso: frases de marca estilo nota a mano ("y me cuentas 💕", "un ritual de 5 minutos 🌙").
+- Regla: máximo una por sección, nunca en texto funcional.
+
+### 3.3 Símbolo e iconografía
+- **Isotipo:** llama estilizada de dos lenguas (SVG), en rojo sobre crema o blanco sobre rojo/vino.
+- **Iconografía:** lineal, stroke 1.6–1.8, esquinas redondeadas, un solo color por icono.
+- **Motivos:** fuego/calor, luna (ritual nocturno), regalo sorpresa, checkmark de confianza.
+- Evitar: iconos 3D, mezcla de estilos, fotografía clínica o de laboratorio.
+
+### 3.4 Recursos gráficos
+- Blobs y manchas suaves rosa/naranja desenfocadas como fondo del héroe.
+- Stickers circulares rotados para sellos: "REGALO SORPRESA" (oro) y "AHORRAS 66%" (rojo).
+- Tarjetas blancas con esquinas 18–26 px y sombras cálidas sobre fondo crema.
+- Línea punteada como separador en totales y bordes internos.
+
+### 3.5 Fotografía
+- Fotos reales del producto (tarro rojo con etiqueta visible) siempre que sea posible;
+  la autenticidad es parte de la confianza anti-estafa.
+- Texturas de la crema rosada con la tapa abierta como foto de fórmula.
+- Modo de vida: mujer sosteniendo el tarro, luz cálida, ropa cómoda, ambiente de casa.
+- Video vertical 9:16 para el "ritual de 5 minutos".
+- Evitar stock artificiales, piel excesivamente retocada y antes/después engañosos.
+
+---
+
+## 4. Arquitectura de la landing (experiencia digital)
+
+**Principios:** mobile-first · una sola conversión (pedir) · confianza primero ·
+urgencia honesta (regalo limitado, no inventado) · proceso de pedido en 1 pantalla.
+
+### Estructura implementada
+1. Marquee superior: envío gratis · pago contraentrega · regalo · reto 21 noches.
+2. Header: logo + rating 4.9 (1.343 reseñas) + CTA.
+3. Héroe: promesa + 4 beneficios del envase + precio anclado + foto real + stickers.
+4. Barra de confianza: envío, contraentrega, regalo, garantía 30 días.
+5. Dolor → transformación (tarjetas "Sin Candela" / "Con Candela").
+6. Antes/después con pieza real: Día 1 vs Día 30 (anuncio del reto de 21 días) + disclaimer.
+7. 5 soluciones en un tarro.
+8. Fórmula: Pimienta Rosa + 4 activos (nicotinato de metilo, carnitina+cafeína,
+   jengibre/capsaicina/algas, mentol).
+9. Video de presentación (vertical, la percepción del ritual).
+10. Modo de uso en 3 pasos + 4 tips.
+11. Estadísticas de percepción con nota legal.
+12. Testimonios con "compradora verificada".
+13. Historias reales: galería masonry con las piezas UGC de la marca (posparto,
+    cambios de peso, "las estrías son normales", ritual de 5 minutos, oferta).
+14. Oferta: selector de packs (1/2/3 tarros) con anclaje y ahorro visible.
+15. Formulario COD (estilo Releasit): datos de envío + totales en vivo + compromiso +
+    envío del pedido a WhatsApp.
+16. FAQ (8 preguntas) · CTA final · footer con advertencia cosmética.
+17. Barra sticky móvil con precio del pack de 3.
+
+**Nota sobre los banners de oferta:** las piezas genéricas "Lleva 3 paga 2",
+"Paga 2 lleva 3" y "Paga 2 lleva 1" contradictorias entre sí no se incluyeron
+en la página porque sus textos de promoción no coinciden con la tabla de precios
+del estudio; así se evita confundir a la compradora. Si se quieren usar, primero
+unificar la mecánica de la promoción (visión del pack de 3 de $99.900 = $33.300 c/u con regalo).
+
+### Oferta y precios (fuente: ESTUDIO PRECIOS CANDELA.xlsx)
+| Pack | Precio | Precio unitario | Anclaje | Ahorro visible |
+|---|---|---|---|---|
+| 1 tarro | $69.900 | $69.900 | ~~$99.900~~ | Ahorras $30.000 |
+| 2 tarros | $89.900 | $44.950 | ~~$199.800~~ | Ahorras $109.900 |
+| 3 tarros ⭐ + regalo | $99.900 | $33.300 | ~~$299.700~~ | Ahorras $199.800 (66%) |
+
+El pack de 3 es la oferta héroe (coincide con los anuncios "3 por $99.900").
+
+---
+
+## 5. Criterios de calidad y consistencia
+
+- El logo y el rojo Candela se reconocen en tamaño de avatar y favicon.
+- Los CTAs son siempre rojos; nunca dos rojos compitiendo en la misma vista.
+- Las cifras de eficacia llevan su nota de percepción.
+- El formulario funciona y envía a WhatsApp sin errores en móvil.
+- La urgencia (regalo sorpresa) es real y editable desde la configuración.
+- El tono es de amiga honesta, no de infomercial.
+
+---
+
+## 6. Entregables y configuración técnica
+
+- `index.html` · `assets/css/style.css` · `assets/js/main.js` · `assets/img/` · `assets/video/`.
+- **Número de WhatsApp configurado:** `573147247260` (57 + 314 724 7260), definido en
+  la variable `WHATSAPP_TIENDA` al inicio de `main.js`. Todos los pedidos del
+  formulario llegan ahí; cámbiala ahí si cambia el número.
+- Sitio 100% estático: publicable en GitHub Pages, Netlify o Vercel sin build.
+- Datos dinámicos centralizados en JS: precios de packs, costo de envío prioritario.

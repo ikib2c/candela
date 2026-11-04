@@ -1,0 +1,190 @@
+/* CANDELA — Lógica de la landing
+   ⚙️ CONFIGURACIÓN: reemplaza WHATSAPP_TIENDA por el número real de WhatsApp
+   de la tienda (indicativo de país + número, sin espacios ni símbolos). */
+const WHATSAPP_TIENDA = '573147247260';
+
+const PACKS = {
+  1: { unidades: 1, precio: 69900,  antes: 99900,  nombre: '1 tarro CANDELA 300ml',  detalle: '1 mes de ritual' },
+  2: { unidades: 2, precio: 89900,  antes: 199800, nombre: '2 × CANDELA 300ml',      detalle: '2 meses de ritual · $44.950 c/u' },
+  3: { unidades: 3, precio: 99900,  antes: 299700, nombre: '3 × CANDELA 300ml',      detalle: '3 meses de ritual · $33.300 c/u · + regalo sorpresa' }
+};
+
+const ENVIO_PRIORITARIO = 9900;
+let packActual = 3;
+
+const $  = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const cop = v => new Intl.NumberFormat('es-CO', { style:'currency', currency:'COP', minimumFractionDigits:0 }).format(v);
+
+/* ============ Galería del héroe ============ */
+function initGaleria(){
+  const img = $('#heroImg');
+  $$('.hero-miniaturas img').forEach(t => {
+    t.addEventListener('click', () => {
+      img.src = t.src.replace('.jpg', '.jpg');
+      img.style.opacity = '0';
+      setTimeout(() => img.style.opacity = '1', 120);
+      $$('.hero-miniaturas img').forEach(x => x.classList.remove('on'));
+      t.classList.add('on');
+    });
+  });
+}
+
+/* ============ Selector de packs ============ */
+function initBundles(){
+  $$('.bundle').forEach(b => {
+    b.addEventListener('click', () => {
+      $$('.bundle').forEach(x => x.classList.remove('sel'));
+      b.classList.add('sel');
+      packActual = parseInt(b.dataset.pack, 10);
+      actualizarResumen();
+    });
+  });
+}
+
+function packData(){
+  return PACKS[packActual];
+}
+
+function envioActual(){
+  const r = document.querySelector('input[name="envio"]:checked');
+  return r && r.value === 'prioritario' ? ENVIO_PRIORITARIO : 0;
+}
+
+function actualizarResumen(){
+  const p = packData();
+  const sub = $('#resNombre');
+  const det = $('#resDetalle');
+  const mon = $('#resMonto');
+  const tS  = $('#tSubtotal');
+  const tE  = $('#tEnvio');
+  const tT  = $('#tTotal');
+  if (sub) sub.textContent = p.nombre;
+  if (det) det.textContent = p.detalle;
+  if (mon) mon.textContent = cop(p.precio);
+  if (tS)  tS.textContent  = cop(p.precio);
+  if (tE)  tE.textContent  = envioActual() > 0 ? cop(envioActual()) : 'Gratis';
+  if (tT)  tT.textContent  = cop(p.precio + envioActual());
+}
+
+function initEnvio(){
+  $$('input[name="envio"]').forEach(r => r.addEventListener('change', actualizarResumen));
+}
+
+function irAlPedido(){
+  actualizarResumen();
+  const destino = $('#pedido');
+  if (destino) destino.scrollIntoView({ behavior:'smooth' });
+}
+
+/* ============ Envío del pedido por WhatsApp ============ */
+function initFormulario(){
+  const form = $('#formPedido');
+  if (!form) return;
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const nombre = $('#fNombre').value.trim();
+    const apellido = $('#fApellido').value.trim();
+    const telefono = $('#fTelefono').value.trim();
+    const departamento = $('#fDepartamento').value;
+    const ciudad = $('#fCiudad').value.trim();
+    const direccion = $('#fDireccion').value.trim();
+    const nota = $('#fNota').value.trim();
+    const compromiso = $('#fCompromiso').checked;
+
+    if (!nombre || !apellido || !telefono || !departamento || !ciudad || !direccion){
+      alert('Por favor completa todos los campos marcados con *.');
+      return;
+    }
+    if (!compromiso){
+      alert('Marca la casilla de compromiso para confirmar tu pedido.');
+      return;
+    }
+
+    const p = packData();
+    const envio = envioActual();
+    const total = p.precio + envio;
+
+    let msg = '*🔥 Nuevo pedido — CANDELA*%0A%0A';
+    msg += `*Cliente:* ${nombre} ${apellido}%0A`;
+    msg += `*Celular / WhatsApp:* ${telefono}%0A`;
+    msg += `*Dirección:* ${direccion}%0A`;
+    msg += `*Departamento:* ${departamento}%0A`;
+    msg += `*Ciudad:* ${ciudad}%0A`;
+    if (nota) msg += `*Referencia:* ${nota}%0A`;
+    msg += '%0A*Pedido:*%0A';
+    msg += `- ${p.nombre} — ${cop(p.precio)}%0A`;
+    if (packActual === 3) msg += '- Regalo sorpresa incluido%0A';
+    msg += `*Envío:* ${envio > 0 ? 'Prioritario — ' + cop(envio) : 'Gratis'}%0A`;
+    msg += `*TOTAL:* ${cop(total)}%0A%0A`;
+    msg += '*Método de pago:* Contraentrega (pago al recibir)%0A%0A';
+    msg += 'Confirmo que recibiré y pagaré mi pedido en la entrega.';
+
+    window.open(`https://wa.me/${WHATSAPP_TIENDA}?text=${msg}`, '_blank');
+  });
+}
+
+/* ============ FAQ acordeón ============ */
+function initFaq(){
+  $$('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', () => {
+      const abierto = item.classList.contains('open');
+      $$('.faq-item.open').forEach(o => {
+        o.classList.remove('open');
+        o.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if (!abierto){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+}
+
+/* ============ Cuenta regresiva diaria (regalo sorpresa) ============ */
+function initCuentaRegresiva(){
+  const el = $('#cuentaRegresiva');
+  if (!el) return;
+  function tic(){
+    const ahora = new Date();
+    const fin = new Date(ahora);
+    fin.setHours(23, 59, 59, 999);
+    let dif = Math.max(0, fin - ahora);
+    const h = String(Math.floor(dif / 3600000)).padStart(2, '0');
+    const m = String(Math.floor((dif % 3600000) / 60000)).padStart(2, '0');
+    const s = String(Math.floor((dif % 60000) / 1000)).padStart(2, '0');
+    el.textContent = `${h}:${m}:${s}`;
+  }
+  tic();
+  setInterval(tic, 1000);
+}
+
+/* ============ Aparición al hacer scroll ============ */
+function initReveal(){
+  const obs = new IntersectionObserver(entradas => {
+    entradas.forEach(en => {
+      if (en.isIntersecting){
+        en.target.classList.add('vis');
+        obs.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  $$('.reveal').forEach(el => obs.observe(el));
+}
+
+/* ============ Inicio ============ */
+document.addEventListener('DOMContentLoaded', () => {
+  initGaleria();
+  initBundles();
+  initEnvio();
+  actualizarResumen();
+  initFormulario();
+  initFaq();
+  initCuentaRegresiva();
+  initReveal();
+  const anio = $('#anio');
+  if (anio) anio.textContent = new Date().getFullYear();
+});
