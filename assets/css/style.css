@@ -39,7 +39,7 @@ body{
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }
-img{max-width:100%;display:block}
+img{max-width:100%;display:block;height:auto}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;border:0;background:none;cursor:pointer;color:inherit}
 input,select,textarea{font-family:inherit;font-size:inherit}
@@ -108,15 +108,15 @@ header{position:sticky;top:0;z-index:80;background:rgba(255,246,243,.92);backdro
 .hero-confianza svg{width:18px;height:18px;stroke:var(--rojo)}
 
 .hero-media{position:relative}
-.hero-foto{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sombra-fuerte);border:8px solid #fff;transform:rotate(2deg)}
-.hero-foto img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.hero-foto{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sombra-fuerte);border:8px solid #fff;transform:rotate(2deg);background:var(--crema-2)}
+.hero-foto img{width:100%;aspect-ratio:1/1;object-fit:contain;filter:drop-shadow(0 16px 26px rgba(72,16,31,.16))}
 .sticker{position:absolute;font:400 20px/1.1 var(--ff-display);text-transform:uppercase;letter-spacing:.05em;display:grid;place-items:center;text-align:center;border-radius:50%;box-shadow:var(--sombra-fuerte);overflow:hidden}
 .sticker.regalo{width:116px;height:116px;background:var(--oro);color:var(--vino);top:-24px;left:-14px;transform:rotate(-12deg);padding:10px;font-size:14px;line-height:1.3}
 .sticker.descuento{width:112px;height:112px;background:var(--rojo);color:#fff;bottom:22px;right:-8px;transform:rotate(8deg);padding:8px}
 .sticker.descuento span{display:grid;gap:2px;justify-items:center;font-size:11.5px;letter-spacing:.14em;line-height:1.1}
 .sticker.descuento b{display:block;font-size:30px;line-height:1;letter-spacing:.02em}
 .hero-miniaturas{display:flex;gap:12px;margin-top:18px;justify-content:center}
-.hero-miniaturas img{width:72px;height:72px;object-fit:cover;border-radius:14px;border:3px solid #fff;box-shadow:var(--sombra);cursor:pointer;opacity:.75;transition:.2s}
+.hero-miniaturas img{width:72px;height:72px;object-fit:contain;background:#fff;border-radius:14px;border:3px solid #fff;box-shadow:var(--sombra);cursor:pointer;opacity:.75;transition:.2s}
 .hero-miniaturas img:hover,.hero-miniaturas img.on{opacity:1;border-color:var(--pimienta)}
 
 /* ============ Barra de confianza ============ */
@@ -346,11 +346,42 @@ footer .copy{opacity:.6;font-size:11.5px}
   .sticky-movil{display:flex}
   body{padding-bottom:76px}
   .bundle.sel{transform:none}
-  .sticker.regalo{width:92px;height:92px;font-size:11.5px;left:-6px;top:-16px}
-  .sticker.descuento{width:88px;height:88px;right:-4px;bottom:14px}
+  .sticker.regalo{width:92px;height:92px;font-size:11.5px;left:2px;top:-14px}
+  .sticker.descuento{width:88px;height:88px;right:0;bottom:12px}
   .sticker.descuento b{font-size:23px}
   .sticker.descuento span{font-size:9.5px}
   .galeria-historias{columns:2;column-gap:12px}
   .galeria-historias figure{border-radius:16px;padding:7px;margin-bottom:12px}
-  .video-marco video{max-height:60vh}
+  .video-marco{max-width:calc(60vh * .5625)}
+  .creativos{padding:24px 18px 16px}
+  .creativos-row{gap:12px;justify-content:flex-start;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x mandatory}
+  .creativos-row img{flex:0 0 46%;scroll-snap-align:center}
 }
+
+
+/* ============ Anuncios (como lo viste en redes) ============ */
+.creativos{margin-top:46px;background:#fff;border:1px solid rgba(72,16,31,.08);border-radius:var(--r-lg);padding:34px 30px 24px;box-shadow:var(--sombra)}
+.creativos-h{font:400 22px var(--ff-display);text-transform:uppercase;color:var(--vino-soft);margin-top:8px}
+.creativos-row{display:flex;gap:20px;justify-content:center;margin-top:24px}
+.creativos-row img{width:32%;max-width:250px;border:6px solid #fff;outline:1px solid rgba(72,16,31,.12);border-radius:18px;box-shadow:var(--sombra);transition:transform .3s}
+.creativos-row img:hover{transform:translateY(-6px)}
+.creativos-row .c1{transform:rotate(-3deg)}
+.creativos-row .c3{transform:rotate(3deg)}
+.creativos-nota{text-align:center;color:var(--vino-soft);font-size:12.5px;margin-top:20px;line-height:1.6}
+.creativos-nota b{color:var(--rojo)}
+
+/* ============ Packshot en tarjetas de pack ============ */
+.packshot{display:flex;align-items:flex-end;padding:2px 0 10px}
+.packshot img{width:56px;filter:drop-shadow(0 6px 10px rgba(72,16,31,.18))}
+.packshot img:nth-child(odd){transform:rotate(-5deg)}
+.packshot img:nth-child(even){transform:rotate(5deg)}
+.packshot img + img{margin-left:-18px}
+.packshot-x3 img{width:50px;margin-left:-20px}
+.packshot-x3 img:first-child{margin-left:0}
+
+/* ============ Accesibilidad / movimiento ============ */
+@media (prefers-reduced-motion:reduce){
+  .barra-top .pista{animation:none}
+  .reveal{transition:none;opacity:1;transform:none}
+}
+.bundle:focus-visible{outline:3px solid var(--oro);outline-offset:3px}

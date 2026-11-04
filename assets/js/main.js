@@ -21,7 +21,8 @@ function initGaleria(){
   const img = $('#heroImg');
   $$('.hero-miniaturas img').forEach(t => {
     t.addEventListener('click', () => {
-      img.src = t.src.replace('.jpg', '.jpg');
+      img.src = t.src;
+      img.alt = t.alt.replace(/^Ver foto \d+: /, '');
       img.style.opacity = '0';
       setTimeout(() => img.style.opacity = '1', 120);
       $$('.hero-miniaturas img').forEach(x => x.classList.remove('on'));
@@ -33,11 +34,19 @@ function initGaleria(){
 /* ============ Selector de packs ============ */
 function initBundles(){
   $$('.bundle').forEach(b => {
-    b.addEventListener('click', () => {
-      $$('.bundle').forEach(x => x.classList.remove('sel'));
+    b.tabIndex = 0;
+    b.setAttribute('role', 'button');
+    b.setAttribute('aria-pressed', b.classList.contains('sel') ? 'true' : 'false');
+    const elegir = () => {
+      $$('.bundle').forEach(x => { x.classList.remove('sel'); x.setAttribute('aria-pressed', 'false'); });
       b.classList.add('sel');
+      b.setAttribute('aria-pressed', 'true');
       packActual = parseInt(b.dataset.pack, 10);
       actualizarResumen();
+    };
+    b.addEventListener('click', elegir);
+    b.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); elegir(); }
     });
   });
 }
@@ -135,10 +144,12 @@ function initFaq(){
       $$('.faq-item.open').forEach(o => {
         o.classList.remove('open');
         o.querySelector('.faq-a').style.maxHeight = null;
+        o.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
       });
       if (!abierto){
         item.classList.add('open');
         a.style.maxHeight = a.scrollHeight + 'px';
+        q.setAttribute('aria-expanded', 'true');
       }
     });
   });

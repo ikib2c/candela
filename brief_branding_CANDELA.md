@@ -133,30 +133,29 @@ urgencia honesta (regalo limitado, no inventado) · proceso de pedido en 1 panta
 ### Estructura implementada
 1. Marquee superior: envío gratis · pago contraentrega · regalo · reto 21 noches.
 2. Header: logo + rating 4.9 (1.343 reseñas) + CTA.
-3. Héroe: promesa + 4 beneficios del envase + precio anclado + foto real + stickers.
+3. Héroe: promesa + 4 beneficios del envase + precio anclado + foto real del tarro (galería de 3 fotos reales: precintado, abierto y reverso) + stickers.
 4. Barra de confianza: envío, contraentrega, regalo, garantía 30 días.
 5. Dolor → transformación (tarjetas "Sin Candela" / "Con Candela").
 6. Antes/después con pieza real: Día 1 vs Día 30 (anuncio del reto de 21 días) + disclaimer.
 7. 5 soluciones en un tarro.
 8. Fórmula: Pimienta Rosa + 4 activos (nicotinato de metilo, carnitina+cafeína,
    jengibre/capsaicina/algas, mentol).
-9. Video de presentación (vertical, la percepción del ritual).
+9. Video: testimonio real de clienta (Tertimonio.mp4, 1080×1920, 9:16 vertical) con póster, copy sobrio y disclaimer de resultados.
 10. Modo de uso en 3 pasos + 4 tips.
 11. Estadísticas de percepción con nota legal.
 12. Testimonios con "compradora verificada".
-13. Historias reales: galería masonry con las piezas UGC de la marca (posparto,
-    cambios de peso, "las estrías son normales", ritual de 5 minutos, oferta).
-14. Oferta: selector de packs (1/2/3 tarros) con anclaje y ahorro visible.
+13. Historias reales: galería masonry con 6 piezas UGC de la marca (estrías normales, posparto, ritual de uso, cambios de peso, oferta del día y tarro abierto, todas con dimensiones intrínsecas para evitar saltos de layout).
+14. Oferta: strip de creatividades (los 3 banners reales de la campaña: "Lleva 3 paga 2", "Paga 2 lleva 3", "OFERTA EXCLUSIVA paga 2 lleva 1") presentados como piezas de redes + nota aclaratoria de que el precio vigente es el del selector; selector de packs (1/2/3 tarros) con packshots del producto real, anclaje y ahorro visible.
 15. Formulario COD (estilo Releasit): datos de envío + totales en vivo + compromiso +
-    envío del pedido a WhatsApp.
+    envío del pedido a WhatsApp, con foto real del tarro en el resumen.
 16. FAQ (8 preguntas) · CTA final · footer con advertencia cosmética.
 17. Barra sticky móvil con precio del pack de 3.
 
-**Nota sobre los banners de oferta:** las piezas genéricas "Lleva 3 paga 2",
-"Paga 2 lleva 3" y "Paga 2 lleva 1" contradictorias entre sí no se incluyeron
-en la página porque sus textos de promoción no coinciden con la tabla de precios
-del estudio; así se evita confundir a la compradora. Si se quieren usar, primero
-unificar la mecánica de la promoción (visión del pack de 3 de $99.900 = $33.300 c/u con regalo).
+**Nota sobre los banners de oferta:** las piezas "Lleva 3 paga 2", "Paga 2 lleva 3"
+y "Paga 2 lleva 1" se muestran ahora en la sección de oferta como **visuales de
+campaña** (tal como circulan en redes), con una nota que aclara que el precio vigente
+es el del selector: pack de 3 tarros por $99.900 ($33.300 c/u) + regalo sorpresa.
+Decisión de oct 2026: mostrar las creatividades sin alterar la tabla de precios.
 
 ### Oferta y precios (fuente: ESTUDIO PRECIOS CANDELA.xlsx)
 | Pack | Precio | Precio unitario | Anclaje | Ahorro visible |
@@ -187,4 +186,10 @@ El pack de 3 es la oferta héroe (coincide con los anuncios "3 por $99.900").
   la variable `WHATSAPP_TIENDA` al inicio de `main.js`. Todos los pedidos del
   formulario llegan ahí; cámbiala ahí si cambia el número.
 - Sitio 100% estático: publicable en GitHub Pages, Netlify o Vercel sin build.
+- Publicado en: https://ikib2c.github.io/candela/ (repo https://github.com/ikib2c/candela).
+- SEO/social: canonical + Open Graph (og:image de 1200×630 generada con el tarro real
+  y la oferta héroe) + Twitter card + JSON-LD Product.
+- Calidad: QA E2E automatizado (Edge headless) 34/34 PASS: selector de packs, totales
+  en vivo, flujo COD hasta wa.me, video 9:16 verificado (1080×1920), sin errores de
+  consola ni recursos fallidos, sin scroll horizontal en móvil (390 px).
 - Datos dinámicos centralizados en JS: precios de packs, costo de envío prioritario.
