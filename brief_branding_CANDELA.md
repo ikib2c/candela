@@ -249,6 +249,13 @@ El pack de 3 es la oferta héroe (coincide con los anuncios "3 por $99.900").
 - **Dopamina:** toast de ahorro al elegir pack ("¡Buena elección! Ahorras $X 🎁"),
   barra de progreso de 3 pasos en el COD (pack ✓ → datos ✓ → pagas al recibir),
   overlay de éxito con check al enviar el pedido, shimmer en los botones, pop del radio
-  seleccionado y rebote de la barra sticky al cambiar de pack (todo con guard de
-  `prefers-reduced-motion`).
+  seleccionado, rebote de la barra sticky al cambiar de pack y **latido del botón
+  "Enviar pedido · Pago contraentrega"** (doble pulso tipo corazón, con guard de
+  `prefers-reduced-motion`). Formulario COD con estética pulida: cabecera en degradado,
+  campos con fondo suave + glow de foco, totales y compromiso como tarjetas.
+- **CTAs adicionales:** strip intermedio "Quiero empezar mi reto hoy" tras los
+  testimonios y botón "Ver los packs y precios" al cierre de la sección nueva
+  presentación (junto con hero, sticky, oferta y CTA final suman 7 puntos de conversión).
+- **Sin menciones a la SIC** (Superintendencia de Industria y Comercio) en las páginas
+  legales, por decisión del cliente: los reclamos se canalizan por el WhatsApp oficial.
 - Datos dinámicos centralizados en JS: precios de packs, costo de envío prioritario.

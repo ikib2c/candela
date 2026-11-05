@@ -280,8 +280,8 @@ section{padding:84px 0}
 .cod-totales{border-top:1px dashed rgba(72,16,31,.2);margin-top:24px;padding-top:18px;display:grid;gap:8px}
 .cod-totales div{display:flex;justify-content:space-between;font-size:14px;color:var(--vino-soft)}
 .cod-totales div span:last-child{font-weight:600;color:var(--vino)}
-.cod-totales .final{font-size:16px;color:var(--vino)}
-.cod-totales .final span:last-child{font:400 26px var(--ff-display);color:var(--rojo)}
+.cod-totales .tot-final{font-size:16px;font-weight:600;color:var(--vino)}
+.cod-totales .tot-final span:last-child{font:400 26px var(--ff-display);color:var(--rojo)}
 .cod-compromiso{font-size:12.5px;color:var(--vino-soft);margin-top:14px;display:flex;gap:9px;align-items:flex-start}
 .cod-compromiso input{accent-color:var(--rojo);margin-top:3px}
 .cod-enviar{width:100%;margin-top:18px}
@@ -417,7 +417,30 @@ footer .copy{opacity:.6;font-size:11.5px}
 @media (prefers-reduced-motion:reduce){
   .btn::after,.bundle.sel .punto,.exito-check{animation:none}
   .sticky-movil.flash{animation:none}
+  .cod-enviar{animation:none}
 }
+
+/* ============ Formulario COD: estética mejorada ============ */
+.cod-head{background:linear-gradient(135deg,#8A1B30,var(--vino))}
+.cod-body{padding:30px 32px}
+.cod-resumen{border:1px solid rgba(211,30,60,.12);box-shadow:0 6px 16px rgba(72,16,31,.05)}
+.cod-resumen img{box-shadow:0 6px 14px rgba(72,16,31,.18)}
+.cod-envio label{padding:14px 16px;border-radius:12px;transition:border-color .2s,background .2s,box-shadow .2s}
+.cod-envio label:hover{border-color:rgba(211,30,60,.35)}
+.cod-envio label:has(input:checked){box-shadow:0 6px 16px rgba(211,30,60,.12)}
+.campo input,.campo select,.campo textarea{background:#FDF9F8;padding:14px 15px;border-radius:12px}
+.campo input:hover:not(:focus),.campo select:hover:not(:focus){border-color:rgba(211,30,60,.3)}
+.campo input:focus,.campo select:focus,.campo textarea:focus{background:#fff;border-color:var(--rojo);box-shadow:0 0 0 4px rgba(211,30,60,.09)}
+.cod-totales{border-top:none;background:var(--crema-2);border-radius:14px;padding:16px 18px}
+.cod-compromiso{background:var(--crema-2);border:1px dashed rgba(211,30,60,.28);border-radius:12px;padding:12px 14px;margin-top:14px}
+.cod-enviar{width:100%;margin-top:18px;background:linear-gradient(135deg,#E8324E,var(--rojo) 55%,#B3182F);box-shadow:0 14px 30px rgba(211,30,60,.35);font-size:16px;padding:18px;animation:latido 1.6s ease-in-out infinite;transform-origin:center}
+@keyframes latido{0%,100%{transform:scale(1)}14%{transform:scale(1.045)}28%{transform:scale(1)}42%{transform:scale(1.03)}56%{transform:scale(1)}}
+
+/* ============ CTA intermedios ============ */
+.cta-mid{padding:10px 0 30px;text-align:center}
+.cta-mid .mano{font-size:26px;color:var(--vino-soft);display:block;margin-bottom:14px}
+.cta-mid .cta-nota{display:block;margin-top:12px;color:var(--vino-soft);font-size:12.5px}
+.creativos-cta{display:block;width:fit-content;margin:16px auto 0}
 
 /* ============ Páginas legales ============ */
 .legal-pag{max-width:840px;margin:0 auto;padding:36px 22px 60px}
