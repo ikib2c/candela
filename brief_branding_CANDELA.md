@@ -139,12 +139,12 @@ urgencia honesta (regalo limitado, no inventado) · proceso de pedido en 1 panta
 6. Antes/después con pieza real: Día 1 vs Día 30 (anuncio del reto de 21 días) + disclaimer.
 7. 5 soluciones en un tarro.
 8. Fórmula: Pimienta Rosa + 4 activos (nicotinato de metilo, carnitina+cafeína,
-   jengibre/capsaicina/algas, mentol).
+   jengibre/capsaicina/algas, mentol) con foto real del tarro abierto mostrando la textura de la crema.
 9. Video: testimonio real de clienta (Tertimonio.mp4, 1080×1920, 9:16 vertical) con póster, copy sobrio y disclaimer de resultados.
 10. Modo de uso en 3 pasos + 4 tips.
 11. Estadísticas de percepción con nota legal.
 12. Testimonios con "compradora verificada".
-13. Historias reales: galería en cuadrícula uniforme 3×2 (2×3 en móvil) con 6 piezas UGC de la marca (estrías normales, posparto, ritual de uso, cambios de peso, oferta del día y tarro abierto), todas en la misma caja 9:16 (object-fit cover) y con dimensiones intrínsecas para evitar saltos de layout.
+13. Historias reales: galería uniforme con 3 piezas UGC de la marca (estrías normales, posparto y ritual de uso), misma caja 9:16 (object-fit cover) en escritorio y una sola columna en móvil.
 14. Oferta: strip de creatividades uniforme (3 banners de la campaña: "Oferta de lanzamiento — una sola crema $69.900", "Paga 2 lleva 3" y "Lleva 3 paga 2") presentados como piezas de redes + nota aclaratoria de que el precio vigente es el del selector; selector de packs (1/2/3 tarros) con packshots del producto real, anclaje y ahorro visible.
 15. Formulario COD (estilo Releasit): datos de envío + totales en vivo + compromiso +
     envío del pedido a WhatsApp, con foto real del tarro en el resumen.
@@ -189,9 +189,15 @@ El pack de 3 es la oferta héroe (coincide con los anuncios "3 por $99.900").
   formulario llegan ahí; cámbiala ahí si cambia el número.
 - Sitio 100% estático: publicable en GitHub Pages, Netlify o Vercel sin build.
 - Publicado en: https://ikib2c.github.io/candela/ (repo https://github.com/ikib2c/candela).
+- Tracking: Google Tag Manager (GTM-5M6MMNGH) + GA4 (G-E2ZVQKECVG) + Meta Pixel
+  (1283443887279567) + Microsoft Clarity (z83tjfbh9h) + verificación de dominio de Meta,
+  todo en el `<head>`. Eventos de conversión con valor en COP: Meta ViewContent, AddToCart,
+  InitiateCheckout y Purchase; GA4 view_item, add_to_cart, begin_checkout y purchase
+  (con items y transaction_id); los mismos eventos se empujan al dataLayer de GTM.
 - SEO/social: canonical + Open Graph (og:image de 1200×630 generada con el tarro real
   y la oferta héroe) + Twitter card + JSON-LD Product.
-- Calidad: QA E2E automatizado (Edge headless) 34/34 PASS: selector de packs, totales
-  en vivo, flujo COD hasta wa.me, video 9:16 verificado (1080×1920), sin errores de
-  consola ni recursos fallidos, sin scroll horizontal en móvil (390 px).
+- Calidad: QA E2E automatizado (Edge headless) 39/39 PASS: selector de packs, totales
+  en vivo, flujo COD hasta wa.me, eventos de conversión con valor (ViewContent, AddToCart,
+  InitiateCheckout, Purchase), video 9:16 verificado (1080×1920), historias en una columna
+  en móvil, sin errores de consola ni recursos fallidos, sin scroll horizontal en móvil (390 px).
 - Datos dinámicos centralizados en JS: precios de packs, costo de envío prioritario.

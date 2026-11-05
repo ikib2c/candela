@@ -16,6 +16,48 @@ const $  = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
 const cop = v => new Intl.NumberFormat('es-CO', { style:'currency', currency:'COP', minimumFractionDigits:0 }).format(v);
 
+/* ============ Tracking de conversiones (Meta Pixel + GA4 + GTM dataLayer) ============
+   Cada evento se envía a Meta (fbq), a Google Analytics 4 (gtag) y al dataLayer de
+   Google Tag Manager con la misma información de compra (valor, moneda, ítem). */
+const GA4_EVENTOS = {
+  ViewContent: 'view_item',
+  AddToCart: 'add_to_cart',
+  InitiateCheckout: 'begin_checkout',
+  Purchase: 'purchase'
+};
+
+function track(metaEvento, { pack, envio = 0, transaction_id } = {}) {
+  const p = pack || PACKS[packActual];
+  const value = p.precio + envio;
+  const itemId = 'candela-300ml-' + p.unidades + '-tarros';
+  const item = { item_id: itemId, item_name: p.nombre, item_category: 'Crema corporal', price: p.precio, quantity: 1 };
+  const eventoGa4 = GA4_EVENTOS[metaEvento] || metaEvento.toLowerCase();
+
+  if (typeof fbq === 'function') {
+    const params = {
+      value: value,
+      currency: 'COP',
+      content_type: 'product',
+      content_ids: [itemId],
+      content_name: p.nombre,
+      num_items: p.unidades
+    };
+    if (transaction_id) fbq('track', metaEvento, params, { eventID: transaction_id });
+    else fbq('track', metaEvento, params);
+  }
+
+  if (typeof gtag === 'function') {
+    const params = { currency: 'COP', value: value, items: [item] };
+    if (transaction_id) params.transaction_id = transaction_id;
+    gtag('event', eventoGa4, params);
+  }
+
+  window.dataLayer = window.dataLayer || [];
+  const ecommerce = { currency: 'COP', value: value, items: [item] };
+  if (transaction_id) ecommerce.transaction_id = transaction_id;
+  window.dataLayer.push({ event: eventoGa4, ecommerce: ecommerce });
+}
+
 /* ============ Galería del héroe ============ */
 function initGaleria(){
   const img = $('#heroImg');
@@ -43,6 +85,7 @@ function initBundles(){
       b.setAttribute('aria-pressed', 'true');
       packActual = parseInt(b.dataset.pack, 10);
       actualizarResumen();
+      track('AddToCart', { pack: PACKS[packActual] });
     };
     b.addEventListener('click', elegir);
     b.addEventListener('keydown', e => {
@@ -90,6 +133,16 @@ function irAlPedido(){
 function initFormulario(){
   const form = $('#formPedido');
   if (!form) return;
+
+  let checkoutIniciado = false;
+  const marcarInicioCheckout = () => {
+    if (checkoutIniciado) return;
+    checkoutIniciado = true;
+    track('InitiateCheckout', { pack: packData(), envio: envioActual() });
+  };
+  form.addEventListener('focusin', marcarInicioCheckout);
+  form.addEventListener('input', marcarInicioCheckout);
+
   form.addEventListener('submit', e => {
     e.preventDefault();
 
@@ -129,6 +182,8 @@ function initFormulario(){
     msg += `*TOTAL:* ${cop(total)}%0A%0A`;
     msg += '*Método de pago:* Contraentrega (pago al recibir)%0A%0A';
     msg += 'Confirmo que recibiré y pagaré mi pedido en la entrega.';
+
+    track('Purchase', { pack: p, envio: envio, transaction_id: 'CDL-' + Date.now() });
 
     window.open(`https://wa.me/${WHATSAPP_TIENDA}?text=${msg}`, '_blank');
   });
@@ -198,4 +253,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   const anio = $('#anio');
   if (anio) anio.textContent = new Date().getFullYear();
+  track('ViewContent');
 });
