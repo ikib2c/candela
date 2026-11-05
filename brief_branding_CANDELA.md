@@ -114,7 +114,9 @@ debe pulsarse o recordarse: CTAs, precios y sellos.
 
 ### 3.4 Recursos gráficos
 - Blobs y manchas suaves rosa/naranja desenfocadas como fondo del héroe.
-- Stickers circulares rotados para sellos: "REGALO SORPRESA" (oro) y "AHORRAS 66%" (rojo).
+- Stickers circulares rotados para sellos: "+ REGALO SORPRESA 🎁" (oro) y
+  "AHORRAS 55%" (rojo) en el héroe — el % sigue siempre al pack objetivo (55% del
+  pack de 2; en piezas del pack de 3 se usa 66%).
 - Tarjetas blancas con esquinas 18–26 px y sombras cálidas sobre fondo crema.
 - Línea punteada como separador en totales y bordes internos.
 
@@ -136,7 +138,9 @@ urgencia honesta (regalo limitado, no inventado) · proceso de pedido en 1 panta
 ### Estructura implementada
 1. Marquee superior: envío gratis · pago contraentrega · regalo · reto 21 noches.
 2. Header: logo + rating 4.9 (1.343 reseñas) + CTA.
-3. Héroe: promesa + 4 beneficios del envase + precio anclado + foto real del tarro (galería de 3 fotos reales: precintado, abierto y reverso) + stickers.
+3. Héroe: promesa + 4 beneficios del envase + precio anclado al pack de 2
+   (~~$199.800~~ → $89.900, "$44.950 c/u", sticker AHORRAS 55%) + foto real del tarro
+   (galería de 3 fotos reales: precintado, abierto y reverso) + stickers.
 4. Barra de confianza: envío, contraentrega, regalo, garantía 30 días.
 5. Dolor → transformación (tarjetas "Sin Candela" / "Con Candela").
 6. Antes/después con pieza real: Día 1 vs Día 30 (anuncio del reto de 21 días) + disclaimer.
@@ -151,15 +155,17 @@ urgencia honesta (regalo limitado, no inventado) · proceso de pedido en 1 panta
 10. Modo de uso en 3 pasos + 4 tips.
 11. Estadísticas de percepción con nota legal.
 12. Testimonios con "compradora verificada".
-13. Historias reales: galería uniforme con 3 piezas UGC de la marca (estrías normales, posparto y ritual de uso), misma caja 9:16 (object-fit cover) en escritorio y una sola columna en móvil.
-14. Oferta: sección independiente `#presentacion` con la pieza oficial "Nueva presentación
+13. CTA intermedio: strip "Quiero empezar mi reto hoy" que salta a la oferta.
+14. Historias reales: galería uniforme con 3 piezas UGC de la marca (estrías normales, posparto y ritual de uso), misma caja 9:16 (object-fit cover) en escritorio y una sola columna en móvil.
+15. Oferta: sección independiente `#presentacion` con la pieza oficial "Nueva presentación
     Candela: belleza y cuidado" (941×1672) justo antes del selector; selector de packs
     (1/2/3 tarros) con la imagen de oferta real por cantidad (1/2/3 tarros, recortes de
     "Ofertas Candela: cuida y realza tu piel"), anclaje y ahorro visible.
-15. Formulario COD (estilo Releasit): datos de envío + totales en vivo + compromiso +
+16. Formulario COD (estilo Releasit): datos de envío + totales en vivo + compromiso +
     envío del pedido a WhatsApp, con foto real del tarro en el resumen.
-16. FAQ (8 preguntas) · CTA final · footer con advertencia cosmética.
-17. Barra sticky móvil dinámica: muestra el pack elegido (nombre, precio y precio
+17. FAQ (9 preguntas, acordeón) · CTA final (ancla alta con el pack de 3) · footer con
+    páginas legales (T&C, privacidad, garantías, envíos) + advertencia cosmética.
+18. Barra sticky móvil dinámica: muestra el pack elegido (nombre, precio y precio
     anterior) y se actualiza junto con el resumen al cambiar de pack o envío.
 
 **Nota sobre los banners de oferta:** las piezas "Lleva 3 paga 2", "Paga 2 lleva 3" y
@@ -173,11 +179,14 @@ Decisión vigente: mostrar las piezas sin alterar la tabla de precios.
 ### Oferta y precios (fuente: ESTUDIO PRECIOS CANDELA.xlsx)
 | Pack | Precio | Precio unitario | Anclaje | Ahorro visible |
 |---|---|---|---|---|
-| 1 tarro | $69.900 | $69.900 | ~~$99.900~~ | Ahorras $30.000 |
-| 2 tarros | $89.900 | $44.950 | ~~$199.800~~ | Ahorras $109.900 |
-| 3 tarros ⭐ + regalo | $99.900 | $33.300 | ~~$299.700~~ | Ahorras $199.800 (66%) |
+| 1 tarro | $69.900 | $69.900 | ~~$99.900~~ | Ahorras $30.000 (30%) |
+| 2 tarros | $89.900 | $44.950 | ~~$199.800~~ | Ahorras $109.900 (55%) |
+| 3 tarros + regalo | $99.900 | $33.300 | ~~$299.700~~ | Ahorras $199.800 (66%) |
 
-El pack de 3 es la oferta héroe (coincide con los anuncios "3 por $99.900").
+Desde nov 2026 el pack de 2 es la oferta héroe visible (preseleccionado, "El más
+elegido" y precio ancla del héroe) por ser el de mayor rentabilidad; el pack de 3
+actúa como ancla aspiracional y cierra el CTA final (coincide con los anuncios
+"3 por $99.900"). Ver sección 8.
 
 ---
 
@@ -204,6 +213,8 @@ El pack de 3 es la oferta héroe (coincide con los anuncios "3 por $99.900").
   correspondencia y correo de contacto para el bloque "identificación del responsable"
   de los T&C; número o estado de la Notificación Sanitaria Obligatoria (NSO) ante INVIMA
   si se quiere mostrar explícitamente.
+- **Pendiente de diseño:** regenerar la og:image (1200×630) con la oferta del pack de 2
+  ($199.800 → $89.900) para alinearla con la nueva estrategia de anclaje del héroe.
 - **Número de WhatsApp configurado:** `573147247260` (57 + 314 724 7260), definido en
   la variable `WHATSAPP_TIENDA` al inicio de `main.js`. Todos los pedidos del
   formulario llegan ahí; cámbiala ahí si cambia el número.
@@ -219,9 +230,10 @@ El pack de 3 es la oferta héroe (coincide con los anuncios "3 por $99.900").
   Keywords de alto volumen integradas en title, meta description, H1/H2, FAQ y alts:
   "crema para estrías", "estrías rojas y blancas", "estrías postparto", "crema anticelulítica",
   "celulitis/piel de naranja", "crema reafirmante", "flacidez", "efecto calor", "pago contraentrega".
-- Calidad: QA E2E automatizado (Edge headless) 48/48 PASS: selector de packs, totales
-  en vivo (resumen + barra sticky sincronizadas), flujo COD hasta wa.me, eventos de
-  conversión con valor (ViewContent, AddToCart, InitiateCheckout, Purchase), video 9:16
+- Calidad: QA E2E automatizado (Edge headless) 49/49 PASS: selector de packs con
+  el pack de 2 preseleccionado por defecto (anclaje), totales en vivo (resumen +
+  barra sticky sincronizadas), flujo COD hasta wa.me, eventos de conversión con
+  valor (ViewContent, AddToCart, InitiateCheckout, Purchase), video 9:16
   verificado (1080×1920), historias en una columna en móvil, badges de nueva presentación,
   toast de ahorro, progreso del pedido, overlay de éxito, enlaces legales del footer,
   página de garantías con retracto (5 días hábiles + 30 días calendario), sin errores de
@@ -243,9 +255,9 @@ El pack de 3 es la oferta héroe (coincide con los anuncios "3 por $99.900").
   fábrica", "Lote y fecha visibles" y "Fórmula IKI"; FAQ "¿Cómo recibo la nueva
   presentación?"; badge también en el encabezado del formulario COD.
 - **Orden de cierre:** hero → confianza → dolor → antes/después → 5 soluciones →
-  fórmula → video → uso → estadísticas → testimonios → historias → **nueva presentación**
-  → oferta → COD → FAQ → CTA final → footer legal. La prueba social y la novedad quedan
-  pegadas a la decisión de compra.
+  fórmula → video → uso → estadísticas → testimonios → **CTA intermedio** → historias →
+  **nueva presentación** → oferta → COD → FAQ → CTA final → footer legal. La prueba
+  social y la novedad quedan pegadas a la decisión de compra.
 - **Dopamina:** toast de ahorro al elegir pack ("¡Buena elección! Ahorras $X 🎁"),
   barra de progreso de 3 pasos en el COD (pack ✓ → datos ✓ → pagas al recibir),
   overlay de éxito con check al enviar el pedido, shimmer en los botones, pop del radio
