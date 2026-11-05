@@ -86,6 +86,11 @@ function initBundles(){
       packActual = parseInt(b.dataset.pack, 10);
       actualizarResumen();
       track('AddToCart', { pack: PACKS[packActual] });
+      const p = PACKS[packActual];
+      const ahorro = p.antes - p.precio;
+      toast('¡Buena elección! Ahorras ' + cop(ahorro) + (p.unidades === 3 ? ' + regalo sorpresa 🎁' : ' 🎉'));
+      flashSticky();
+      actualizarPasos();
     };
     b.addEventListener('click', elegir);
     b.addEventListener('keydown', e => {
@@ -96,6 +101,32 @@ function initBundles(){
 
 function packData(){
   return PACKS[packActual];
+}
+
+/* ============ Dopamina: feedback inmediato ============ */
+let toastTimer;
+function toast(mensaje){
+  const t = $('#toast');
+  if (!t) return;
+  t.textContent = mensaje;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+}
+
+function actualizarPasos(){
+  const ids = ['fNombre', 'fApellido', 'fTelefono', 'fCiudad', 'fDireccion'];
+  const full = ids.every(i => { const e = $('#' + i); return e && e.value.trim() !== ''; }) && ($('#fDepartamento') || { value: '' }).value !== '';
+  const p2 = document.querySelector('#pasosPedido .pp:nth-child(2)');
+  if (p2) p2.classList.toggle('done', full);
+}
+
+function flashSticky(){
+  const st = document.querySelector('.sticky-movil');
+  if (!st) return;
+  st.classList.remove('flash');
+  void st.offsetWidth;
+  st.classList.add('flash');
 }
 
 function envioActual(){
@@ -147,7 +178,8 @@ function initFormulario(){
     track('InitiateCheckout', { pack: packData(), envio: envioActual() });
   };
   form.addEventListener('focusin', marcarInicioCheckout);
-  form.addEventListener('input', marcarInicioCheckout);
+  form.addEventListener('input', () => { marcarInicioCheckout(); actualizarPasos(); });
+  form.addEventListener('change', () => { marcarInicioCheckout(); actualizarPasos(); });
 
   form.addEventListener('submit', e => {
     e.preventDefault();
@@ -190,6 +222,18 @@ function initFormulario(){
     msg += 'Confirmo que recibiré y pagaré mi pedido en la entrega.';
 
     track('Purchase', { pack: p, envio: envio, transaction_id: 'CDL-' + Date.now() });
+
+    const p3 = document.querySelector('#pasosPedido .pp:nth-child(3)');
+    if (p3) p3.classList.add('done');
+    const overlay = $('#exito');
+    if (overlay){
+      overlay.classList.add('show');
+      overlay.setAttribute('aria-hidden', 'false');
+      setTimeout(() => {
+        overlay.classList.remove('show');
+        overlay.setAttribute('aria-hidden', 'true');
+      }, 2400);
+    }
 
     window.open(`https://wa.me/${WHATSAPP_TIENDA}?text=${msg}`, '_blank');
   });
@@ -253,6 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initBundles();
   initEnvio();
   actualizarResumen();
+  actualizarPasos();
   initFormulario();
   initFaq();
   initCuentaRegresiva();

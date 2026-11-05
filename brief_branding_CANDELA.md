@@ -143,16 +143,19 @@ urgencia honesta (regalo limitado, no inventado) · proceso de pedido en 1 panta
 7. 5 soluciones en un tarro.
 8. Fórmula: IKI + 4 activos (nicotinato de metilo, carnitina+cafeína,
    jengibre/capsaicina/algas, mentol) con foto real del tarro abierto mostrando la textura de la crema.
+   **Nota pendiente:** la etiqueta trasera (INCI) es ilegible en la foto disponible; si el
+   proveedor confirma que el extracto de pimienta rosa (Schinus molle) está en la lista de
+   ingredientes del envase, se puede añadir la mención "con extracto de pimienta rosa"
+   como ingrediente real (hoy la landing solo usa IKI como nombre comercial de la fórmula).
 9. Video: testimonio real de clienta (Tertimonio.mp4, 1080×1920, 9:16 vertical) con póster, copy sobrio y disclaimer de resultados.
 10. Modo de uso en 3 pasos + 4 tips.
 11. Estadísticas de percepción con nota legal.
 12. Testimonios con "compradora verificada".
 13. Historias reales: galería uniforme con 3 piezas UGC de la marca (estrías normales, posparto y ritual de uso), misma caja 9:16 (object-fit cover) en escritorio y una sola columna en móvil.
-14. Oferta: pieza oficial "Nueva presentación Candela: belleza y cuidado" (941×1672)
-    enmarcada como pieza de campaña + nota aclaratoria de que el precio vigente es el
-    del selector; selector de packs (1/2/3 tarros) con la imagen de oferta real por
-    cantidad (1/2/3 tarros, recortes de "Ofertas Candela: cuida y realza tu piel"),
-    anclaje y ahorro visible.
+14. Oferta: sección independiente `#presentacion` con la pieza oficial "Nueva presentación
+    Candela: belleza y cuidado" (941×1672) justo antes del selector; selector de packs
+    (1/2/3 tarros) con la imagen de oferta real por cantidad (1/2/3 tarros, recortes de
+    "Ofertas Candela: cuida y realza tu piel"), anclaje y ahorro visible.
 15. Formulario COD (estilo Releasit): datos de envío + totales en vivo + compromiso +
     envío del pedido a WhatsApp, con foto real del tarro en el resumen.
 16. FAQ (8 preguntas) · CTA final · footer con advertencia cosmética.
@@ -192,6 +195,15 @@ El pack de 3 es la oferta héroe (coincide con los anuncios "3 por $99.900").
 ## 6. Entregables y configuración técnica
 
 - `index.html` · `assets/css/style.css` · `assets/js/main.js` · `assets/img/` · `assets/video/`.
+- **Páginas legales:** `terminos.html` (T&C), `privacidad.html` (datos, Ley 1581/2012,
+  con cookies/píxeles y enlaces de opt-out), `garantias.html` (garantía por defectos +
+  **derecho de retracto** art. 47 Ley 1480/2011: 5 días hábiles, reembolso máximo 30 días
+  calendario, formulario modelo) y `envios.html` (envíos y pagos). Todas enlazadas desde
+  el footer de la landing (compliance Meta + Estatuto del Consumidor).
+- **Pendientes legales a completar por el cliente:** razón social, NIT, dirección de
+  correspondencia y correo de contacto para el bloque "identificación del responsable"
+  de los T&C; número o estado de la Notificación Sanitaria Obligatoria (NSO) ante INVIMA
+  si se quiere mostrar explícitamente.
 - **Número de WhatsApp configurado:** `573147247260` (57 + 314 724 7260), definido en
   la variable `WHATSAPP_TIENDA` al inicio de `main.js`. Todos los pedidos del
   formulario llegan ahí; cámbiala ahí si cambia el número.
@@ -203,10 +215,40 @@ El pack de 3 es la oferta héroe (coincide con los anuncios "3 por $99.900").
   InitiateCheckout y Purchase; GA4 view_item, add_to_cart, begin_checkout y purchase
   (con items y transaction_id); los mismos eventos se empujan al dataLayer de GTM.
 - SEO/social: canonical + Open Graph (og:image de 1200×630 generada con el tarro real
-  y la oferta héroe) + Twitter card + JSON-LD Product.
-- Calidad: QA E2E automatizado (Edge headless) 40/40 PASS: selector de packs, totales
+  y la oferta héroe) + Twitter card + JSON-LD Product + **JSON-LD FAQPage** (9 preguntas).
+  Keywords de alto volumen integradas en title, meta description, H1/H2, FAQ y alts:
+  "crema para estrías", "estrías rojas y blancas", "estrías postparto", "crema anticelulítica",
+  "celulitis/piel de naranja", "crema reafirmante", "flacidez", "efecto calor", "pago contraentrega".
+- Calidad: QA E2E automatizado (Edge headless) 48/48 PASS: selector de packs, totales
   en vivo (resumen + barra sticky sincronizadas), flujo COD hasta wa.me, eventos de
   conversión con valor (ViewContent, AddToCart, InitiateCheckout, Purchase), video 9:16
-  verificado (1080×1920), historias en una columna en móvil, sin errores de consola ni
-  recursos fallidos, sin scroll horizontal en móvil (390 px).
+  verificado (1080×1920), historias en una columna en móvil, badges de nueva presentación,
+  toast de ahorro, progreso del pedido, overlay de éxito, enlaces legales del footer,
+  página de garantías con retracto (5 días hábiles + 30 días calendario), sin errores de
+  consola ni recursos fallidos, sin scroll horizontal en móvil (390 px).
+
+---
+
+## 7. Novedades de nov 2026 (SEO, legal, autenticidad y dopamina)
+
+- **Rebrand IKI:** "Pimienta Rosa" (nombre comercial anterior de la fórmula, y también
+  nombre de una marca del mercado) fue reemplazado por **IKI** en todos los textos
+  visibles. La palabra "pimienta rosa" NO se usa como ingrediente hasta confirmar el
+  INCI real del envase (ver nota del punto 8).
+- **Dolor principal = estrías y celulitis:** la promesa encabeza title, H1, metas y FAQ;
+  la sección de dolor y la de soluciones hablan de "estrías rojas y blancas",
+  "estrías postparto" y "piel de naranja" (lenguaje de búsqueda real).
+- **Autenticidad sin decir "original":** nueva sección `#presentacion` (independiente,
+  antes de la oferta) con la pieza oficial "Nueva presentación" + badges "Precinto de
+  fábrica", "Lote y fecha visibles" y "Fórmula IKI"; FAQ "¿Cómo recibo la nueva
+  presentación?"; badge también en el encabezado del formulario COD.
+- **Orden de cierre:** hero → confianza → dolor → antes/después → 5 soluciones →
+  fórmula → video → uso → estadísticas → testimonios → historias → **nueva presentación**
+  → oferta → COD → FAQ → CTA final → footer legal. La prueba social y la novedad quedan
+  pegadas a la decisión de compra.
+- **Dopamina:** toast de ahorro al elegir pack ("¡Buena elección! Ahorras $X 🎁"),
+  barra de progreso de 3 pasos en el COD (pack ✓ → datos ✓ → pagas al recibir),
+  overlay de éxito con check al enviar el pedido, shimmer en los botones, pop del radio
+  seleccionado y rebote de la barra sticky al cambiar de pack (todo con guard de
+  `prefers-reduced-motion`).
 - Datos dinámicos centralizados en JS: precios de packs, costo de envío prioritario.

@@ -312,6 +312,9 @@ footer .wrap{display:grid;gap:14px;justify-items:center;text-align:center}
 footer .logo b{color:#fff}
 footer .logo small{color:#E9B7C4}
 footer .legal{max-width:720px;opacity:.75;line-height:1.7;font-size:11.5px}
+.footer-legal{display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:center;align-items:center}
+.footer-legal a{color:#F6C6D3;font-size:13px;font-weight:600;text-decoration:none}
+.footer-legal a:hover{text-decoration:underline;color:#fff}
 footer .copy{opacity:.6;font-size:11.5px}
 
 /* ============ Barra sticky móvil ============ */
@@ -376,3 +379,53 @@ footer .copy{opacity:.6;font-size:11.5px}
   .reveal{transition:none;opacity:1;transform:none}
 }
 .bundle:focus-visible{outline:3px solid var(--oro);outline-offset:3px}
+
+/* ============ Sección Nueva presentación ============ */
+.creativos-sec{padding:64px 0 8px}
+.badges-presentacion{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.badges-presentacion span{background:#fff;border:1px solid rgba(72,16,31,.12);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:600;color:var(--vino-soft);box-shadow:0 4px 12px rgba(72,16,31,.06)}
+.creativos .h2{margin-top:8px}
+
+/* ============ Progreso del pedido ============ */
+.pasos-pedido{display:flex;justify-content:space-between;gap:8px;margin:16px 0 4px}
+.pp{flex:1;display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--vino-soft);opacity:.5;transition:opacity .3s}
+.pp i{display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:rgba(72,16,31,.08);font-style:normal;font-weight:700;flex-shrink:0;transition:background .3s,color .3s}
+.pp.done{opacity:1;color:var(--vino)}
+.pp.done i{background:var(--exito);color:#fff}
+
+/* ============ Toast ============ */
+#toast{position:fixed;left:50%;bottom:86px;transform:translate(-50%,20px);background:var(--vino);color:#fff;font-size:13.5px;font-weight:600;padding:12px 20px;border-radius:999px;box-shadow:0 12px 30px rgba(72,16,31,.35);opacity:0;pointer-events:none;transition:all .35s;z-index:60;max-width:min(92vw,480px);text-align:center}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ============ Overlay de éxito ============ */
+#exito{position:fixed;inset:0;background:rgba(72,16,31,.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;z-index:70;opacity:0;pointer-events:none;transition:opacity .3s}
+#exito.show{opacity:1}
+.exito-caja{background:#fff;border-radius:24px;padding:34px 40px;text-align:center;box-shadow:0 24px 60px rgba(72,16,31,.35);transform:scale(.9);transition:transform .3s}
+#exito.show .exito-caja{transform:scale(1)}
+.exito-caja b{display:block;font:400 24px var(--ff-display);text-transform:uppercase;color:var(--vino);margin-top:12px}
+.exito-caja p{margin-top:6px;color:var(--vino-soft);font-size:14px}
+.exito-check{display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:var(--exito);color:#fff;font-size:30px;font-weight:700;animation:pop .45s cubic-bezier(.34,1.56,.64,1)}
+
+/* ============ Micro-interacciones (dopamina) ============ */
+.btn{position:relative;overflow:hidden}
+.btn::after{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);animation:brillo 3.4s ease-in-out infinite}
+@keyframes brillo{0%,55%{left:-80%}75%{left:130%}100%{left:130%}}
+.bundle.sel .punto{animation:pop .4s cubic-bezier(.34,1.56,.64,1)}
+@keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.25)}100%{transform:scale(1)}}
+.sticky-movil.flash{animation:rebote .5s ease}
+@keyframes rebote{0%{transform:translateY(0)}30%{transform:translateY(-7px)}60%{transform:translateY(2px)}100%{transform:translateY(0)}}
+@media (prefers-reduced-motion:reduce){
+  .btn::after,.bundle.sel .punto,.exito-check{animation:none}
+  .sticky-movil.flash{animation:none}
+}
+
+/* ============ Páginas legales ============ */
+.legal-pag{max-width:840px;margin:0 auto;padding:36px 22px 60px}
+.legal-pag h1{font:400 34px/1.1 var(--ff-display);text-transform:uppercase;color:var(--vino);margin-bottom:6px}
+.legal-pag .legal-fecha{color:var(--vino-soft);font-size:13px;margin-bottom:26px}
+.legal-pag h2{font:700 18px var(--ff-text);color:var(--vino);margin:26px 0 8px}
+.legal-pag p,.legal-pag li{color:var(--vino-soft);font-size:14.5px;line-height:1.75;margin-bottom:8px}
+.legal-pag ul{padding-left:22px;margin-bottom:10px}
+.legal-pag a{color:var(--rojo);font-weight:600}
+.legal-volver{display:inline-block;margin-bottom:18px;color:var(--vino-soft);font-size:13px;text-decoration:none}
+.legal-volver:hover{color:var(--rojo)}
