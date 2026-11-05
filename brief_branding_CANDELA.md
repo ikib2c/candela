@@ -269,6 +269,12 @@ actúa como ancla aspiracional y cierra el CTA final (coincide con los anuncios
   "Enviar pedido · Pago contraentrega"** (doble pulso tipo corazón, con guard de
   `prefers-reduced-motion`). Formulario COD con estética pulida: cabecera en degradado,
   campos con fondo suave + glow de foco, totales y compromiso como tarjetas.
+- **Animaciones de producto (ref: landing Vexa de referencia, nov 2026):** el tarro del
+  héroe **levita con inclinación suave** dentro de su marco (`tarro-flota`, 4 s,
+  translateY ±13 px + rotate −2°→1.5°, transform-only/GPU) y el **pack elegido respira
+  con un glow rojo** (`glow-oferta`, 3.2 s). Ambos desactivados con
+  `prefers-reduced-motion`. No se aplicó drift ni marquee extra: ya existen marquee
+  superior, shimmer en botones y latido.
 - **CTAs adicionales:** strip intermedio "Quiero empezar mi reto hoy" tras los
   testimonios y botón "Ver los packs y precios" al cierre de la sección nueva
   presentación (junto con hero, sticky, oferta y CTA final suman 7 puntos de conversión).

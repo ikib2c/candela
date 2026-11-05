@@ -378,6 +378,7 @@ footer .copy{opacity:.6;font-size:11.5px}
 @media (prefers-reduced-motion:reduce){
   .barra-top .pista{animation:none}
   .reveal{transition:none;opacity:1;transform:none}
+  .hero-foto img{animation:none}
 }
 .bundle:focus-visible{outline:3px solid var(--oro);outline-offset:3px}
 
@@ -419,6 +420,7 @@ footer .copy{opacity:.6;font-size:11.5px}
   .btn::after,.bundle.sel .punto,.exito-check{animation:none}
   .sticky-movil.flash{animation:none}
   .cod-enviar{animation:none}
+  .hero-foto img,.bundle.sel{animation:none}
 }
 
 /* ============ Formulario COD: estética mejorada ============ */
@@ -464,3 +466,11 @@ footer .copy{opacity:.6;font-size:11.5px}
 .linea-tiempo .tl b{font:400 19px/1.1 var(--ff-display);text-transform:uppercase;letter-spacing:.03em;color:var(--rojo)}
 .linea-tiempo .tl p{margin-top:6px;font-size:13.5px;line-height:1.6;color:var(--vino-soft)}
 @media (max-width:760px){.linea-tiempo{grid-template-columns:1fr}}
+
+/* ============ Flotación del tarro del héroe (ref: vc-product-float-tilt de Vexa) ============ */
+.hero-foto img{animation:tarro-flota 4s ease-in-out infinite;will-change:transform}
+@keyframes tarro-flota{0%,100%{transform:translateY(12px) rotate(-2deg)}50%{transform:translateY(-14px) rotate(1.5deg)}}
+
+/* ============ Respiro del pack elegido (ref: vc-cro-offer-pulse de Vexa) ============ */
+.bundle.sel{animation:glow-oferta 3.2s ease-in-out infinite}
+@keyframes glow-oferta{0%,100%{box-shadow:0 16px 40px rgba(211,30,60,.18)}50%{box-shadow:0 18px 46px rgba(211,30,60,.34)}}
