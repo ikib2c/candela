@@ -258,4 +258,30 @@ El pack de 3 es la oferta héroe (coincide con los anuncios "3 por $99.900").
   presentación (junto con hero, sticky, oferta y CTA final suman 7 puntos de conversión).
 - **Sin menciones a la SIC** (Superintendencia de Industria y Comercio) en las páginas
   legales, por decisión del cliente: los reclamos se canalizan por el WhatsApp oficial.
+
+---
+
+## 8. Estrategia de anclaje de precios (nov 2026)
+
+**Objetivo comercial:** maximizar la ganancia — el pack de 2 es el más rentable, seguido
+del pack de 3; el de 1 es el de menor margen.
+
+**Arquitectura de elección (decoy + anclaje + aversión a los extremos):**
+
+| Rol | Pack | Precio | Mensaje |
+|---|---|---|---|
+| Ancla de entrada | 1 tarro | $69.900 ($69.900 c/u, -30%) | Cinta "Para empezar" — hace ver razonable el pack 2 |
+| **Objetivo (target)** | **2 tarros** | **$89.900 ($44.950 c/u, -55%)** | **Preseleccionado + cinta "🔥 El más elegido" + héroe con su precio** |
+| Ancla aspiracional | 3 tarros | $99.900 ($33.300 c/u, -66%) | Cinta oro "🎁 + Regalo sorpresa" — techo de valor, upsell final |
+
+- **Efecto de posición central:** el pack 2 queda en el centro de la grilla y como
+  opción por defecto (status quo bias): el resumen del COD, la barra sticky y el
+  bloque de precio del héroe arrancan en "Pack de 2 · $89.900 · $44.950 c/u".
+- **Ahorro anclado en %** en cada tarjeta (30% / 55% / 66%) y sticker del héroe
+  actualizado a 55%.
+- **Precios de terminación .900** (charm pricing) en todos los packs.
+- El CTA final mantiene el pack de 3 como ancla alta de cierre ("3 por $99.900").
+- Urgencia existente (cuenta regresiva diaria del regalo) se mantiene sobre la oferta.
+- Referencia: efecto señuelo/decoy (Huber 1982), aversión a los extremos
+  (Simonson & Tversky 1992), anclaje (Tversky & Kahneman 1974).
 - Datos dinámicos centralizados en JS: precios de packs, costo de envío prioritario.

@@ -10,7 +10,7 @@ const PACKS = {
 };
 
 const ENVIO_PRIORITARIO = 9900;
-let packActual = 3;
+let packActual = 2;
 
 const $  = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));

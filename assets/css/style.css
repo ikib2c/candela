@@ -236,6 +236,7 @@ section{padding:84px 0}
 .bundle.sel{border-color:var(--rojo);box-shadow:0 16px 40px rgba(211,30,60,.18)}
 .bundle .cinta{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--rojo);color:#fff;font:700 11px var(--ff-cuerpo);letter-spacing:.14em;text-transform:uppercase;padding:7px 18px;border-radius:var(--r-pill);white-space:nowrap;box-shadow:var(--sombra)}
 .bundle .cinta.oro{background:var(--oro);color:var(--vino)}
+.bundle .cinta.suave{background:#fff;color:var(--vino-soft);border:1px solid rgba(72,16,31,.15);box-shadow:0 4px 10px rgba(72,16,31,.08)}
 .bundle .cant{font:400 34px/1 var(--ff-display);text-transform:uppercase}
 .bundle .cant small{display:block;font:600 12px var(--ff-cuerpo);letter-spacing:.18em;color:var(--vino-soft);text-transform:uppercase;margin-top:6px}
 .bundle .precio{margin:18px 0 4px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
