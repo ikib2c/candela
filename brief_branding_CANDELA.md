@@ -232,13 +232,15 @@ actúa como ancla aspiracional y cierra el CTA final (coincide con los anuncios
   Keywords de alto volumen integradas en title, meta description, H1/H2, FAQ y alts:
   "crema para estrías", "estrías rojas y blancas", "estrías postparto", "crema anticelulítica",
   "celulitis/piel de naranja", "crema reafirmante", "flacidez", "efecto calor", "pago contraentrega".
-- Calidad: QA E2E automatizado (Edge headless) 49/49 PASS: selector de packs con
+- Calidad: QA E2E automatizado (Edge headless) 55/55 PASS: selector de packs con
   el pack de 2 preseleccionado por defecto (anclaje), totales en vivo (resumen +
   barra sticky sincronizadas), flujo COD hasta wa.me, eventos de conversión con
   valor (ViewContent, AddToCart, InitiateCheckout, Purchase), video 9:16
   verificado (1080×1920), historias en una columna en móvil, badges de nueva presentación,
   toast de ahorro, progreso del pedido, overlay de éxito, enlaces legales del footer,
-  página de garantías con retracto (5 días hábiles + 30 días calendario), sin errores de
+  página de garantías con retracto (5 días hábiles + 30 días calendario), checks CRO
+  (nombre en un campo, datalist de ciudades, prueba social en oferta, línea de tiempo,
+  garantía en el héroe, fetchpriority del héroe), sin errores de
   consola ni recursos fallidos, sin scroll horizontal en móvil (390 px).
 
 ---
@@ -299,3 +301,33 @@ del pack de 3; el de 1 es el de menor margen.
 - Referencia: efecto señuelo/decoy (Huber 1982), aversión a los extremos
   (Simonson & Tversky 1992), anclaje (Tversky & Kahneman 1974).
 - Datos dinámicos centralizados en JS: precios de packs, costo de envío prioritario.
+
+---
+
+## 9. Investigación CRO y mejoras aplicadas (nov 2026)
+
+**Fuentes:** Stripe Ecommerce Landing Pages (2026), Shopify Ecommerce LP (2026),
+eGrow COD Forms (2026), CODRocket, Whatalo COD LATAM, 72Technologies WhatsApp
+LATAM, ConversionStudio, ConvertCart, ClearAudit D2C (2026) y casos Skin
+Cupid/Judge.me y Omnilux (CRO Pros).
+
+**Hallazgos aplicados (ordenados por impacto documentado):**
+
+| Mejora | Evidencia | Implementación en la landing |
+|---|---|---|
+| Formulario más corto: "Nombre completo" en un campo (5→4 requeridos) | Cada campo extra baja conversión 3–8% (Whatalo); reducir campos +0,8–1,5pp (ClearAudit) | `#fNombre` único con `autocomplete="name"` |
+| Prueba social junto al bloque de compra | Skin Cupid +6% (snippet de reseñas sobre el botón); Omnilux +13% (social proof en héroe) | Strip "★★★★★ 4.9 · 1.343 reseñas verificadas" + cita real de Julia L. sobre el selector de packs |
+| Ciudad con sugerencias | Ciudad como lista (no texto libre) reduce typos y NDR (eGrow, Regla 3) | `datalist` con las 30 ciudades principales; texto libre permitido |
+| Claridad del teléfono en COD | El teléfono es el canal de confirmación primario (eGrow Regla 2, Whatalo) | Helper bajo el campo: "Asegúrate de que tu número tenga WhatsApp…" |
+| Reversión de riesgo bajo el CTA | +0,6–1,3pp (ClearAudit); trust signals junto al botón (Stripe) | Aviso bajo el botón: sin anticipos + reposición sin costo (garantía 30 días) |
+| Garantía dentro del bloque de compra | WebTonic: la garantía va "donde ocurre la duda", no en el footer | Chip "Garantía 30 días" en el héroe + aviso en el COD |
+| CTA en primera persona y micro-fricción | CTA específicos +15–25% CTR (ClearAudit); "Pides en 2 minutos" reduce energía de activación (Stripe) | "Enviar mi pedido · Pagas al recibir 🔥" + micro "⏱ Pides en 2 minutos · sin tarjeta ni anticipos" en el héroe |
+| Expectativas semana a semana | WebTonic y Bare Ritual: timeline honesto reduce escepticismo (skincare) | Línea de tiempo noches 1–3 / 7–14 / 15–21 + nota "los resultados varían" |
+| Total antes del botón | eGrow Regla 4 (ya cumplía) | Verificado |
+| LCP del héroe | Core Web Vitals afectan conversión y calidad de pauta (Stripe) | `preload` + `fetchpriority="high"` en la foto principal |
+
+**No aplicado (razón):** contadores de urgencia fabricados ("X pedidos hoy") por
+honestidad de marca; popup de salida por intrusivo en tráfico frío de Meta;
+dropdown estricto de ciudades (pesaría en móvil; el datalist da el beneficio sin
+el costo). Confirmación post-pedido por WhatsApp: ya funciona — el botón abre
+WhatsApp con el pedido prellenado; el asesor confirma (respuesta LATAM 75–85%).

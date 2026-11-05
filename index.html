@@ -23,6 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/img/real-front-tapa.png" fetchpriority="high">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Product","name":"CANDELA Crema anticelulítica y para estrías con efecto calor 300ml","brand":{"@type":"Brand","name":"CANDELA"},"description":"Crema reafirmante termogénica con IKI que ayuda a atenuar estrías rojas y blancas (incl. estrías postparto), la apariencia de la celulitis (piel de naranja) y la flacidez.","category":"Cosmética corporal","offers":{"@type":"AggregateOffer","priceCurrency":"COP","lowPrice":"69900","highPrice":"99900","offerCount":"3"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"1343"}}
 </script>
@@ -132,14 +133,16 @@ src="https://www.facebook.com/tr?id=1283443887279567&ev=PageView&noscript=1"
           <a class="btn" href="#oferta">Quiero mi pack Candela <span class="flecha">→</span></a>
           <a class="btn secundario" href="#formula">¿Cómo funciona?</a>
         </div>
+        <small class="hero-micro">⏱ Pides en 2 minutos · sin tarjeta ni anticipos</small>
         <div class="hero-confianza">
           <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 8h13v8H1zM14 11h4l3 3v2h-7z"/><circle cx="6" cy="18.5" r="1.8"/><circle cx="17" cy="18.5" r="1.8"/></svg> Envío gratis</span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg> Pagas al recibir</span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="4" rx="1"/><path d="M5 13v7h14v-7M12 9v11M12 9c-2 0-4-1-4-3a2 2 0 0 1 4 0M12 9c2 0 4-1 4-3a2 2 0 0 0-4 0"/></svg> + Regalo sorpresa</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="M8.5 11.5l2.5 2.5 4.5-4.5"/></svg> Garantía 30 días</span>
         </div>
       </div>
       <div class="hero-media">
-        <div class="hero-foto"><img id="heroImg" src="assets/img/real-front-tapa.png" alt="Tarro de crema Candela de 300ml IKI — nueva presentación con precinto de fábrica"></div>
+        <div class="hero-foto"><img id="heroImg" src="assets/img/real-front-tapa.png" fetchpriority="high" decoding="async" alt="Tarro de crema Candela de 300ml IKI — nueva presentación con precinto de fábrica"></div>
         <div class="sticker regalo">+ REGALO<br>SORPRESA 🎁</div>
         <div class="sticker descuento"><span>AHORRAS<b>55%</b></span></div>
         <div class="hero-miniaturas">
@@ -327,6 +330,12 @@ src="https://www.facebook.com/tr?id=1283443887279567&ev=PageView&noscript=1"
       <span>Dedica un tarro a cada zona: abdomen, piernas y glúteos</span>
       <span>La constancia vale más que la cantidad</span>
     </div>
+    <div class="linea-tiempo reveal" aria-label="Qué esperar noche a noche">
+      <div class="tl"><b>Noches 1–3</b><p>Piel más suave, hidratada y con el calorcito activador del IKI.</p></div>
+      <div class="tl"><b>Noches 7–14</b><p>Más firmeza y luminosidad; la textura se siente cada vez más uniforme.</p></div>
+      <div class="tl"><b>Noches 15–21</b><p>La apariencia de estrías, celulitis y flacidez se percibe atenuada.</p></div>
+    </div>
+    <p class="stats-nota" style="margin-top:10px">Expectativa con uso constante del ritual nocturno. Los resultados varían según cada piel.</p>
   </div>
 </section>
 
@@ -443,6 +452,7 @@ src="https://www.facebook.com/tr?id=1283443887279567&ev=PageView&noscript=1"
       <h2 class="h2">Elige tu <em>pack</em></h2>
       <p class="sub">El <strong>pack de 2 es el más elegido</strong>: 2 meses de ritual con 55% menos por tarro. ¿Quieres el máximo descuento? El pack de 3 incluye el <strong>regalo sorpresa</strong>. Envío gratis en todos.</p>
       <p style="margin-top:14px;font-weight:600;font-size:14px;color:var(--rojo)">⏳ El regalo y este precio terminan en <span id="cuentaRegresiva">--:--:--</span></p>
+      <p class="prueba-compra"><span class="estrellas" aria-hidden="true">★★★★★</span> <strong>4.9</strong> · 1.343 reseñas verificadas · <em>"Ha mejorado bastante el aspecto de mis estrías"</em> — Julia L., compradora verificada</p>
     </div>
     <div class="bundles" id="bundles">
       <div class="bundle reveal" data-pack="1">
@@ -518,14 +528,11 @@ src="https://www.facebook.com/tr?id=1283443887279567&ev=PageView&noscript=1"
           </div>
 
           <div class="cod-campos">
-            <div class="fila">
-              <div class="campo"><label>Nombre <span class="req">*</span></label><input type="text" id="fNombre" placeholder="Tu nombre" autocomplete="given-name" required></div>
-              <div class="campo"><label>Apellido <span class="req">*</span></label><input type="text" id="fApellido" placeholder="Tu apellido" autocomplete="family-name" required></div>
-            </div>
+            <div class="campo"><label>Nombre completo <span class="req">*</span></label><input type="text" id="fNombre" placeholder="Ej. Laura Gómez" autocomplete="name" required></div>
             <div class="campo">
               <label>Celular / WhatsApp <span class="req">*</span></label>
               <input type="tel" id="fTelefono" placeholder="Ej. 300 123 4567" autocomplete="tel" required>
-              <small>Te enviaremos la confirmación y la guía por WhatsApp.</small>
+              <small>Asegúrate de que tu número tenga WhatsApp: ahí te confirmamos el pedido y te enviamos la guía.</small>
             </div>
             <div class="fila">
               <div class="campo">
@@ -535,8 +542,11 @@ src="https://www.facebook.com/tr?id=1283443887279567&ev=PageView&noscript=1"
                   <option>AMAZONAS</option><option>ANTIOQUIA</option><option>ARAUCA</option><option>ATLÁNTICO</option><option>BOLÍVAR</option><option>BOYACÁ</option><option>CALDAS</option><option>CAQUETÁ</option><option>CASANARE</option><option>CAUCA</option><option>CESAR</option><option>CHOCÓ</option><option>CÓRDOBA</option><option>CUNDINAMARCA</option><option>GUAINÍA</option><option>GUAVIARE</option><option>HUILA</option><option>LA GUAJIRA</option><option>MAGDALENA</option><option>META</option><option>NARIÑO</option><option>NORTE DE SANTANDER</option><option>PUTUMAYO</option><option>QUINDÍO</option><option>RISARALDA</option><option>SAN ANDRÉS Y PROVIDENCIA</option><option>SANTANDER</option><option>SUCRE</option><option>TOLIMA</option><option>VALLE DEL CAUCA</option><option>VAUPÉS</option><option>VICHADA</option>
                 </select>
               </div>
-              <div class="campo"><label>Ciudad / Municipio <span class="req">*</span></label><input type="text" id="fCiudad" placeholder="Ej. Bogotá" required></div>
+              <div class="campo"><label>Ciudad / Municipio <span class="req">*</span></label><input type="text" id="fCiudad" list="ciudades" placeholder="Ej. Bogotá" required></div>
             </div>
+            <datalist id="ciudades">
+              <option>Bogotá</option><option>Medellín</option><option>Cali</option><option>Barranquilla</option><option>Cartagena</option><option>Bucaramanga</option><option>Pereira</option><option>Manizales</option><option>Ibagué</option><option>Villavicencio</option><option>Cúcuta</option><option>Soledad</option><option>Soacha</option><option>Bello</option><option>Valledupar</option><option>Montería</option><option>Popayán</option><option>Neiva</option><option>Armenia</option><option>Pasto</option><option>Tunja</option><option>Florencia</option><option>Sincelejo</option><option>Riohacha</option><option>Quibdó</option><option>Yopal</option><option>Santa Marta</option><option>Palmira</option><option>Buenaventura</option><option>Dosquebradas</option>
+            </datalist>
             <div class="campo">
               <label>Dirección de entrega <span class="req">*</span></label>
               <input type="text" id="fDireccion" placeholder="Ej. Calle 63 #25-32, Ed. Margarita, Apto 101 Torre 2" required>
@@ -556,8 +566,8 @@ src="https://www.facebook.com/tr?id=1283443887279567&ev=PageView&noscript=1"
             <span>Me comprometo a recibir y pagar mi pedido en la entrega. Tendré el dinero disponible o dejaré el pago con quien reciba por mí.</span>
           </label>
 
-          <button class="btn cod-enviar" type="submit">Enviar pedido · Pago contraentrega 🔥</button>
-          <p class="cod-aviso">Sin tarjeta, sin anticipos, sin riesgo. Tu pedido sale en cuanto confirmemos tus datos.</p>
+          <button class="btn cod-enviar" type="submit">Enviar mi pedido · Pagas al recibir 🔥</button>
+          <p class="cod-aviso">Sin tarjeta, sin anticipos, sin riesgo. Si tu tarro llega dañado, lo reponemos sin costo (garantía de 30 días).</p>
         </form>
       </div>
     </div>

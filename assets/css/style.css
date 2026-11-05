@@ -453,3 +453,14 @@ footer .copy{opacity:.6;font-size:11.5px}
 .legal-pag a{color:var(--rojo);font-weight:600}
 .legal-volver{display:inline-block;margin-bottom:18px;color:var(--vino-soft);font-size:13px;text-decoration:none}
 .legal-volver:hover{color:var(--rojo)}
+
+/* ============ CRO nov 2026 ============ */
+.hero-micro{display:block;margin-top:12px;font-size:13px;font-weight:600;color:var(--vino-soft)}
+.prueba-compra{margin-top:14px;font-size:14px;color:var(--vino);font-weight:600;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px}
+.prueba-compra .estrellas{font-size:16px}
+.prueba-compra em{font-style:normal;font-weight:500;color:var(--vino-soft)}
+.linea-tiempo{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:980px;margin:26px auto 0}
+.linea-tiempo .tl{background:#fff;border:1px solid rgba(72,16,31,.08);border-left:4px solid var(--rojo);border-radius:var(--r-md);padding:18px 20px;text-align:left}
+.linea-tiempo .tl b{font:400 19px/1.1 var(--ff-display);text-transform:uppercase;letter-spacing:.03em;color:var(--rojo)}
+.linea-tiempo .tl p{margin-top:6px;font-size:13.5px;line-height:1.6;color:var(--vino-soft)}
+@media (max-width:760px){.linea-tiempo{grid-template-columns:1fr}}

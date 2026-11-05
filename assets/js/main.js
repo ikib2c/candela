@@ -115,7 +115,7 @@ function toast(mensaje){
 }
 
 function actualizarPasos(){
-  const ids = ['fNombre', 'fApellido', 'fTelefono', 'fCiudad', 'fDireccion'];
+  const ids = ['fNombre', 'fTelefono', 'fCiudad', 'fDireccion'];
   const full = ids.every(i => { const e = $('#' + i); return e && e.value.trim() !== ''; }) && ($('#fDepartamento') || { value: '' }).value !== '';
   const p2 = document.querySelector('#pasosPedido .pp:nth-child(2)');
   if (p2) p2.classList.toggle('done', full);
@@ -185,7 +185,6 @@ function initFormulario(){
     e.preventDefault();
 
     const nombre = $('#fNombre').value.trim();
-    const apellido = $('#fApellido').value.trim();
     const telefono = $('#fTelefono').value.trim();
     const departamento = $('#fDepartamento').value;
     const ciudad = $('#fCiudad').value.trim();
@@ -193,7 +192,7 @@ function initFormulario(){
     const nota = $('#fNota').value.trim();
     const compromiso = $('#fCompromiso').checked;
 
-    if (!nombre || !apellido || !telefono || !departamento || !ciudad || !direccion){
+    if (!nombre || !telefono || !departamento || !ciudad || !direccion){
       alert('Por favor completa todos los campos marcados con *.');
       return;
     }
@@ -207,7 +206,7 @@ function initFormulario(){
     const total = p.precio + envio;
 
     let msg = '*🔥 Nuevo pedido — CANDELA*%0A%0A';
-    msg += `*Cliente:* ${nombre} ${apellido}%0A`;
+    msg += `*Cliente:* ${nombre}%0A`;
     msg += `*Celular / WhatsApp:* ${telefono}%0A`;
     msg += `*Dirección:* ${direccion}%0A`;
     msg += `*Departamento:* ${departamento}%0A`;
