@@ -213,8 +213,10 @@ actúa como ancla aspiracional y cierra el CTA final (coincide con los anuncios
   correspondencia y correo de contacto para el bloque "identificación del responsable"
   de los T&C; número o estado de la Notificación Sanitaria Obligatoria (NSO) ante INVIMA
   si se quiere mostrar explícitamente.
-- **Pendiente de diseño:** regenerar la og:image (1200×630) con la oferta del pack de 2
-  ($199.800 → $89.900) para alinearla con la nueva estrategia de anclaje del héroe.
+- **og:image (1200×630) regenerada (nov 2026):** alineada con el anclaje — pill roja
+  "EL MÁS ELEGIDO", caja oro con "2 x $89.900", "antes $199.800" tachado y
+  "ahorras 55%", tarro real frontal sobre panel rojo con degradado y círculos.
+  og:image y twitter:image usan `?v=2` para invalidar la caché de Meta/X.
 - **Número de WhatsApp configurado:** `573147247260` (57 + 314 724 7260), definido en
   la variable `WHATSAPP_TIENDA` al inicio de `main.js`. Todos los pedidos del
   formulario llegan ahí; cámbiala ahí si cambia el número.
@@ -226,7 +228,7 @@ actúa como ancla aspiracional y cierra el CTA final (coincide con los anuncios
   InitiateCheckout y Purchase; GA4 view_item, add_to_cart, begin_checkout y purchase
   (con items y transaction_id); los mismos eventos se empujan al dataLayer de GTM.
 - SEO/social: canonical + Open Graph (og:image de 1200×630 generada con el tarro real
-  y la oferta héroe) + Twitter card + JSON-LD Product + **JSON-LD FAQPage** (9 preguntas).
+  y la oferta del pack de 2, ver punto 6) + Twitter card + JSON-LD Product + **JSON-LD FAQPage** (9 preguntas).
   Keywords de alto volumen integradas en title, meta description, H1/H2, FAQ y alts:
   "crema para estrías", "estrías rojas y blancas", "estrías postparto", "crema anticelulítica",
   "celulitis/piel de naranja", "crema reafirmante", "flacidez", "efecto calor", "pago contraentrega".
