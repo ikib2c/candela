@@ -2,9 +2,9 @@
 
 ## Documento maestro de identidad de marca (versión landing)
 
-**Producto:** Crema reductora de estrías y celulitis · 300 ml · fórmula IKI
-(renombrada en nov 2026; antes se comunicaba como "Pimienta Rosa" — el activo es el
-mismo, solo cambia el nombre de marca público)
+**Producto:** Crema reductora de estrías y celulitis · 300 ml · fórmula de pimienta rosa
+(nov 2026: se usó temporalmente el nombre comercial "IKI" y se revirtió a "pimienta rosa"
+por decisión del cliente; el activo es el mismo)
 **Categoría:** Cosmética corporal / cuidado del cuerpo
 **Mercado:** Colombia (venta directa e-commerce, pago contraentrega)
 **Modelo comercial:** Landing de conversión directa (Meta Ads → landing → WhatsApp)
@@ -151,7 +151,8 @@ urgencia honesta (regalo limitado, no inventado) · proceso de pedido en 1 panta
    proveedor confirma que el extracto de pimienta rosa (Schinus molle) está en la lista de
    ingredientes del envase, se puede añadir la mención "con extracto de pimienta rosa"
    como ingrediente real (hoy la landing solo usa IKI como nombre comercial de la fórmula).
-9. Video: testimonio real de clienta (Tertimonio.mp4, 1080×1920, 9:16 vertical) con póster, copy sobrio y disclaimer de resultados.
+9. Video: testimonio real de clienta (Tertimonio.mp4, 1080×1920, 9:16 vertical) sin
+   póster (solo el video, nov 2026), copy sobrio y disclaimer de resultados.
 10. Modo de uso en 3 pasos + 4 tips.
 11. Estadísticas de percepción con nota legal.
 12. Testimonios con "compradora verificada".
@@ -247,10 +248,12 @@ actúa como ancla aspiracional y cierra el CTA final (coincide con los anuncios
 
 ## 7. Novedades de nov 2026 (SEO, legal, autenticidad y dopamina)
 
-- **Rebrand IKI:** "Pimienta Rosa" (nombre comercial anterior de la fórmula, y también
-  nombre de una marca del mercado) fue reemplazado por **IKI** en todos los textos
-  visibles. La palabra "pimienta rosa" NO se usa como ingrediente hasta confirmar el
-  INCI real del envase (ver nota del punto 8).
+- **Rebrand IKI (REVURTIDO):** "Pimienta Rosa" fue renombrada temporalmente a "IKI"
+  y el 5 de nov 2026 el cliente pidió volver atrás: todos los textos visibles vuelven a
+  decir "pimienta rosa" (title, logo, chip del héroe, badge "Fórmula con pimienta rosa",
+  sección de fórmula, línea de tiempo, FAQ + JSON-LD, resumen del pedido, footer y
+  términos). Las clases CSS internas siguen llamándose `pimienta-grid`/`pimienta-foto`
+  (no renombrar).
 - **Dolor principal = estrías y celulitis:** la promesa encabeza title, H1, metas y FAQ;
   la sección de dolor y la de soluciones hablan de "estrías rojas y blancas",
   "estrías postparto" y "piel de naranja" (lenguaje de búsqueda real).
@@ -337,3 +340,15 @@ honestidad de marca; popup de salida por intrusivo en tráfico frío de Meta;
 dropdown estricto de ciudades (pesaría en móvil; el datalist da el beneficio sin
 el costo). Confirmación post-pedido por WhatsApp: ya funciona — el botón abre
 WhatsApp con el pedido prellenado; el asesor confirma (respuesta LATAM 75–85%).
+
+**Ajustes adicionales (5 nov 2026):**
+- **Auto-scroll al formulario al elegir pack:** estándar en landings COD (elegir
+  cantidad → formulario, eGrow Regla 5 / CODRocket). Al hacer clic en un pack,
+  tras 400 ms (para percibir toast + pop) la página baja suave a `#pedido`.
+  El usuario todavía puede comparar los 3 packs: el scroll ocurre solo tras el
+  clic explícito de selección.
+- **H1 legible:** "adiós" va ahora en la manuscrita Caveat — en Anton mayúscula
+  el "ADIÓS" se leía como "ADJÓS" (la tilde de la Ó se funde con la I).
+- **Video sin póster:** se retiró la imagen de portada; el reproductor muestra
+  el video directo (preload metadata). El archivo video-poster.jpg salió del repo
+  (copia disponible en la carpeta de fotos del proyecto).

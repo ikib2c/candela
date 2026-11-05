@@ -91,6 +91,8 @@ function initBundles(){
       toast('¡Buena elección! Ahorras ' + cop(ahorro) + (p.unidades === 3 ? ' + regalo sorpresa 🎁' : ' 🎉'));
       flashSticky();
       actualizarPasos();
+      const pedido = document.querySelector('#pedido');
+      if (pedido) setTimeout(() => pedido.scrollIntoView({ behavior: 'smooth', block: 'start' }), 400);
     };
     b.addEventListener('click', elegir);
     b.addEventListener('keydown', e => {
