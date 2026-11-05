@@ -2,7 +2,9 @@
 
 ## Documento maestro de identidad de marca (versión landing)
 
-**Producto:** Crema reductora de estrías y celulitis · 300 ml · Pimienta Rosa
+**Producto:** Crema reductora de estrías y celulitis · 300 ml · fórmula IKI
+(renombrada en nov 2026; antes se comunicaba como "Pimienta Rosa" — el activo es el
+mismo, solo cambia el nombre de marca público)
 **Categoría:** Cosmética corporal / cuidado del cuerpo
 **Mercado:** Colombia (venta directa e-commerce, pago contraentrega)
 **Modelo comercial:** Landing de conversión directa (Meta Ads → landing → WhatsApp)
@@ -20,7 +22,8 @@
 ## 1. Esencia de marca
 
 ### Significado
-"Candela" es el fuego, la llama que enciende. La Pimienta Rosa genera un efecto calor
+"Candela" es el fuego, la llama que enciende. El activo IKI (antes "Pimienta Rosa")
+genera un efecto calor
 real sobre la piel: ese calor es la metáfora central de la marca — la transformación
 se enciende noche a noche, con constancia.
 
@@ -138,26 +141,31 @@ urgencia honesta (regalo limitado, no inventado) · proceso de pedido en 1 panta
 5. Dolor → transformación (tarjetas "Sin Candela" / "Con Candela").
 6. Antes/después con pieza real: Día 1 vs Día 30 (anuncio del reto de 21 días) + disclaimer.
 7. 5 soluciones en un tarro.
-8. Fórmula: Pimienta Rosa + 4 activos (nicotinato de metilo, carnitina+cafeína,
+8. Fórmula: IKI + 4 activos (nicotinato de metilo, carnitina+cafeína,
    jengibre/capsaicina/algas, mentol) con foto real del tarro abierto mostrando la textura de la crema.
 9. Video: testimonio real de clienta (Tertimonio.mp4, 1080×1920, 9:16 vertical) con póster, copy sobrio y disclaimer de resultados.
 10. Modo de uso en 3 pasos + 4 tips.
 11. Estadísticas de percepción con nota legal.
 12. Testimonios con "compradora verificada".
 13. Historias reales: galería uniforme con 3 piezas UGC de la marca (estrías normales, posparto y ritual de uso), misma caja 9:16 (object-fit cover) en escritorio y una sola columna en móvil.
-14. Oferta: strip de creatividades uniforme (3 banners de la campaña: "Oferta de lanzamiento — una sola crema $69.900", "Paga 2 lleva 3" y "Lleva 3 paga 2") presentados como piezas de redes + nota aclaratoria de que el precio vigente es el del selector; selector de packs (1/2/3 tarros) con packshots del producto real, anclaje y ahorro visible.
+14. Oferta: pieza oficial "Nueva presentación Candela: belleza y cuidado" (941×1672)
+    enmarcada como pieza de campaña + nota aclaratoria de que el precio vigente es el
+    del selector; selector de packs (1/2/3 tarros) con la imagen de oferta real por
+    cantidad (1/2/3 tarros, recortes de "Ofertas Candela: cuida y realza tu piel"),
+    anclaje y ahorro visible.
 15. Formulario COD (estilo Releasit): datos de envío + totales en vivo + compromiso +
     envío del pedido a WhatsApp, con foto real del tarro en el resumen.
 16. FAQ (8 preguntas) · CTA final · footer con advertencia cosmética.
-17. Barra sticky móvil con precio del pack de 3.
+17. Barra sticky móvil dinámica: muestra el pack elegido (nombre, precio y precio
+    anterior) y se actualiza junto con el resumen al cambiar de pack o envío.
 
-**Nota sobre los banners de oferta:** las piezas "Lleva 3 paga 2" y "Paga 2 lleva 3"
-se muestran en la sección de oferta como **visuales de campaña** (tal como circulan en
-redes), con una nota que aclara que el precio vigente es el del selector. La pieza de
-**oferta de lanzamiento (1 tarro por $69.900)** se creó para la landing replicando el
-estilo de los anuncios (misma paleta y tipografía, foto real del tarro) porque en los
-anuncios originales no existía una pieza de tarro individual. Decisión de oct 2026:
-mostrar las creatividades sin alterar la tabla de precios.
+**Nota sobre los banners de oferta:** las piezas "Lleva 3 paga 2", "Paga 2 lleva 3" y
+la pieza creada de "oferta de lanzamiento" **se retiraron de la landing** (nov 2026):
+la sección de oferta ahora muestra la pieza oficial **"Nueva presentación Candela:
+belleza y cuidado"** y las tarjetas de pack usan los recortes del collage oficial
+"Ofertas Candela" (1/2/3 tarros con su oferta impresa). Los archivos siguen
+disponibles en la carpeta de fotos del proyecto por si la campaña los reaprovecha.
+Decisión vigente: mostrar las piezas sin alterar la tabla de precios.
 
 ### Oferta y precios (fuente: ESTUDIO PRECIOS CANDELA.xlsx)
 | Pack | Precio | Precio unitario | Anclaje | Ahorro visible |
@@ -196,8 +204,9 @@ El pack de 3 es la oferta héroe (coincide con los anuncios "3 por $99.900").
   (con items y transaction_id); los mismos eventos se empujan al dataLayer de GTM.
 - SEO/social: canonical + Open Graph (og:image de 1200×630 generada con el tarro real
   y la oferta héroe) + Twitter card + JSON-LD Product.
-- Calidad: QA E2E automatizado (Edge headless) 39/39 PASS: selector de packs, totales
-  en vivo, flujo COD hasta wa.me, eventos de conversión con valor (ViewContent, AddToCart,
-  InitiateCheckout, Purchase), video 9:16 verificado (1080×1920), historias en una columna
-  en móvil, sin errores de consola ni recursos fallidos, sin scroll horizontal en móvil (390 px).
+- Calidad: QA E2E automatizado (Edge headless) 40/40 PASS: selector de packs, totales
+  en vivo (resumen + barra sticky sincronizadas), flujo COD hasta wa.me, eventos de
+  conversión con valor (ViewContent, AddToCart, InitiateCheckout, Purchase), video 9:16
+  verificado (1080×1920), historias en una columna en móvil, sin errores de consola ni
+  recursos fallidos, sin scroll horizontal en móvil (390 px).
 - Datos dinámicos centralizados en JS: precios de packs, costo de envío prioritario.

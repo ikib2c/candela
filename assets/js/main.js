@@ -117,6 +117,12 @@ function actualizarResumen(){
   if (tS)  tS.textContent  = cop(p.precio);
   if (tE)  tE.textContent  = envioActual() > 0 ? cop(envioActual()) : 'Gratis';
   if (tT)  tT.textContent  = cop(p.precio + envioActual());
+  const stPack = $('#stickyPack');
+  const stPrecio = $('#stickyPrecio');
+  const stAntes = $('#stickyAntes');
+  if (stPack) stPack.textContent = 'PACK DE ' + p.unidades + ' · HOY';
+  if (stPrecio) stPrecio.textContent = cop(p.precio);
+  if (stAntes) stAntes.textContent = cop(p.antes);
 }
 
 function initEnvio(){

@@ -354,30 +354,21 @@ footer .copy{opacity:.6;font-size:11.5px}
   .galeria-historias figure{border-radius:16px;padding:7px}
   .video-marco{max-width:calc(60vh * .5625)}
   .creativos{padding:24px 18px 16px}
-  .creativos-row{gap:12px;justify-content:flex-start;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x mandatory}
-  .creativos-row img{flex:0 0 46%;scroll-snap-align:center}
+  .creativos-img{border-width:6px;border-radius:16px}
 }
 
 
-/* ============ Anuncios (como lo viste en redes) ============ */
+/* ============ Nueva presentación (pieza de campaña) ============ */
 .creativos{margin-top:46px;background:#fff;border:1px solid rgba(72,16,31,.08);border-radius:var(--r-lg);padding:34px 30px 24px;box-shadow:var(--sombra)}
 .creativos-h{font:400 22px var(--ff-display);text-transform:uppercase;color:var(--vino-soft);margin-top:8px}
-.creativos-row{display:flex;gap:20px;justify-content:center;margin-top:24px}
-.creativos-row img{width:32%;max-width:250px;border:6px solid #fff;outline:1px solid rgba(72,16,31,.12);border-radius:18px;box-shadow:var(--sombra);transition:transform .3s}
-.creativos-row img:hover{transform:translateY(-6px)}
-.creativos-row .c1{transform:rotate(-3deg)}
-.creativos-row .c3{transform:rotate(3deg)}
+.creativos-img{display:block;width:min(100%,640px);margin:24px auto 0;border:8px solid #fff;outline:1px solid rgba(72,16,31,.12);border-radius:22px;box-shadow:var(--sombra)}
 .creativos-nota{text-align:center;color:var(--vino-soft);font-size:12.5px;margin-top:20px;line-height:1.6}
 .creativos-nota b{color:var(--rojo)}
 
-/* ============ Packshot en tarjetas de pack ============ */
-.packshot{display:flex;align-items:flex-end;padding:2px 0 10px}
-.packshot img{width:56px;filter:drop-shadow(0 6px 10px rgba(72,16,31,.18))}
-.packshot img:nth-child(odd){transform:rotate(-5deg)}
-.packshot img:nth-child(even){transform:rotate(5deg)}
-.packshot img + img{margin-left:-18px}
-.packshot-x3 img{width:50px;margin-left:-20px}
-.packshot-x3 img:first-child{margin-left:0}
+/* ============ Imagen de oferta en tarjetas de pack ============ */
+.packshot{padding:0 0 14px}
+.packshot img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;border:1px solid rgba(72,16,31,.08);transition:transform .35s}
+.bundle.sel .packshot img{transform:scale(1.03)}
 
 /* ============ Accesibilidad / movimiento ============ */
 @media (prefers-reduced-motion:reduce){
