@@ -48,13 +48,19 @@ function track(metaEvento, { pack, envio = 0, transaction_id } = {}) {
 
   if (typeof gtag === 'function') {
     const params = { currency: 'COP', value: value, items: [item] };
-    if (transaction_id) params.transaction_id = transaction_id;
+    if (transaction_id) {
+      params.transaction_id = transaction_id;
+      if (envio) params.shipping = envio;
+    }
     gtag('event', eventoGa4, params);
   }
 
   window.dataLayer = window.dataLayer || [];
   const ecommerce = { currency: 'COP', value: value, items: [item] };
-  if (transaction_id) ecommerce.transaction_id = transaction_id;
+  if (transaction_id) {
+    ecommerce.transaction_id = transaction_id;
+    if (envio) ecommerce.shipping = envio;
+  }
   window.dataLayer.push({ event: eventoGa4, ecommerce: ecommerce });
 }
 

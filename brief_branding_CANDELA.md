@@ -386,3 +386,17 @@ WhatsApp con el pedido prellenado; el asesor confirma (respuesta LATAM 75–85%)
   Ley 1581): esa información sigue íntegra en `garantias.html` y `privacidad.html`,
   enlazadas desde el nav del footer. El footer queda con logo, nav legal, la única
   advertencia cosmética y el copyright.
+- **Auditoría de analítica y campo shipping (6 nov 2026):** revisión E2E completa de
+  la configuración de eventos (Meta Pixel 1283443887279567 · GA4 G-E2ZVQKECVG ·
+  Clarity z83tjfbh9h · dataLayer de GTM) con reporte de valores de compra en COP
+  por escenario: pack 1 gratis Purchase 69.900, pack 2 prioritario 99.800 y
+  pack 3 prioritario 109.800 (64 checks PASS). Meta y GA4/GTM reportan los mismos
+  valores en cada evento del funnel (ViewContent → view_item, AddToCart →
+  add_to_cart, InitiateCheckout → begin_checkout, Purchase → purchase), el Purchase
+  de Meta lleva eventID CDL-* idéntico al transaction_id de GA4 y.purchase abre
+  wa.me con el TOTAL correcto. Corrección incluida: el Purchase ahora envía el
+  campo estándar `shipping` a GA4 y al dataLayer cuando aplica envío prioritario
+  ($9.900), separando el costo de envío dentro del valor total; sin envío no se
+  envía el campo. Cache-bust del script a `main.js?v=3`. Pendiente recomendado
+  (no implementado): Advanced Matching de Meta (hash SHA-256 de em/ph del
+  formulario) y Conversions API para sesiones con bloqueadores.
