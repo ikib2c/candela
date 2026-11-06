@@ -397,6 +397,19 @@ WhatsApp con el pedido prellenado; el asesor confirma (respuesta LATAM 75–85%)
   wa.me con el TOTAL correcto. Corrección incluida: el Purchase ahora envía el
   campo estándar `shipping` a GA4 y al dataLayer cuando aplica envío prioritario
   ($9.900), separando el costo de envío dentro del valor total; sin envío no se
-  envía el campo. Cache-bust del script a `main.js?v=3`. Pendiente recomendado
-  (no implementado): Advanced Matching de Meta (hash SHA-256 de em/ph del
-  formulario) y Conversions API para sesiones con bloqueadores.
+  envía el campo. Cache-bust del script a `main.js?v=3`.
+- **Advanced Matching + Conversions API (7 nov 2026):** el celular del formulario
+  se normaliza (10 dígitos → + `57`, solo dígitos) y se envía hasheado en
+  SHA-256 vía `fbq('init', id, { ph })` (una sola vez por sesión, con guardia)
+  para mejorar el match y la calidad de evento (EMQ) del píxel de Meta; verificado
+  E2E: hash del navegador idéntico al SHA-256 de Node para `573100000000`.
+  Además queda cableado el adaptador de **Conversions API**: `CAPI_ENDPOINT` en
+  `main.js` está vacío hasta que el cliente despliegue un proxy propio
+  (Cloudflare Worker / Make / función serverless) con el access token en el
+  servidor — el token NUNCA va en el código del sitio. Con el endpoint vacío
+  cero POST salen del navegador (verificado); el payload ya se construye en
+  formato estándar Meta (data[].event_name, event_id CDL-*, event_time en
+  segundos, action_source website, user_data.ph hasheado, custom_data con
+  value/currency/content_ids/num_items) y sale por fetch POST al configurarlo.
+  Auditoría de analítica ampliada: 71/71 PASS · funnel E2E: 17/17 PASS.
+  Cache-bust a `main.js?v=4`.

@@ -12,6 +12,14 @@ const PACKS = {
 const ENVIO_PRIORITARIO = 9900;
 let packActual = 2;
 
+/* Advanced Matching + Conversions API (Meta) */
+const PIXEL_ID = '1283443887279567';
+/* Sin backend no se puede llamar a la API de Conversiones directamente: al configurar
+   un proxy propio (Cloudflare Worker / Make / función serverless) que reenvíe a
+   https://graph.facebook.com/{PIXEL_ID}/events con el access token, escríbelo aquí.
+   El token de acceso NUNCA va en este archivo (es secreto de servidor). */
+const CAPI_ENDPOINT = '';
+
 const $  = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
 const cop = v => new Intl.NumberFormat('es-CO', { style:'currency', currency:'COP', minimumFractionDigits:0 }).format(v);
@@ -62,6 +70,61 @@ function track(metaEvento, { pack, envio = 0, transaction_id } = {}) {
     if (envio) ecommerce.shipping = envio;
   }
   window.dataLayer.push({ event: eventoGa4, ecommerce: ecommerce });
+}
+
+/* Advanced Matching: normaliza el celular colombiano y lo envía hasheado (SHA-256 hex)
+   con fbq('init', id, { ph }) para mejorar el match y la calidad de evento (EMQ). */
+function normalizarTelefono(tel) {
+  let d = String(tel || '').replace(/\D/g, '');
+  if (d.length === 10) d = '57' + d;
+  return d.length === 12 && d.indexOf('57') === 0 ? d : '';
+}
+
+async function hashSHA256(texto) {
+  if (!(window.crypto && window.crypto.subtle)) return null;
+  const buf = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(texto));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+let phHashActual = null;
+let phHashDe = '';
+
+async function tipificarTelefono() {
+  const campo = $('#fTelefono');
+  if (!campo) return phHashActual;
+  const norm = normalizarTelefono(campo.value);
+  if (!norm || norm === phHashDe || typeof fbq !== 'function') return phHashActual;
+  const h = await hashSHA256(norm);
+  if (!h) return phHashActual;
+  phHashDe = norm;
+  phHashActual = h;
+  fbq('init', PIXEL_ID, { ph: h });
+  return h;
+}
+
+/* Conversions API (servidor): sin CAPI_ENDPOINT solo devuelve el payload
+   (estándar Meta: data[].event_name/event_id/user_data.ph/custom_data). */
+async function enviarCAPI(evento, eventID, phHash, valor, contentIds, numItems) {
+  const payload = {
+    data: [{
+      event_name: evento,
+      event_time: Math.floor(Date.now() / 1000),
+      event_id: eventID,
+      action_source: 'website',
+      user_data: phHash ? { ph: [phHash] } : {},
+      custom_data: { currency: 'COP', value: valor, content_ids: contentIds, num_items: numItems }
+    }]
+  };
+  if (!CAPI_ENDPOINT) return payload;
+  try {
+    await fetch(CAPI_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      keepalive: true
+    });
+  } catch (e) { /* CAPI es complementaria: un fallo de red no afecta la conversión */ }
+  return payload;
 }
 
 /* ============ Galería del héroe ============ */
@@ -186,10 +249,10 @@ function initFormulario(){
     track('InitiateCheckout', { pack: packData(), envio: envioActual() });
   };
   form.addEventListener('focusin', marcarInicioCheckout);
-  form.addEventListener('input', () => { marcarInicioCheckout(); actualizarPasos(); });
-  form.addEventListener('change', () => { marcarInicioCheckout(); actualizarPasos(); });
+  form.addEventListener('input', () => { marcarInicioCheckout(); actualizarPasos(); tipificarTelefono(); });
+  form.addEventListener('change', () => { marcarInicioCheckout(); actualizarPasos(); tipificarTelefono(); });
 
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
 
     const nombre = $('#fNombre').value.trim();
@@ -212,6 +275,9 @@ function initFormulario(){
     const p = packData();
     const envio = envioActual();
     const total = p.precio + envio;
+
+    await tipificarTelefono();
+    const eventID = 'CDL-' + Date.now();
 
     const lineas = [
       '*🔥 Nuevo pedido — CANDELA*',
@@ -239,7 +305,8 @@ function initFormulario(){
     );
     const mensajePedido = encodeURIComponent(lineas.join('\n'));
 
-    track('Purchase', { pack: p, envio: envio, transaction_id: 'CDL-' + Date.now() });
+    track('Purchase', { pack: p, envio: envio, transaction_id: eventID });
+    enviarCAPI('Purchase', eventID, phHashActual, total, ['candela-300ml-' + p.unidades + '-tarros'], p.unidades);
 
     const p3 = document.querySelector('#pasosPedido .pp:nth-child(3)');
     if (p3) p3.classList.add('done');
