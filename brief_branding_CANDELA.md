@@ -418,3 +418,16 @@ WhatsApp con el pedido prellenado; el asesor confirma (respuesta LATAM 75–85%)
   1.0/0.4) y `robots.txt` (Allow global + `Sitemap:` declarado). Listo para
   registrar en Google Search Console como propiedad https://ikib2c.github.io/candela/
   y enviar el sitemap `https://ikib2c.github.io/candela/sitemap.xml`.
+- **Benchmark filete a filete vs competidor (7 nov 2026):** se desarmó la landing de
+  referencia del mercado (salabreizada localmente) y se mapearon sus 16 secciones y
+  patrones CRO. CANDELA ya cubría casi todos (marquee superior, rating en header,
+  dolor→transformación, modo de uso, reseñas con estrellas, cuenta regresiva, CTA
+  oscuro final). Se adoptaron los tres patrones faltantes con copy propio (sin
+  copiar textos del tercero): (1) sección "Ficha del producto" antes del FAQ con
+  9 tarjetas de datos verificados contra nuestras páginas legales (qué es, cómo
+  actúa, presentación, uso, rendimiento, qué incluye, envío/pago, garantías,
+  precauciones) + CTA a la oferta; (2) etiquetas de intención en los packs
+  ("Para probar · 1 tarro" / "El más elegido" / "Mayor ahorro + regalo"); (3)
+  confirmación por WhatsApp añ adida al micro-texto del CTA de la oferta.
+  Verificado: auditoría estática 25/25 PASS y funnel E2E 17/17 PASS
+  (incl. móvil sin overflow).
