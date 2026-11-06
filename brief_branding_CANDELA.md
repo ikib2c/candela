@@ -413,3 +413,8 @@ WhatsApp con el pedido prellenado; el asesor confirma (respuesta LATAM 75–85%)
   value/currency/content_ids/num_items) y sale por fetch POST al configurarlo.
   Auditoría de analítica ampliada: 71/71 PASS · funnel E2E: 17/17 PASS.
   Cache-bust a `main.js?v=4`.
+- **Sitemap y robots.txt (6 nov 2026):** se crearon `sitemap.xml` (5 URLs con las
+  canónicas del sitio: landing + 4 páginas legales, lastmod del día, prioridades
+  1.0/0.4) y `robots.txt` (Allow global + `Sitemap:` declarado). Listo para
+  registrar en Google Search Console como propiedad https://ikib2c.github.io/candela/
+  y enviar el sitemap `https://ikib2c.github.io/candela/sitemap.xml`.
