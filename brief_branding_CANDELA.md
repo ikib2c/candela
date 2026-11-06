@@ -139,8 +139,12 @@ urgencia honesta (regalo limitado, no inventado) · proceso de pedido en 1 panta
 1. Marquee superior: envío gratis · pago contraentrega · regalo · reto 21 noches.
 2. Header: logo + rating 4.9 (1.343 reseñas) + CTA.
 3. Héroe: promesa + 4 beneficios del envase + precio anclado al pack de 2
-   (~~$199.800~~ → $89.900, "$44.950 c/u", sticker AHORRAS 55%) + foto real del tarro
-   (galería de 3 fotos reales: precintado, abierto y reverso) + stickers.
+   (~~$199.800~~ → $89.900, "$44.950 c/u") + foto real del tarro con galería que
+   argumenta: 3 fotos reales (precintado, abierto y reverso) cada una con caption
+   de prueba dinámico ("llega precintado de fábrica" / "300 ml reales" / "etiqueta
+   con fórmula, lote y fecha"), sticker AHORRAS 55% · HOY · $109.900, sticker de
+   regalo "esta semana", nota "fotos reales · sin retoques", miniatura activa
+   elevada y glow de pimienta.
 4. Barra de confianza: envío, contraentrega, regalo, garantía 30 días.
 5. Dolor → transformación (tarjetas "Sin Candela" / "Con Candela").
 6. Antes/después con pieza real: Día 1 vs Día 30 (anuncio del reto de 21 días) + disclaimer.
@@ -164,9 +168,15 @@ urgencia honesta (regalo limitado, no inventado) · proceso de pedido en 1 panta
     "Ofertas Candela: cuida y realza tu piel"), anclaje y ahorro visible.
 16. Formulario COD (estilo Releasit): datos de envío + totales en vivo + compromiso +
     envío del pedido a WhatsApp, con foto real del tarro en el resumen.
-17. FAQ (9 preguntas, acordeón) · CTA final (ancla alta con el pack de 3) · footer con
+17. Ficha del producto (patrón benchmark Nevora, copy propio): 9 tarjetas con datos
+    verificados contra las páginas legales (qué es, cómo actúa, presentación, uso,
+    rendimiento, qué incluye, envío/pago, garantías, precauciones). Las 3 filas de
+    decisión (qué incluye, envío/pago, garantías) van resaltadas con acento oro
+    para el escaneo en la zona caliente (después del formulario, antes del FAQ),
+    y cierra con CTA de rescate a la oferta.
+18. FAQ (9 preguntas, acordeón) · CTA final (ancla alta con el pack de 3) · footer con
     páginas legales (T&C, privacidad, garantías, envíos) + advertencia cosmética.
-18. Barra sticky móvil dinámica: muestra el pack elegido (nombre, precio y precio
+19. Barra sticky móvil dinámica: muestra el pack elegido (nombre, precio y precio
     anterior) y se actualiza junto con el resumen al cambiar de pack o envío.
 
 **Nota sobre los banners de oferta:** las piezas "Lleva 3 paga 2", "Paga 2 lleva 3" y
@@ -428,7 +438,9 @@ WhatsApp con el pedido prellenado; el asesor confirma (respuesta LATAM 75–85%)
   actúa, presentación, uso, rendimiento, qué incluye, envío/pago, garantías,
   precauciones) + CTA a la oferta; (2) etiquetas de intención en los packs
   ("Para probar · 1 tarro" / "El más elegido" / "Mayor ahorro + regalo"); (3)
-  confirmación por WhatsApp añ adida al micro-texto del CTA de la oferta.
+  confirmación por WhatsApp añadida al micro-texto del CTA de la oferta; y (4)
+  las tres filas de decisión de la ficha resaltadas con acento oro (segunda
+  iteración de la zona caliente).
   Verificado: auditoría estática 25/25 PASS y funnel E2E 17/17 PASS
   (incl. móvil sin overflow).
 - **Héroe persuasivo — galería con pruebas (7 nov 2026):** la zona de imágenes del
