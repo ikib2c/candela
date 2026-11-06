@@ -207,20 +207,31 @@ function initFormulario(){
     const envio = envioActual();
     const total = p.precio + envio;
 
-    let msg = '*🔥 Nuevo pedido — CANDELA*%0A%0A';
-    msg += `*Cliente:* ${nombre}%0A`;
-    msg += `*Celular / WhatsApp:* ${telefono}%0A`;
-    msg += `*Dirección:* ${direccion}%0A`;
-    msg += `*Departamento:* ${departamento}%0A`;
-    msg += `*Ciudad:* ${ciudad}%0A`;
-    if (nota) msg += `*Referencia:* ${nota}%0A`;
-    msg += '%0A*Pedido:*%0A';
-    msg += `- ${p.nombre} — ${cop(p.precio)}%0A`;
-    if (packActual === 3) msg += '- Regalo sorpresa incluido%0A';
-    msg += `*Envío:* ${envio > 0 ? 'Prioritario — ' + cop(envio) : 'Gratis'}%0A`;
-    msg += `*TOTAL:* ${cop(total)}%0A%0A`;
-    msg += '*Método de pago:* Contraentrega (pago al recibir)%0A%0A';
-    msg += 'Confirmo que recibiré y pagaré mi pedido en la entrega.';
+    const lineas = [
+      '*🔥 Nuevo pedido — CANDELA*',
+      '',
+      `*Cliente:* ${nombre}`,
+      `*Celular / WhatsApp:* ${telefono}`,
+      `*Dirección:* ${direccion}`,
+      `*Departamento:* ${departamento}`,
+      `*Ciudad:* ${ciudad}`
+    ];
+    if (nota) lineas.push(`*Referencia:* ${nota}`);
+    lineas.push(
+      '',
+      '*Pedido:*',
+      `- ${p.nombre} — ${cop(p.precio)}`
+    );
+    if (packActual === 3) lineas.push('- Regalo sorpresa incluido');
+    lineas.push(
+      `*Envío:* ${envio > 0 ? 'Prioritario — ' + cop(envio) : 'Gratis'}`,
+      `*TOTAL:* ${cop(total)}`,
+      '',
+      '*Método de pago:* Contraentrega (pago al recibir)',
+      '',
+      'Confirmo que recibiré y pagaré mi pedido en la entrega.'
+    );
+    const mensajePedido = encodeURIComponent(lineas.join('\n'));
 
     track('Purchase', { pack: p, envio: envio, transaction_id: 'CDL-' + Date.now() });
 
@@ -236,7 +247,7 @@ function initFormulario(){
       }, 2400);
     }
 
-    window.open(`https://wa.me/${WHATSAPP_TIENDA}?text=${msg}`, '_blank');
+    window.open(`https://wa.me/${WHATSAPP_TIENDA}?text=${mensajePedido}`, '_blank');
   });
 }
 

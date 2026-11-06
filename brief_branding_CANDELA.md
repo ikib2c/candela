@@ -208,8 +208,10 @@ actúa como ancla aspiracional y cierra el CTA final (coincide con los anuncios
 - **Páginas legales:** `terminos.html` (T&C), `privacidad.html` (datos, Ley 1581/2012,
   con cookies/píxeles y enlaces de opt-out), `garantias.html` (garantía por defectos +
   **derecho de retracto** art. 47 Ley 1480/2011: 5 días hábiles, reembolso máximo 30 días
-  calendario, formulario modelo) y `envios.html` (envíos y pagos). Todas enlazadas desde
-  el footer de la landing (compliance Meta + Estatuto del Consumidor).
+   calendario, formulario modelo) y `envios.html` (envíos y pagos). Todas enlazadas desde
+   el footer de la landing (compliance Meta + Estatuto del Consumidor). Nov 2026: la
+   marca/identificación de los cuatro documentos es IKI — el producto se sigue citando
+   como CANDELA 300 ml.
 - **Pendientes legales a completar por el cliente:** razón social, NIT, dirección de
   correspondencia y correo de contacto para el bloque "identificación del responsable"
   de los T&C; número o estado de la Notificación Sanitaria Obligatoria (NSO) ante INVIMA
@@ -243,6 +245,18 @@ actúa como ancla aspiracional y cierra el CTA final (coincide con los anuncios
   (nombre en un campo, datalist de ciudades, prueba social en oferta, línea de tiempo,
   garantía en el héroe, fetchpriority del héroe), sin errores de
   consola ni recursos fallidos, sin scroll horizontal en móvil (390 px).
+  + QA E2E con Chrome headless (puppeteer-core): auditoría estática 25/25 PASS
+  y funnel comprador 17/17 PASS (desktop 1280×900 y móvil 390×844): carga sin
+  errores de red/consola, render completo de imágenes y video, FAQ acordeón,
+  funnel de packs (1→3→2 con anclaje), envío prioritario $9.900 / total $99.800
+  y regreso a Gratis, checkout con InitiateCheckout único y progreso 2/3,
+  guardia sin compromiso (cero intentos de WhatsApp), submit con wa.me completo
+  (dirección con #, 17 líneas) + Purchase COP con eventID CDL-*, overlay de éxito
+  con autocierre ≤ 4 s, orden del funnel de eventos Meta/GA4/dataLayer con
+  transaction_id, sticky móvil "Pedir ahora" → #oferta, funnel móvil completo
+  hasta wa.me y páginas legales con título IKI. Conversiones de prueba
+  bloqueadas por red (googletagmanager, google-analytics, facebook, clarity,
+  doubleclick) para no contaminar píxeles de producción.
 
 ---
 
@@ -352,3 +366,23 @@ WhatsApp con el pedido prellenado; el asesor confirma (respuesta LATAM 75–85%)
 - **Video sin póster:** se retiró la imagen de portada; el reproductor muestra
   el video directo (preload metadata). El archivo video-poster.jpg salió del repo
   (copia disponible en la carpeta de fotos del proyecto).
+- **Mensaje de WhatsApp completo (6 nov 2026):** se corrigió el envío del pedido en
+  `main.js`: el mensaje se arma como lista de líneas y se codifica con
+  `encodeURIComponent` hacia `wa.me`. Antes los datos del cliente iban sin codificar
+  en la URL y toda dirección con `#` (ej. "Calle 63 #25-32"), `&` o `+` truncaba el
+  texto (se perdían departamento, ciudad, pedido, TOTAL y método de pago). Probado en
+  Node con el bloque real de `main.js`: 17 líneas completas con pack 1/2/3, envío
+  prioritario y especiales (`#`, `&`, `%`, tildes, `ñ`, emojis); `node --check` OK
+  y scripts inline de `index.html` OK. `index.html` carga el script con
+  `main.js?v=2` para invalidar la caché de los navegadores que ya tenían el JS viejo.
+- **Marca legal IKI (6 nov 2026):** títulos, descriptions e identidad del responsable
+  de las 4 páginas legales (T&C, privacidad, garantías y envíos) pasaron de
+  "marca CANDELA" a "marca IKI". Se conservan las menciones que nombran el producto
+  ("cosmético CANDELA 300 ml", "nueva presentación de Candela").
+- **Footer y avisos retirados (6 nov 2026):** se eliminó del footer la frase
+  "Documentación sanitaria del producto disponible a solicitud" y su variante en la
+  sección 8 del T&C ("La documentación sanitaria…"). También se retiró del footer el
+  segundo párrafo legal (retracto de 5 días, garantía Ley 1480 y tratamiento de datos
+  Ley 1581): esa información sigue íntegra en `garantias.html` y `privacidad.html`,
+  enlazadas desde el nav del footer. El footer queda con logo, nav legal, la única
+  advertencia cosmética y el copyright.
