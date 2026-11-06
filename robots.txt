@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ikib2c.github.io/candela/sitemap.xml
