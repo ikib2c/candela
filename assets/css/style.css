@@ -118,6 +118,17 @@ header{position:sticky;top:0;z-index:80;background:rgba(255,246,243,.92);backdro
 .hero-miniaturas{display:flex;gap:12px;margin-top:18px;justify-content:center}
 .hero-miniaturas img{width:72px;height:72px;object-fit:contain;background:#fff;border-radius:14px;border:3px solid #fff;box-shadow:var(--sombra);cursor:pointer;opacity:.75;transition:.2s}
 .hero-miniaturas img:hover,.hero-miniaturas img.on{opacity:1;border-color:var(--pimienta)}
+.hero-miniaturas img.on{transform:translateY(-3px);box-shadow:0 10px 22px rgba(211,30,60,.22)}
+.hero-cap{display:block;max-width:max-content;margin:16px auto 0;background:#fff;border:1.5px dashed var(--pimienta-claro);border-radius:var(--r-pill);padding:9px 18px;font-weight:600;font-size:13.5px;color:var(--vino-soft);box-shadow:var(--sombra)}
+.hero-cap.pop{animation:cap-pop .35s ease}
+@keyframes cap-pop{from{transform:scale(.94);opacity:.35}to{transform:scale(1);opacity:1}}
+.hero-nota{display:block;text-align:center;margin-top:12px;font-size:11.5px;letter-spacing:.06em;color:var(--vino-soft)}
+.sticker.regalo small{font:700 9px var(--ff-cuerpo);letter-spacing:.14em;text-transform:uppercase;margin-top:4px;opacity:.9}
+.sticker.regalo{animation:regalo-vive 2.8s ease-in-out infinite}
+@keyframes regalo-vive{0%,100%{transform:rotate(-12deg) scale(1)}50%{transform:rotate(-12deg) scale(1.07)}}
+.sticker.descuento i{font:700 9.5px var(--ff-cuerpo);font-style:normal;letter-spacing:.08em}
+.hero-foto{box-shadow:var(--sombra-fuerte),0 0 0 12px rgba(242,84,125,.07),0 34px 70px rgba(211,30,60,.14)}
+@media (prefers-reduced-motion:reduce){.sticker.regalo{animation:none}.hero-cap.pop{animation:none}}
 
 /* ============ Barra de confianza ============ */
 .confianza{background:var(--vino);color:#FFD9E2;padding:26px 0}

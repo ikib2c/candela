@@ -130,6 +130,7 @@ async function enviarCAPI(evento, eventID, phHash, valor, contentIds, numItems) 
 /* ============ Galería del héroe ============ */
 function initGaleria(){
   const img = $('#heroImg');
+  const cap = $('#heroCap');
   $$('.hero-miniaturas img').forEach(t => {
     t.addEventListener('click', () => {
       img.src = t.src;
@@ -138,6 +139,12 @@ function initGaleria(){
       setTimeout(() => img.style.opacity = '1', 120);
       $$('.hero-miniaturas img').forEach(x => x.classList.remove('on'));
       t.classList.add('on');
+      if (cap && t.dataset.cap) {
+        cap.textContent = t.dataset.cap;
+        cap.classList.remove('pop');
+        void cap.offsetWidth;
+        cap.classList.add('pop');
+      }
     });
   });
 }

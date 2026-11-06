@@ -431,3 +431,15 @@ WhatsApp con el pedido prellenado; el asesor confirma (respuesta LATAM 75–85%)
   confirmación por WhatsApp añ adida al micro-texto del CTA de la oferta.
   Verificado: auditoría estática 25/25 PASS y funnel E2E 17/17 PASS
   (incl. móvil sin overflow).
+- **Héroe persuasivo — galería con pruebas (7 nov 2026):** la zona de imágenes del
+  héroe dejó de ser decorativa y ahora argumenta. Cada miniatura lleva un caption
+  de prueba que cambia al hacer clic (precinto de fábrica intacto → 300 ml reales
+  de la nueva presentación → etiqueta con fórmula, lote y fecha), con animación de
+  pop y aria-live para accesibilidad. El sticker de ahorro ahora es concreto:
+  "AHORRAS 55% · HOY · $109.900" (monto real del pack de 2, no solo porcentaje).
+  El sticker de regalo aclara "+ REGALO SORPRESA · esta semana" (coherente con la
+  barra de confianza) y respira con micro-animación (desactivada en
+  prefers-reduced-motion). Se añadió la nota "Fotos reales del producto · sin
+  retoques", la miniatura activa se eleva y la foto ganó doble glow de pimienta.
+  Cache-bust: `main.js?v=5` y `style.css?v=2`. Verificado: caption funcional E2E,
+  auditoría estática 25/25 y funnel 17/17.
