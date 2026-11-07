@@ -269,7 +269,8 @@ actúa como ancla aspiracional y cierra el CTA final (coincide con los anuncios
   (dirección con #, N.º de pedido trazable CDL-AAMMDD-HHMMSS, 18-19 líneas) +
   Purchase COP con eventID idéntico al N.º de pedido, overlay de éxito
   con autocierre ≤ 4 s, orden del funnel de eventos Meta/GA4/dataLayer con
-  transaction_id, sticky móvil "Pedir ahora" → #oferta, funnel móvil completo
+  transaction_id, sticky móvil "Pedir ahora" → formulario #pedido (con AddToCart
+  del pack vigente), funnel móvil completo
   hasta wa.me y páginas legales con título IKI. Conversiones de prueba
   bloqueadas por red (googletagmanager, google-analytics, facebook, clarity,
   doubleclick) para no contaminar píxeles de producción.
@@ -551,3 +552,19 @@ WhatsApp con el pedido prellenado; el asesor confirma (respuesta LATAM 75–85%)
   y envios) y la advertencia cosmética del footer. La ronda se publicó como un
   solo commit en `main` y el build de Pages quedó verificado en vivo (v=7/v=3,
   poster 200 con 46 KB, dims/lazy/preload observables en el HTML servido).
+- **Sticky "Pedir ahora" va directo al formulario (7 nov 2026):** la barra sticky
+  móvil mostraba el precio del pack vigente, pero al tocarla devolvía al usuario
+  a los packs (#oferta) en vez del formulario — fricción innecesaria en el paso
+  de mayor intención. Ahora todos los CTA de compra llevan a #pedido: el toque
+  en la sticky registra AddToCart del pack mostrado (solo si ese pack aún no se
+  había registrado, evitando duplicados) y baja con scroll suave al formulario;
+  sin JS el ancla `href="#pedido"` hace de fallback. El selector de packs sigue
+  siendo la vía para cambiar de pack (auto-scroll de vuelta al formulario) y el
+  efecto "vuela a la oferta" conserva su rol de descubrimiento hacia #oferta.
+  En escritorio la barra sticky no existe (solo ≤768 px) y se recomienda dejarla
+  así: el recorrido de compra es más corto y los CTA grandes ya están a la
+  vista. El pack de 2 tarros sigue preseleccionado por defecto y es el ancla
+  correcta: es el "más elegido", equilibra conversión y ticket, y deja el pack
+  de 3 como subida natural ($10.000 más por el tercer tarro). Verificado: T15
+  reescrita (sticky ⇒ #pedido visible + AddToCart 89.900 del pack 2) y suites
+  en verde; cache-bust `main.js?v=8`.

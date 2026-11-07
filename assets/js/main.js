@@ -173,6 +173,7 @@ function initBundles(){
       packActual = parseInt(b.dataset.pack, 10);
       actualizarResumen();
       track('AddToCart', { pack: PACKS[packActual] });
+      addCartOrigen = packActual;
       const p = PACKS[packActual];
       const ahorro = p.antes - p.precio;
       toast('¡Buena elección! Ahorras ' + cop(ahorro) + (p.unidades === 3 ? ' + regalo sorpresa 🎁' : ' 🎉'));
@@ -253,6 +254,16 @@ function irAlPedido(){
   actualizarResumen();
   const destino = $('#pedido');
   if (destino) destino.scrollIntoView({ behavior:'smooth' });
+}
+
+let addCartOrigen = null;
+function pedirDesdeSticky(e){
+  if (e) e.preventDefault();
+  if (addCartOrigen !== packActual){
+    addCartOrigen = packActual;
+    track('AddToCart', { pack: PACKS[packActual] });
+  }
+  irAlPedido();
 }
 
 /* ============ Envío del pedido por WhatsApp ============ */
