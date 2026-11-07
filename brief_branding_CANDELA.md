@@ -231,9 +231,12 @@ actúa como ancla aspiracional y cierra el CTA final (coincide con los anuncios
   "EL MÁS ELEGIDO", caja oro con "2 x $89.900", "antes $199.800" tachado y
   "ahorras 55%", tarro real frontal sobre panel rojo con degradado y círculos.
   og:image y twitter:image usan `?v=2` para invalidar la caché de Meta/X.
-- **Número de WhatsApp configurado:** `573147247260` (57 + 314 724 7260), definido en
-  la variable `WHATSAPP_TIENDA` al inicio de `main.js`. Todos los pedidos del
-  formulario llegan ahí; cámbiala ahí si cambia el número.
+- **Números de WhatsApp configurados (nov 2026):** definidos al inicio de `main.js`.
+  `WHATSAPP_PEDIDOS = '573160868408'` (+57 316 086 8408) recibe todos los pedidos del
+  formulario (checkout COD → wa.me). `WHATSAPP_ATENCION = '573173671930'`
+  (+57 317 367 1930) atiende información, PQRS, reclamos, garantías/retracto, datos
+  personales y atención personalizada con asesor humano (footer, formulario y páginas
+  legales). Cámbialos ahí si cambian los números.
 - Sitio 100% estático: publicable en GitHub Pages, Netlify o Vercel sin build.
 - Publicado en: https://ikib2c.github.io/candela/ (repo https://github.com/ikib2c/candela).
 - Tracking: Google Tag Manager (GTM-5M6MMNGH) + GA4 (G-E2ZVQKECVG) + Meta Pixel
