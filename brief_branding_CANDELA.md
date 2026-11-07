@@ -260,7 +260,8 @@ actúa como ancla aspiracional y cierra el CTA final (coincide con los anuncios
   garantía en el héroe, fetchpriority del héroe), sin errores de
   consola ni recursos fallidos, sin scroll horizontal en móvil (390 px).
   + QA E2E con Chrome headless (puppeteer-core): auditoría estática 25/25 PASS
-  y funnel comprador 17/17 PASS (desktop 1280×900 y móvil 390×844): carga sin
+  y funnel comprador 19/19 PASS (desktop 1280×900 y móvil 390×844, incluye 2
+  pruebas del efecto "vuela a la oferta"): carga sin
   errores de red/consola, render completo de imágenes y video, FAQ acordeón,
   funnel de packs (1→3→2 con anclaje), envío prioritario $9.900 / total $99.800
   y regreso a Gratis, checkout con InitiateCheckout único y progreso 2/3,
@@ -278,7 +279,10 @@ actúa como ancla aspiracional y cierra el CTA final (coincide con los anuncios
   Advanced Matching (SHA-256 del celular ≡ hash de Node), CAPI con cero POST
   mientras el endpoint esté vacío y trazabilidad del consecutivo en el texto
   de WhatsApp. + Caption de la galería del héroe verificado E2E (clic en
-  miniatura → cambia la prueba y la imagen).
+  miniatura → cambia la prueba y la imagen). + Barrido responsive de 10 anchos
+  (320-1920 px) sin derrapes horizontales y pruebas de carga CDP OK:
+  móvil 3G rápida 951 KB transferidos y desktop 1,4 MB (poster del vídeo,
+  fuentes async, lazy/dims).
 
 ---
 
@@ -527,5 +531,23 @@ WhatsApp con el pedido prellenado; el asesor confirma (respuesta LATAM 75–85%)
   cargadas y CTAs visibles: OK en los 10 tras 2 arreglos reales (la fila de
   confianza del héroe desbordaba en móviles angostos: ahora cada sello se apila
   en columna con tipografía compacta ≤480 px; y `contain:paint` en la cinta
-  marquee). Suites finales: estática 25/25 · analítica 74/74 · E2E 19/19 ·
-  responsivo 10/10 anchos.
+  marquee). El LCP móvil sigue siendo la foto principal del héroe (PNG de 130 KB,
+  ya con `preload` + `fetchpriority`). Suites finales: estática 25/25 · analítica
+  74/74 · E2E 19/19 · responsivo 10/10 anchos.
+- **Incidente de encoding corregido antes de publicar (7 nov 2026):** durante la
+  ronda apareció mojibake doble-codificado (con BOM) en `index.html` y
+  `style.css` del working tree — nunca llegó a producción, pero se detectó al
+  revisar el diff antes del commit. Causa: escrituras del archivo con PowerShell
+  `Set-Content` (PS 5.1 lee ANSI y re-codifica todo el archivo). Rescate: reset
+  a HEAD (que sí está limpio) y re-aplicación de los cambios de la ronda (todos
+  ASCII salvo el 🛍️ del CSS) con reemplazos de cadena en Node con UTF-8
+  explícito; verificado byte a byte: 39 `é` en index.html y 6 en style.css,
+  em-dashes y emojis intactos, suites re-verde (25/25 · 74/74 · 19/19 · 10/10)
+  y PERF OK. Lecciones registradas: (1) nunca reescribir archivos del repo con
+  `Get-Content`/`Set-Content` de PowerShell — usar Node con `utf8` explícito y
+  sin BOM para todo re-escritura de fuente; (2) los needles de las suites de QA
+  también eran doble-codificados (comparaban mojibake contra mojibake, por eso
+  pasaban) — corregidos a UTF-8 limpio: las frases '· IKI Colombia' (terminos
+  y envios) y la advertencia cosmética del footer. La ronda se publicó como un
+  solo commit en `main` y el build de Pages quedó verificado en vivo (v=7/v=3,
+  poster 200 con 46 KB, dims/lazy/preload observables en el HTML servido).
