@@ -265,12 +265,20 @@ actúa como ancla aspiracional y cierra el CTA final (coincide con los anuncios
   funnel de packs (1→3→2 con anclaje), envío prioritario $9.900 / total $99.800
   y regreso a Gratis, checkout con InitiateCheckout único y progreso 2/3,
   guardia sin compromiso (cero intentos de WhatsApp), submit con wa.me completo
-  (dirección con #, 17 líneas) + Purchase COP con eventID CDL-*, overlay de éxito
+  (dirección con #, N.º de pedido trazable CDL-AAMMDD-HHMMSS, 18-19 líneas) +
+  Purchase COP con eventID idéntico al N.º de pedido, overlay de éxito
   con autocierre ≤ 4 s, orden del funnel de eventos Meta/GA4/dataLayer con
   transaction_id, sticky móvil "Pedir ahora" → #oferta, funnel móvil completo
   hasta wa.me y páginas legales con título IKI. Conversiones de prueba
   bloqueadas por red (googletagmanager, google-analytics, facebook, clarity,
   doubleclick) para no contaminar píxeles de producción.
+  + Auditoría de analítica (Chrome headless) 74/74 PASS: IDs del píxel/GA4/Clarity
+  en el código, valores de compra por pack en COP (69.900 / 99.800 / 109.800)
+  coincidentes entre Meta y GA4/GTM, campo shipping en Purchase con prioritario,
+  Advanced Matching (SHA-256 del celular ≡ hash de Node), CAPI con cero POST
+  mientras el endpoint esté vacío y trazabilidad del consecutivo en el texto
+  de WhatsApp. + Caption de la galería del héroe verificado E2E (clic en
+  miniatura → cambia la prueba y la imagen).
 
 ---
 
