@@ -281,8 +281,15 @@ function initFormulario(){
     track('InitiateCheckout', { pack: packData(), envio: envioActual() });
   };
   form.addEventListener('focusin', marcarInicioCheckout);
-  form.addEventListener('input', () => { marcarInicioCheckout(); actualizarPasos(); tipificarTelefono(); });
-  form.addEventListener('change', () => { marcarInicioCheckout(); actualizarPasos(); tipificarTelefono(); });
+  const limpiarErrorCampo = destino => {
+    const campo = destino && destino.closest && destino.closest('.campo, .cod-compromiso');
+    if (!campo) return;
+    campo.classList.remove('campo-error');
+    const aviso = campo.querySelector('.campo-err');
+    if (aviso) aviso.remove();
+  };
+  form.addEventListener('input', e => { marcarInicioCheckout(); actualizarPasos(); tipificarTelefono(); limpiarErrorCampo(e.target); });
+  form.addEventListener('change', e => { marcarInicioCheckout(); actualizarPasos(); tipificarTelefono(); limpiarErrorCampo(e.target); });
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
@@ -295,12 +302,30 @@ function initFormulario(){
     const nota = $('#fNota').value.trim();
     const compromiso = $('#fCompromiso').checked;
 
-    if (!nombre || !telefono || !departamento || !ciudad || !direccion){
-      alert('Por favor completa todos los campos marcados con *.');
-      return;
-    }
-    if (!compromiso){
-      alert('Marca la casilla de compromiso para confirmar tu pedido.');
+    $$('#formPedido .campo-err').forEach(e => e.remove());
+    $$('#formPedido .campo-error').forEach(c => c.classList.remove('campo-error'));
+    let primerError = null;
+    const marcar = (el, mensaje) => {
+      if (!el) return;
+      const campo = el.closest('.campo, .cod-compromiso');
+      if (!campo) return;
+      campo.classList.add('campo-error');
+      const aviso = document.createElement('small');
+      aviso.className = 'campo-err';
+      aviso.textContent = mensaje;
+      campo.appendChild(aviso);
+      if (!primerError) primerError = el;
+    };
+    const soloDigitos = telefono.replace(/\D/g, '');
+    if (!nombre) marcar($('#fNombre'), 'Escribe tu nombre completo.');
+    if (!/^\d{10}$/.test(soloDigitos) || soloDigitos[0] !== '3') marcar($('#fTelefono'), 'Ingresa un celular de 10 dígitos que empiece por 3 (ej. 300 123 4567).');
+    if (!departamento) marcar($('#fDepartamento'), 'Selecciona tu departamento.');
+    if (!ciudad) marcar($('#fCiudad'), 'Escribe tu ciudad o municipio.');
+    if (!direccion) marcar($('#fDireccion'), 'Escribe tu dirección de entrega.');
+    if (!compromiso) marcar($('#fCompromiso'), 'Marca la casilla de compromiso para confirmar tu pedido.');
+    if (primerError){
+      primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      primerError.focus({ preventScroll: true });
       return;
     }
 
@@ -312,7 +337,7 @@ function initFormulario(){
     const eventID = numeroPedido();
 
     const lineas = [
-      '*🔥 Nuevo pedido — CANDELA*',
+      '*Nuevo pedido — CANDELA*',
       `*N.º de pedido:* ${eventID}`,
       '',
       `*Cliente:* ${nombre}`,
@@ -328,6 +353,7 @@ function initFormulario(){
       `- ${p.nombre} — ${cop(p.precio)}`
     );
     if (packActual === 3) lineas.push('- Regalo sorpresa incluido');
+    if ($('#fReto') && $('#fReto').checked) lineas.push('- Me uno al reto de las 21 noches (envíenme el checklist)');
     lineas.push(
       `*Envío:* ${envio > 0 ? 'Prioritario — ' + cop(envio) : 'Gratis'}`,
       `*TOTAL:* ${cop(total)}`,
@@ -459,8 +485,45 @@ function initVuelo(){
   });
 }
 
+/* ============ Variante de ángulo (?ang=postparto): message match con la pauta ============ */
+const VARIANTE_POSTPARTO = [
+  { sel: '.hero .chip',        html: '💛 Pensada para mamás · estrías postparto' },
+  { sel: '.hero h1',           html: 'Estrías de <span class="mano">postparto</span>: recupera tu piel <span class="mano">noche a noche</span>' },
+  { sel: '.hero .bajada',      html: 'CANDELA es la <strong>crema para estrías de embarazo y postparto</strong> con <strong>efecto calor</strong>: un ritual de 5 minutos mientras tu bebé duerme que hidrata a profundidad y ayuda a que tu piel se vea más firme, lisa y uniforme.' },
+  { sel: '#historia h2',       html: '¿Las estrías del <em>embarazo te quitan confianza?</em>' },
+  { sel: '#historia .sub',     html: 'No estás sola, mamá: tu piel se estiró al darte vida y puede verse mejor con un ritual simple de 5 minutos cada noche.' },
+  { sel: '#resultados .eyebrow', html: 'El reto de las 21 noches · mamás' }
+];
+const TESTIMONIOS_POSTPARTO = [
+  { a: 'C', n: 'Camila Restrepo', t: '"Después de tener a mi hija, las estrías rojas del embarazo me quitaban la confianza. Tres semanas aplicando Candela cada noche y ya se ven mucho más tenues. Se lo recomiendo a cualquier mamá."' },
+  { a: 'L', n: 'Laura Betancur',  t: '"Soy mamá primeriza y no tenía tiempo para mí. Lo aplico mientras el bebé duerme: la piel se siente más firme y ese rato se volvió mi ritual favorito."' },
+  { a: 'V', n: 'Valentina Osorio', t: '"Tras mi segundo embarazo, el abdomen quedó con flacidez. El efecto calor se siente riquísimo y el reto de las 21 noches me mantuvo constante: ya noto la diferencia."' }
+];
+
+function initAngulo(){
+  const params = new URLSearchParams(location.search);
+  const señal = [params.get('ang'), params.get('angulo'), params.get('utm_content'), params.get('utm_campaign')]
+    .join(' ').toLowerCase();
+  if (señal.indexOf('postparto') === -1) return;
+  document.body.dataset.angulo = 'postparto';
+  VARIANTE_POSTPARTO.forEach(c => { const el = document.querySelector(c.sel); if (el) el.innerHTML = c.html; });
+  $$('.testi').slice(0, 3).forEach((t, i) => {
+    const d = TESTIMONIOS_POSTPARTO[i];
+    if (!d) return;
+    const av = t.querySelector('.avatar');
+    const nb = t.querySelector('.cab b');
+    const tx = t.querySelector('p');
+    if (av) av.textContent = d.a;
+    if (nb) nb.textContent = d.n;
+    if (tx) tx.textContent = d.t;
+  });
+  if (typeof fbq === 'function') fbq('trackCustom', 'AnguloPostparto');
+  if (typeof gtag === 'function') gtag('event', 'angulo_postparto');
+}
+
 /* ============ Inicio ============ */
 document.addEventListener('DOMContentLoaded', () => {
+  initAngulo();
   initGaleria();
   initBundles();
   initEnvio();

@@ -237,6 +237,23 @@ actúa como ancla aspiracional y cierra el CTA final (coincide con los anuncios
   (+57 317 367 1930) atiende información, PQRS, reclamos, garantías/retracto, datos
   personales y atención personalizada con asesor humano (footer, formulario y páginas
   legales). Cámbialos ahí si cambian los números.
+- **Paquete CRO ángulo postparto (nov 2026):** (1) variante dinámica por URL
+  `?ang=postparto` (también responde a `utm_content`/`utm_campaign` que contengan
+  "postparto"): cambia chip, H1, bajada, encabezados de dolor/resultados y los 3
+  primeros testimonios por versiones de mamás (eventos custom `AnguloPostparto` /
+  `angulo_postparto`); la versión por defecto queda intacta para SEO. (2) El reto de
+  21 noches es mecánica: casilla opcional `#fReto` en el formulario que añade la línea
+  "Me uno al reto…" al mensaje de WhatsApp (checklist lo entrega el asesor) y el
+  contador ahora habla del "grupo de esta semana". (3) Validación inline del
+  formulario (sin `alert`): celular de 10 dígitos que empiece por 3, errores bajo cada
+  campo con `.campo-error`/`.campo-err`, scroll al primer error. (4) Ancla de precio
+  por día en el héroe ("menos de $1.500/día", pack 2). Cache-busts: `style.css?v=4`,
+  `main.js?v=9`. QA Playwright 19/19 (variante, validación, reto y mensaje wa.me).
+- **Bug corregido (wa.me corrompe emojis):** el redirector de wa.me re-encodea el
+  parámetro `text` y corrompe todo carácter fuera de Latin-1 a U+FFFD (🔥 → `�`,
+  probado también con ⚡); los acentos (á, ñ, º, —) sí sobreviven. Se quitó el emoji
+  del texto del pedido (`*Nuevo pedido — CANDELA*`). Regla: el mensaje que viaja por
+  wa.me debe ser solo ASCII/Latin-1; los emojis se quedan en la página, no en la URL.
 - Sitio 100% estático: publicable en GitHub Pages, Netlify o Vercel sin build.
 - Publicado en: https://ikib2c.github.io/candela/ (repo https://github.com/ikib2c/candela).
 - Tracking: Google Tag Manager (GTM-5M6MMNGH) + GA4 (G-E2ZVQKECVG) + Meta Pixel

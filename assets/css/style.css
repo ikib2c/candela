@@ -509,3 +509,9 @@ footer .copy{opacity:.6;font-size:11.5px}
 .confianza small{font-size:10.5px}
 .hero-fondo .blob{filter:blur(46px)}
 }
+
+/* Validacion inline del formulario */
+.campo.campo-error input,.campo.campo-error select{border-color:var(--rojo)!important}
+.cod-compromiso.campo-error{border-color:var(--rojo)}
+.campo-err{display:block;font:600 11.5px var(--ff-cuerpo);color:var(--rojo);margin-top:5px}
+.cod-compromiso .campo-err{color:var(--rojo-oscuro)}
