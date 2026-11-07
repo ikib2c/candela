@@ -455,3 +455,14 @@ WhatsApp con el pedido prellenado; el asesor confirma (respuesta LATAM 75–85%)
   retoques", la miniatura activa se eleva y la foto ganó doble glow de pimienta.
   Cache-bust: `main.js?v=5` y `style.css?v=2`. Verificado: caption funcional E2E,
   auditoría estática 25/25 y funnel 17/17.
+- **Consecutivo de pedido con trazabilidad (7 nov 2026):** cada envío genera el
+  número de pedido `CDL-AAMMDD-HHMMSS` (único por segundo, legible para el asesor,
+  ordenable cronológicamente, con la fecha embebida) que llega como segunda línea
+  del mensaje de WhatsApp (`*N.º de pedido:* …`) y es el MISMO identificador que
+  viaja como eventID del píxel de Meta, transaction_id de GA4/GTM y event_id de
+  la API de Conversiones: un solo ID enlaza el chat de WhatsApp con las plataformas
+  de anuncios para seguimiento y trazabilidad. Sin backend no existe contador
+  global secuencial; fecha+hora es el consecutivo trazable más robusto para un
+  sitio estático. Cache-bust a `main.js?v=6`. Verificado: auditoría analítica
+  74/74 PASS (incluye check de trazabilidad: el número del texto de WhatsApp es
+  idéntico al eventID/transaction_id) y funnel E2E 17/17 PASS.

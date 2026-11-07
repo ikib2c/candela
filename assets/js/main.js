@@ -127,6 +127,17 @@ async function enviarCAPI(evento, eventID, phHash, valor, contentIds, numItems) 
   return payload;
 }
 
+/* Consecutivo de pedido: CDL-AAMMDD-HHMMSS. Único (granularidad de segundo),
+   legible para el asesor, ordenable cronológicamente y con la fecha embebida
+   para seguimiento y trazabilidad. Es el mismo identificador que viaja como
+   eventID de Meta, transaction_id de GA4 y event_id de la API de Conversiones. */
+function numeroPedido() {
+  const f = new Date();
+  const p2 = n => String(n).padStart(2, '0');
+  return 'CDL-' + String(f.getFullYear()).slice(2) + p2(f.getMonth() + 1) + p2(f.getDate()) +
+    '-' + p2(f.getHours()) + p2(f.getMinutes()) + p2(f.getSeconds());
+}
+
 /* ============ Galería del héroe ============ */
 function initGaleria(){
   const img = $('#heroImg');
@@ -284,10 +295,11 @@ function initFormulario(){
     const total = p.precio + envio;
 
     await tipificarTelefono();
-    const eventID = 'CDL-' + Date.now();
+    const eventID = numeroPedido();
 
     const lineas = [
       '*🔥 Nuevo pedido — CANDELA*',
+      `*N.º de pedido:* ${eventID}`,
       '',
       `*Cliente:* ${nombre}`,
       `*Celular / WhatsApp:* ${telefono}`,
