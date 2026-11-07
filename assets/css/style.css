@@ -49,7 +49,7 @@ p{margin:0}
 .center{text-align:center}
 
 /* ============ Marquee superior ============ */
-.barra-top{background:var(--vino);color:#FFD9E2;overflow:hidden;padding:10px 0}
+.barra-top{background:var(--vino);color:#FFD9E2;overflow:hidden;padding:10px 0;contain:paint}
 .barra-top .pista{display:flex;white-space:nowrap;animation:desfile 30s linear infinite}
 .barra-top span{font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:0 22px;display:inline-flex;align-items:center;gap:22px}
 .barra-top .sep{color:var(--oro);font-size:9px}
@@ -79,7 +79,7 @@ header{position:sticky;top:0;z-index:80;background:rgba(255,246,243,.92);backdro
 .btn.secundario:hover{border-color:var(--vino);background:rgba(72,16,31,.05)}
 .btn.blanco{background:#fff;color:var(--rojo);box-shadow:0 10px 24px rgba(72,16,31,.25)}
 .btn.blanco:hover{background:var(--crema-2)}
-.btn.fino{padding:13px 26px;font-size:14px}
+.btn.fino{padding:13px 26px;font-size:14px;height:48px;display:inline-flex;align-items:center}
 .btn:not(.secundario) .flecha{transition:transform .2s}
 .btn:hover .flecha{transform:translateX(4px)}
 
@@ -133,7 +133,7 @@ header{position:sticky;top:0;z-index:80;background:rgba(255,246,243,.92);backdro
 /* ============ Barra de confianza ============ */
 .confianza{background:var(--vino);color:#FFD9E2;padding:26px 0}
 .confianza .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.confianza div{display:flex;align-items:center;gap:12px;justify-content:center;text-align:left}
+.confianza div{display:flex;align-items:center;gap:12px;justify-content:center;text-align:left;min-width:0}
 .confianza svg{width:30px;height:30px;stroke:var(--oro);flex:none}
 .confianza b{display:block;font-size:13.5px;color:#fff}
 .confianza small{font-size:11.5px;opacity:.75}
@@ -468,7 +468,7 @@ footer .copy{opacity:.6;font-size:11.5px}
 .legal-volver:hover{color:var(--rojo)}
 
 /* ============ CRO nov 2026 ============ */
-.hero-micro{display:block;margin-top:12px;font-size:13px;font-weight:600;color:var(--vino-soft)}
+.hero-micro{display:block;margin-top:12px;font-size:13px;font-weight:600;color:var(--vino-soft);min-height:18px}
 .prueba-compra{margin-top:14px;font-size:14px;color:var(--vino);font-weight:600;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px}
 .prueba-compra .estrellas{font-size:16px}
 .prueba-compra em{font-style:normal;font-weight:500;color:var(--vino-soft)}
@@ -493,3 +493,19 @@ footer .copy{opacity:.6;font-size:11.5px}
 .ficha-row p{font-size:14.5px;line-height:1.6;color:var(--vino)}
 @media (max-width:768px){.ficha-grid{grid-template-columns:1fr}}
 .ficha-row.decision{background:var(--crema-2);border-left:3px solid var(--oro);box-shadow:0 6px 18px rgba(242,169,59,.14)}
+
+/* ============ Vuela a la oferta (fly-to-cart) ============ */
+.vuela-cta img{cursor:pointer}
+.vuela-cta{position:relative}
+.vuela-cta::after{content:"🛍️ Toca para elegir tu pack";position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:var(--vino);color:#fff;font-size:12px;font-weight:600;padding:7px 14px;border-radius:999px;box-shadow:var(--sombra);pointer-events:none;opacity:.94}
+.vuelo-clon{position:fixed;z-index:98;object-fit:cover;border-radius:14px;transition:transform .68s cubic-bezier(.32,.72,.35,1.18),opacity .68s ease-out}
+@media (prefers-reduced-motion:reduce){.vuelo-clon{transition:none}.vuela-cta::after{display:none}}
+@media(max-width:480px){
+.confianza .wrap{gap:12px}
+.confianza div{flex-direction:column;gap:6px}
+.confianza div small{max-width:100%;overflow-wrap:break-word}
+.confianza svg{width:22px;height:22px}
+.confianza b{font-size:12.5px}
+.confianza small{font-size:10.5px}
+.hero-fondo .blob{filter:blur(46px)}
+}

@@ -395,6 +395,56 @@ function initReveal(){
   $$('.reveal').forEach(el => obs.observe(el));
 }
 
+/* ============ Efecto "vuela a la oferta" (fly-to-cart) ============
+ * Inspirado en los catálogos de venta: al tocar la imagen, esta vuela
+ * con una curva hacia la oferta y la página baja sola a #oferta.
+ * Respeta prefers-reduced-motion (vuelve a un simple anclaje suave). */
+function initVuelo(){
+  const objetivoOferta = $('#bundles');
+  const reducir = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  $$('.historias .galeria-historias figure img, .hero-foto img, .creativos-img').forEach(img => {
+    img.closest('figure')?.classList.add('vuela-cta');
+    img.addEventListener('click', () => {
+      if (window.__vueloEnCurso) return;
+      window.__vueloEnCurso = true;
+      if (window.fbq) fbq('trackCustom', 'VueloOferta', { zona: img.closest('.hero-foto') ? 'hero' : 'historias' });
+      if (window.gtag) gtag('event', 'vuelo_oferta');
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'vuelo_oferta' });
+      const burbuja = document.createElement('img');
+      burbuja.src = img.currentSrc || img.src;
+      burbuja.alt = '';
+      burbuja.setAttribute('aria-hidden', 'true');
+      burbuja.className = 'vuelo-clon';
+      const desde = img.getBoundingClientRect();
+      burbuja.style.left = desde.left + 'px';
+      burbuja.style.top = desde.top + 'px';
+      burbuja.style.width = desde.width + 'px';
+      burbuja.style.height = desde.height + 'px';
+      document.body.appendChild(burbuja);
+      img.style.visibility = 'hidden';
+      const destino = (objetivoOferta?.getBoundingClientRect()) || { left: innerWidth / 2 - 40, top: innerHeight / 2 - 40, width: 80, height: 80 };
+      const deltaY = destino.top - desde.top;
+      const deltaX = destino.left - desde.left;
+      requestAnimationFrame(() => {
+        burbuja.style.transform = `translate(${deltaX * 0.92}px, ${deltaY * 0.96}px) scale(0.08) rotate(8deg)`;
+        burbuja.style.opacity = '0.35';
+      });
+      if (reducir) {
+        $('#oferta').scrollIntoView({ behavior: 'auto' });
+      } else {
+        $('#oferta').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      setTimeout(() => {
+        burbuja.remove();
+        img.style.visibility = '';
+        window.__vueloEnCurso = false;
+      }, 700);
+      flashSticky();
+    });
+  });
+}
+
 /* ============ Inicio ============ */
 document.addEventListener('DOMContentLoaded', () => {
   initGaleria();
@@ -406,6 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFaq();
   initCuentaRegresiva();
   initReveal();
+  initVuelo();
   const anio = $('#anio');
   if (anio) anio.textContent = new Date().getFullYear();
   track('ViewContent');

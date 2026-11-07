@@ -492,3 +492,40 @@ WhatsApp con el pedido prellenado; el asesor confirma (respuesta LATAM 75–85%)
   Las dos fotos antiguas (`anuncio-normales.jpg`, `anuncio-uso.jpg`) quedan en
   assets por si se reutilizan. Verificado: auditoría estática 25/25 y funnel
   E2E 17/17 PASS.
+- **Efecto "vuela a la oferta" (fly-to-cart) (7 nov 2026):** inspirado en los
+  catálogos de venta donde la imagen vuela hacia el carrito. Aquí, al tocar la
+  imagen del héroe, la pieza de nueva presentación o cualquiera de las 3 tarjetas
+  de "Miles de mujeres ya viven su ritual", un clon de la imagen vuela con curva
+  y desaceleración hacia la tarjeta del pack seleccionado en #oferta mientras la
+  página baja sola con scroll suave (no abre ninguna ventana extra). Al aterrizar
+  pulsa el precio de la barra sticky (móvil). Sin librerías: clon position:fixed +
+  transición CSS de transform/opacity (~600 ms), cero trabajo de
+  layout; respeta `prefers-reduced-motion` (salta directo con `scrollIntoView`
+  instantáneo) y guarda contra toques dobles. Los toques sobre imágenes NO
+  contaminan el funnel de conversión: se registran como evento personalizado
+  `VueloOferta` (Meta trackCustom) / `vuelo_oferta` (GA4 + dataLayer), dejando
+  AddToCart exclusivamente para la selección real de pack. Cada zona lleva
+  cursor pointer y el rótulo flotante "🛍️ Toca para elegir tu pack". Verificado
+  con 2 pruebas E2E nuevas (desktop y móvil: aparece el clon, se retira, la
+  oferta queda en pantalla). Cache-bust `main.js?v=7` + `style.css?v=3`.
+- **Velocidad y responsividad medidas (7 nov 2026):** pruebas de carga con Chrome
+  headless + CDP (móvil 390×844 emulando 3G rápida con CPU 4x; desktop 1280×900
+  sin throttle). Resultados tras optimizar: transferencia total móvil 950 KB
+  (antes 1.219 KB) y desktop 1,4 MB (antes 33,3 MB — el vídeo de 31,9 MB ya no
+  se descarga al abrir). Optimizaciones aplicadas: `preload="none"` + **poster
+  JPEG generado del propio vídeo** (frame real a 1,2 s, 46 KB, extraído con
+  canvas en Chrome headless) para que el MP4 solo se descargue al pulsar play;
+  `width/height` al vídeo y a la imagen del reto 21 días (elimina saltos de
+  layout), `loading="lazy"` + `decoding="async"` en imágenes bajo el pliegue;
+  hoja de Google Fonts no bloqueante (`media="print" onload` + `<noscript>`).
+  Pendiente fino: el CLS residual (≈0,29 desktop / ≈0,14 móvil) viene del swap
+  de fuentes con `display=swap` (fallback→webfont); la solución canónica es
+  servir las fuentes self-hosted con `size-adjust`/métricas equivalentes — no
+  aplicado porque este entorno no puede descargar los WOFF2 para medirlos.
+  Responsividad: barrido automatizado de 10 anchos (320-1920 px) comprobando
+  overflow horizontal, sticky correcto por rango, columnas de secciones, imágenes
+  cargadas y CTAs visibles: OK en los 10 tras 2 arreglos reales (la fila de
+  confianza del héroe desbordaba en móviles angostos: ahora cada sello se apila
+  en columna con tipografía compacta ≤480 px; y `contain:paint` en la cinta
+  marquee). Suites finales: estática 25/25 · analítica 74/74 · E2E 19/19 ·
+  responsivo 10/10 anchos.
