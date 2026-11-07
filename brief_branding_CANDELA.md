@@ -167,7 +167,8 @@ urgencia honesta (regalo limitado, no inventado) · proceso de pedido en 1 panta
     (1/2/3 tarros) con la imagen de oferta real por cantidad (1/2/3 tarros, recortes de
     "Ofertas Candela: cuida y realza tu piel"), anclaje y ahorro visible.
 16. Formulario COD (estilo Releasit): datos de envío + totales en vivo + compromiso +
-    envío del pedido a WhatsApp, con foto real del tarro en el resumen.
+    envío del pedido a WhatsApp con consecutivo trazable (`*N.º de pedido:*
+    CDL-AAMMDD-HHMMSS` como segunda línea del mensaje), con foto real del tarro en el resumen.
 17. Ficha del producto (patrón benchmark Nevora, copy propio): 9 tarjetas con datos
     verificados contra las páginas legales (qué es, cómo actúa, presentación, uso,
     rendimiento, qué incluye, envío/pago, garantías, precauciones). Las 3 filas de
@@ -240,6 +241,9 @@ actúa como ancla aspiracional y cierra el CTA final (coincide con los anuncios
   todo en el `<head>`. Eventos de conversión con valor en COP: Meta ViewContent, AddToCart,
   InitiateCheckout y Purchase; GA4 view_item, add_to_cart, begin_checkout y purchase
   (con items y transaction_id); los mismos eventos se empujan al dataLayer de GTM.
+  Todo el funnel queda enlazado por el consecutivo de pedido `CDL-AAMMDD-HHMMSS`,
+  el mismo identificador que llega en el mensaje de WhatsApp (eventID de Meta,
+  transaction_id de GA4 y event_id de CAPI).
 - SEO/social: canonical + Open Graph (og:image de 1200×630 generada con el tarro real
   y la oferta del pack de 2, ver punto 6) + Twitter card + JSON-LD Product + **JSON-LD FAQPage** (9 preguntas).
   Keywords de alto volumen integradas en title, meta description, H1/H2, FAQ y alts:
@@ -333,7 +337,8 @@ del pack de 3; el de 1 es el de menor margen.
 - Urgencia existente (cuenta regresiva diaria del regalo) se mantiene sobre la oferta.
 - Referencia: efecto señuelo/decoy (Huber 1982), aversión a los extremos
   (Simonson & Tversky 1992), anclaje (Tversky & Kahneman 1974).
-- Datos dinámicos centralizados en JS: precios de packs, costo de envío prioritario.
+- Datos dinámicos centralizados en JS: precios de packs, costo de envío prioritario,
+  consecutivo de pedido (`numeroPedido()`), hashes de Advanced Matching y endpoint CAPI.
 
 ---
 
