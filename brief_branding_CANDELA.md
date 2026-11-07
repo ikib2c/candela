@@ -483,10 +483,12 @@ WhatsApp con el pedido prellenado; el asesor confirma (respuesta LATAM 75–85%)
   ritual" conserva la tarjeta de postparto y estrena los dos creativos nuevos:
   antes/después de celulitis ("Adiós a la celulitis, estrías y piel de naranja")
   y problema→solución ("¿El problema eres tú?"). Ambos convertidos de PNG de
-  ~2.1 MB a JPG de 810 px (~190-241 KB) para no penalizar la carga; la pieza de
-  problema→solución se insertó **sin la franja inferior de badges** (llevaba
-  "PRODUCTO 100% ORIGINAL" horneado en los píxeles — la palabra retirada de todo
-  el sitio) y se muestra completa con `object-fit:contain`, sin recortar bordes.
+  ~2.1 MB a JPG de 810 px (~190-208 KB) para no penalizar la carga. La pieza de
+  problema→solución va **completa y sin recortes** (`object-fit` normal): la
+  clienta regeneró el arte sin la franja "PRODUCTO 100% ORIGINAL" (archivo
+  "Crema Candela para una Piel Más Firme_.png") y ahora la franja inferior lee
+  "Compra segura · Fórmula natural · Tu información protegida", manteniendo
+  badges + CTA de WhatsApp horneados. La palabra quedó fuera de todo el sitio.
   Las dos fotos antiguas (`anuncio-normales.jpg`, `anuncio-uso.jpg`) quedan en
   assets por si se reutilizan. Verificado: auditoría estática 25/25 y funnel
   E2E 17/17 PASS.
