@@ -479,3 +479,14 @@ WhatsApp con el pedido prellenado; el asesor confirma (respuesta LATAM 75–85%)
   sitio estático. Cache-bust a `main.js?v=6`. Verificado: auditoría analítica
   74/74 PASS (incluye check de trazabilidad: el número del texto de WhatsApp es
   idéntico al eventID/transaction_id) y funnel E2E 17/17 PASS.
+- **Lote social renovado (7 nov 2026):** la sección "Miles de mujeres ya viven su
+  ritual" conserva la tarjeta de postparto y estrena los dos creativos nuevos:
+  antes/después de celulitis ("Adiós a la celulitis, estrías y piel de naranja")
+  y problema→solución ("¿El problema eres tú?"). Ambos convertidos de PNG de
+  ~2.1 MB a JPG de 810 px (~190-241 KB) para no penalizar la carga; la pieza de
+  problema→solución se insertó **sin la franja inferior de badges** (llevaba
+  "PRODUCTO 100% ORIGINAL" horneado en los píxeles — la palabra retirada de todo
+  el sitio) y se muestra completa con `object-fit:contain`, sin recortar bordes.
+  Las dos fotos antiguas (`anuncio-normales.jpg`, `anuncio-uso.jpg`) quedan en
+  assets por si se reutilizan. Verificado: auditoría estática 25/25 y funnel
+  E2E 17/17 PASS.
