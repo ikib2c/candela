@@ -567,4 +567,6 @@ WhatsApp con el pedido prellenado; el asesor confirma (respuesta LATAM 75–85%)
   correcta: es el "más elegido", equilibra conversión y ticket, y deja el pack
   de 3 como subida natural ($10.000 más por el tercer tarro). Verificado: T15
   reescrita (sticky ⇒ #pedido visible + AddToCart 89.900 del pack 2) y suites
-  en verde; cache-bust `main.js?v=8`.
+  en verde; cache-bust `main.js?v=8`. Publicado y verificado en vivo: el HTML
+  servido trae `onclick="pedirDesdeSticky(event)"` en la barra y el JS con la
+  deduplicación.
