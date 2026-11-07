@@ -243,12 +243,35 @@ actúa como ancla aspiracional y cierra el CTA final (coincide con los anuncios
   primeros testimonios por versiones de mamás (eventos custom `AnguloPostparto` /
   `angulo_postparto`); la versión por defecto queda intacta para SEO. (2) El reto de
   21 noches es mecánica: casilla opcional `#fReto` en el formulario que añade la línea
-  "Me uno al reto…" al mensaje de WhatsApp (checklist lo entrega el asesor) y el
-  contador ahora habla del "grupo de esta semana". (3) Validación inline del
-  formulario (sin `alert`): celular de 10 dígitos que empiece por 3, errores bajo cada
-  campo con `.campo-error`/`.campo-err`, scroll al primer error. (4) Ancla de precio
-  por día en el héroe ("menos de $1.500/día", pack 2). Cache-busts: `style.css?v=4`,
-  `main.js?v=9`. QA Playwright 19/19 (variante, validación, reto y mensaje wa.me).
+  "Me uno al reto…" al mensaje de WhatsApp y el contador ahora habla del "grupo de
+  esta semana". (3) Validación inline del formulario (sin `alert`): celular de 10
+  dígitos que empiece por 3, errores bajo cada campo con `.campo-error`/`.campo-err`,
+  scroll al primer error. (4) Ancla de precio por día en el héroe ("menos de
+  $1.500/día", pack 2). Cache-busts: `style.css?v=4`, `main.js?v=9`.
+- **QA integral (46/46, Playwright, red externa bloqueada):** funnel del comprador
+  completo con tracking verificado evento por evento:
+  - **Meta:** ViewContent (1× al cargar, value=89.900 COP pack 2, content_ids correctos),
+    AddToCart al elegir pack (value=99.900, num_items=3), InitiateCheckout con dedup
+    (1 sola vez aunque se siga escribiendo), Purchase (value=109.800 con prioritario,
+    eventID=`CDL-AAMMDD-HHMMSS` en el 4.º argumento), custom `VueloOferta` (zona=hero)
+    y custom `AnguloPostparto` en la variante.
+  - **GA4/dataLayer:** view_item, add_to_cart, begin_checkout y purchase con
+    transaction_id = eventID Meta (un solo ID enlaza chat de WhatsApp, Meta y GA4),
+    shipping=9.900 en purchase, items con item_id del pack elegido, vuelo_oferta y
+    angulo_postparto.
+  - **Advanced Matching:** al digitar un celular válido se llama `fbq('init', PIXEL, {ph})`
+    con SHA-256 de 64 hex del número normalizado 57XXXXXXXXXX.
+  - **CAPI:** endpoint vacío → cero llamadas a graph.facebook.com (solo payload local).
+  - Además: sticky solo ≤768px, validación inline sin `alert()` nativos, totales
+    exactos (pack 3 + prioritario = 109.800), mensaje wa.me con consecutivo, reto y
+    TOTAL, páginas legales 200 con números nuevos y sin el antiguo.
+- **Operativa de la casilla "reto de las 21 noches" (`#fReto`):** es opcional y no
+  bloquea el pedido. Si la clienta la marca, el mensaje que llega al WhatsApp de
+  pedidos incluye la línea "Me uno al reto de las 21 noches (envíenme el checklist)".
+  **No hay automatización** (sitio estático): el asesor que confirma el pedido debe
+  ver esa línea y enviar manualmente el checklist de las 21 noches por el mismo chat,
+  idealmente con recordatorios en los días 7, 14 y 21 (constancia → resultados →
+  reseñas y recompra).
 - **Bug corregido (wa.me corrompe emojis):** el redirector de wa.me re-encodea el
   parámetro `text` y corrompe todo carácter fuera de Latin-1 a U+FFFD (🔥 → `�`,
   probado también con ⚡); los acentos (á, ñ, º, —) sí sobreviven. Se quitó el emoji
