@@ -293,7 +293,7 @@ actúa como ancla aspiracional y cierra el CTA final (coincide con los anuncios
 - **Dolor principal = estrías y celulitis:** la promesa encabeza title, H1, metas y FAQ;
   la sección de dolor y la de soluciones hablan de "estrías rojas y blancas",
   "estrías postparto" y "piel de naranja" (lenguaje de búsqueda real).
-- **Autenticidad sin decir "original":** nueva sección `#presentacion` (independiente,
+- **Autenticidad visual (sin alegar procedencia):** nueva sección `#presentacion` (independiente,
   antes de la oferta) con la pieza oficial "Nueva presentación" + badges "Precinto de
   fábrica", "Lote y fecha visibles" y "Fórmula IKI"; FAQ "¿Cómo recibo la nueva
   presentación?"; badge también en el encabezado del formulario COD.
