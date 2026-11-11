@@ -269,9 +269,10 @@ actúa como ancla aspiracional y cierra el CTA final (coincide con los anuncios
   bloquea el pedido. Si la clienta la marca, el mensaje que llega al WhatsApp de
   pedidos incluye la línea "Me uno al reto de las 21 noches (envíenme el checklist)".
   **No hay automatización** (sitio estático): el asesor que confirma el pedido debe
-  ver esa línea y enviar manualmente el checklist de las 21 noches por el mismo chat,
-  idealmente con recordatorios en los días 7, 14 y 21 (constancia → resultados →
-  reseñas y recompra).
+  ver esa línea y enviar manualmente el checklist de las 21 noches por el mismo chat.
+  Las plantillas listas para copiar/pegar (día 0 + chequeos 7/14/21 con cierre y
+  recompra) están en `CHECKLIST_RETO_21_NOCHES.md`. La suite de QA está versionada en
+  `qa/` (instrucciones en `qa/README.md`).
 - **Bug corregido (wa.me corrompe emojis):** el redirector de wa.me re-encodea el
   parámetro `text` y corrompe todo carácter fuera de Latin-1 a U+FFFD (🔥 → `�`,
   probado también con ⚡); los acentos (á, ñ, º, —) sí sobreviven. Se quitó el emoji
