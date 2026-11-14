@@ -3,8 +3,8 @@
    (indicativo de país + número, sin espacios ni símbolos).
    WHATSAPP_PEDIDOS: recibe los pedidos enviados desde el formulario.
    WHATSAPP_ATENCION: información, PQRS, reclamos y asesor humano. */
-const WHATSAPP_PEDIDOS = '573160868408';
-const WHATSAPP_ATENCION = '573173671930';
+const WHATSAPP_PEDIDOS = '573504379870';
+const WHATSAPP_ATENCION = '573504379692';
 
 const PACKS = {
   1: { unidades: 1, precio: 69900,  antes: 99900,  nombre: '1 tarro CANDELA 300ml',  detalle: '1 mes de ritual' },
