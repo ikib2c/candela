@@ -540,14 +540,15 @@ src="https://www.facebook.com/tr?id=1283443887279567&ev=PageView&noscript=1"
             <label><input type="radio" name="pago" value="contraentrega" checked> <span>💵 <b>Contraentrega</b> — pagas al recibir tu pedido</span></label>
             <label><input type="radio" name="pago" value="online"> <span>💳 <b>Pago online</b> — paga de una vez con Mercado Pago</span></label>
             <div class="pago-online-info" id="pagoOnlineInfo" hidden>
-              <b class="pago-tag">🔥 10% DE DESCUENTO por pagar online — te ahorras <span id="pagoAhorro">$8.990</span></b>
-              <p><b>⚠ Importante:</b> al abrir el enlace, Mercado Pago te pedirá <b>diligenciar el monto</b>. Escribe el valor exacto de tu pack con el 10% de descuento ya incluido: <span class="pago-precio" id="pagoMonto">$80.910</span> <b id="pagoPackTxt">(pack de 2 tarros)</b>. Guarda el comprobante y envíalo a tu asesor por WhatsApp.</p>
+              <b class="pago-tag">🔥 10% DE DESCUENTO por pagar online — te ahorras <span id="pagoAhorro">$9.000</span></b>
+              <p><b>⚠ Importante:</b> al abrir el enlace, Mercado Pago te pedirá <b>diligenciar el monto</b>. Escribe el valor exacto de tu pack con el 10% de descuento ya incluido: <span class="pago-precio" id="pagoMonto">$80.900</span> <b id="pagoPackTxt">(pack de 2 tarros)</b>. Guarda el comprobante y envíalo a tu asesor por WhatsApp.</p>
               <div class="pago-ejemplos">
                 <b>Valores exactos con el 10% incluido:</b>
                 <div id="pagoEjemplos"></div>
                 <small>El valor con "prioritario" suma el envío de $9.900. El envío estándar es gratis.</small>
               </div>
               <a class="btn pago-btn" href="https://link.mercadopago.com.co/ziayiki" target="_blank" rel="noopener" onclick="if(window.fbq)fbq('trackCustom','PagoOnline',{ubicacion:'form'});if(window.gtag)gtag('event','pago_online');window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'pago_online'});">Pagar ahora con Mercado Pago (10% off) →</a>
+              <small class="pago-soporte">¿Dudas o problemas con tu pago online? <a href="https://wa.me/573504379692?text=Hola%2C%20necesito%20soporte%20con%20mi%20pago%20online%20de%20Candela" target="_blank" rel="noopener" style="text-decoration:underline;color:var(--vino);font-weight:600">Envía soporte de pago aquí</a> — asesoría personalizada por WhatsApp.</small>
             </div>
           </div>
 
@@ -581,7 +582,7 @@ src="https://www.facebook.com/tr?id=1283443887279567&ev=PageView&noscript=1"
 
           <div class="cod-totales">
             <div><span>Subtotal</span><span id="tSubtotal">$89.900</span></div>
-            <div id="rowDescuento" hidden><span>💳 Descuento por pagar online (10%)</span><span id="tDescuento">-$8.990</span></div>
+            <div id="rowDescuento" hidden><span>💳 Descuento por pagar online (10%)</span><span id="tDescuento">-$9.000</span></div>
             <div><span>Envío</span><span id="tEnvio">Gratis</span></div>
             <div class="tot-final"><span id="tTotalLbl">Total a pagar al recibir</span><span id="tTotal">$99.900</span></div>
           </div>
@@ -736,6 +737,12 @@ src="https://www.facebook.com/tr?id=1283443887279567&ev=PageView&noscript=1"
     <span class="exito-check">✓</span>
     <b>¡Pedido enviado!</b>
     <p>Te llevamos a WhatsApp para confirmar con tu asesor…</p>
+    <div class="exito-acciones" id="exitoAcciones" hidden>
+      <a id="exitoPagar" class="btn exito-btn" href="https://link.mercadopago.com.co/ziayiki" target="_blank" rel="noopener">Pagar ahora con Mercado Pago (10% off) →</a>
+      <a id="exitoComprobante" class="btn exito-btn-sec" href="#" target="_blank" rel="noopener">Ya pagué · enviar comprobante por WhatsApp</a>
+      <a class="exito-soporte" href="https://wa.me/573504379692?text=Hola%2C%20necesito%20soporte%20con%20mi%20pago%20online%20de%20Candela" target="_blank" rel="noopener">¿Problemas con tu pago? Soporte de pagos aquí</a>
+      <button type="button" id="exitoCerrar" class="exito-cerrar">✕ Cerrar</button>
+    </div>
   </div>
 </div>
 

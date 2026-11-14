@@ -5,6 +5,7 @@
    WHATSAPP_ATENCION: información, PQRS, reclamos y asesor humano. */
 const WHATSAPP_PEDIDOS = '573504379870';
 const WHATSAPP_ATENCION = '573504379692';
+const LINK_MP = 'https://link.mercadopago.com.co/ziayiki';
 
 const PACKS = {
   1: { unidades: 1, precio: 69900,  antes: 99900,  nombre: '1 tarro CANDELA 300ml',  detalle: '1 mes de ritual' },
@@ -233,6 +234,12 @@ function pagoOnlineActivo(){
   return !!(chk && chk.value === 'online');
 }
 
+/* Pago online con tarjeta: 10% de descuento redondeado a centenas
+   (sin "dieces": 89.900 x 0,9 = 80.910 → se cobra 80.900) */
+function precioOnline(p){
+  return Math.floor(p.precio * (1 - DESCUENTO_ONLINE) / 100) * 100;
+}
+
 function totalActual(){
   const p = packData();
   const base = pagoOnlineActivo() ? Math.round(p.precio * (1 - DESCUENTO_ONLINE)) : p.precio;
@@ -249,7 +256,7 @@ function actualizarResumen(){
   const tE  = $('#tEnvio');
   const tT  = $('#tTotal');
   const online = pagoOnlineActivo();
-  const desc = online ? Math.round(p.precio * DESCUENTO_ONLINE) : 0;
+  const desc = online ? p.precio - precioOnline(p) : 0;
   if (sub) sub.textContent = p.nombre;
   if (det) det.textContent = p.detalle;
   if (mon) mon.textContent = cop(p.precio);
@@ -272,13 +279,13 @@ function actualizarResumen(){
   if (pMon) pMon.textContent = cop(p.precio - desc + envioActual());
   if (pPack) pPack.textContent = '(pack de ' + p.unidades + ' tarro' + (p.unidades > 1 ? 's' : '') + ')';
   const aH = $('#pagoAhorro');
-  if (aH) aH.textContent = cop(Math.round(p.precio * DESCUENTO_ONLINE));
+  if (aH) aH.textContent = cop(desc);
 }
 
 function initPago(){
   const ejCont = $('#pagoEjemplos');
   if (ejCont) ejCont.innerHTML = Object.values(PACKS).map(p => {
-    const d = Math.round(p.precio * (1 - DESCUENTO_ONLINE));
+    const d = precioOnline(p);
     return `<div><span>Pack de ${p.unidades} tarro${p.unidades > 1 ? 's' : ''}</span><b>${cop(d)}</b><small>· prioritario: ${cop(d + ENVIO_PRIORITARIO)}</small></div>`;
   }).join('');
   $$('input[name="pago"]').forEach(r => r.addEventListener('change', () => {
@@ -384,7 +391,7 @@ function initFormulario(){
     const envio = envioActual();
     const pagoRadio = document.querySelector('input[name="pago"]:checked');
     const pagoOnline = !!(pagoRadio && pagoRadio.value === 'online');
-    const desc = pagoOnline ? Math.round(p.precio * DESCUENTO_ONLINE) : 0;
+    const desc = pagoOnline ? p.precio - precioOnline(p) : 0;
     const total = p.precio - desc + envio;
 
     await tipificarTelefono();
@@ -426,17 +433,34 @@ function initFormulario(){
 
     const p3 = document.querySelector('#pasosPedido .pp:nth-child(3)');
     if (p3) p3.classList.add('done');
-    const overlay = $('#exito');
-    if (overlay){
-      overlay.classList.add('show');
-      overlay.setAttribute('aria-hidden', 'false');
-      setTimeout(() => {
-        overlay.classList.remove('show');
-        overlay.setAttribute('aria-hidden', 'true');
-      }, 2400);
-    }
 
     window.open(`https://wa.me/${WHATSAPP_PEDIDOS}?text=${mensajePedido}`, '_blank');
+
+    const overlay = $('#exito');
+    if (overlay){
+      const exTxt = overlay.querySelector('.exito-caja p');
+      const acc = $('#exitoAcciones');
+      if (pagoOnline){
+        const exPagar = $('#exitoPagar');
+        if (exPagar) exPagar.href = LINK_MP;
+        const exComp = $('#exitoComprobante');
+        if (exComp) exComp.href = `https://wa.me/${WHATSAPP_PEDIDOS}?text=${encodeURIComponent('*Comprobante de pago — CANDELA*\n*N.º de pedido:* ' + eventID + '\nHola, ya realicé el pago online de ' + cop(total) + ' (10% de descuento incluido). Adjunto mi comprobante. ¡Gracias!')}`;
+        if (exTxt) exTxt.textContent = 'Tu pedido ya llegó a WhatsApp. Ahora paga tu pack con el 10% de descuento (se abrió Mercado Pago en una pestaña nueva; si no abrió, usa el botón):';
+        if (acc) acc.hidden = false;
+        overlay.classList.add('show');
+        overlay.setAttribute('aria-hidden', 'false');
+        window.open(LINK_MP, '_blank');
+      } else {
+        if (exTxt) exTxt.textContent = 'Te llevamos a WhatsApp para confirmar con tu asesor…';
+        if (acc) acc.hidden = true;
+        overlay.classList.add('show');
+        overlay.setAttribute('aria-hidden', 'false');
+        setTimeout(() => {
+          overlay.classList.remove('show');
+          overlay.setAttribute('aria-hidden', 'true');
+        }, 2400);
+      }
+    }
   });
 }
 
@@ -586,6 +610,12 @@ document.addEventListener('DOMContentLoaded', () => {
   initEnvio();
   initPago();
   actualizarResumen();
+  const exClose = $('#exitoCerrar');
+  if (exClose) exClose.addEventListener('click', () => {
+    const ov = $('#exito');
+    ov.classList.remove('show');
+    ov.setAttribute('aria-hidden', 'true');
+  });
   actualizarPasos();
   initFormulario();
   initFaq();
