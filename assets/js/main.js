@@ -232,12 +232,14 @@ function actualizarResumen(){
   const sub = $('#resNombre');
   const det = $('#resDetalle');
   const mon = $('#resMonto');
+  const ri  = $('#resImagen');
   const tS  = $('#tSubtotal');
   const tE  = $('#tEnvio');
   const tT  = $('#tTotal');
   if (sub) sub.textContent = p.nombre;
   if (det) det.textContent = p.detalle;
   if (mon) mon.textContent = cop(p.precio);
+  if (ri)  ri.src = 'assets/img/pack-oferta-' + p.unidades + '.jpg?v=2';
   if (tS)  tS.textContent  = cop(p.precio);
   if (tE)  tE.textContent  = envioActual() > 0 ? cop(envioActual()) : 'Gratis';
   if (tT)  tT.textContent  = cop(p.precio + envioActual());
