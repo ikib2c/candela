@@ -291,6 +291,10 @@ function actualizarResumen(){
 }
 
 function initPago(){
+  /* Ruta de rescate: cliente que pagó online sin llenar el formulario */
+  const datosPago = '*Ya pagué online — CANDELA*\nAdjunto mi comprobante de pago.\n\n*Mis datos de envío:*\nNombre completo: \nCelular: \nDepartamento: \nCiudad: \nDirección: \nMonto pagado: ';
+  const exDatos = $('#datosPagoLink');
+  if (exDatos) exDatos.href = `https://wa.me/${WHATSAPP_PEDIDOS}?text=${encodeURIComponent(datosPago)}`;
   $$('input[name="pago"]').forEach(r => r.addEventListener('change', () => {
     const chk = document.querySelector('input[name="pago"]:checked');
     const online = !!(chk && chk.value === 'online');

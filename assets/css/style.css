@@ -299,6 +299,8 @@ section{padding:84px 0}
 .pago-desglose .d-total span{font-weight:700;color:var(--vino)}
 .pago-desglose .d-total b{font:400 24px var(--ff-display);color:var(--rojo)}
 .pago-btn{font-size:13.5px;padding:12px 18px;text-align:center}
+.pago-btn-sec{display:block;text-align:center;font-size:13px;padding:12px 18px;background:#fff;color:var(--vino);border:1.5px solid rgba(72,16,31,.25);box-shadow:none}
+.pago-btn-sec::after{display:none}
 .cod-campos{display:grid;gap:16px}
 .fila{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .campo label{display:block;font:600 11px var(--ff-cuerpo);letter-spacing:.14em;text-transform:uppercase;color:var(--vino-soft);margin-bottom:7px}
