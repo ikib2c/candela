@@ -13,6 +13,7 @@ const PACKS = {
 };
 
 const ENVIO_PRIORITARIO = 9900;
+const DESCUENTO_ONLINE = 0.10;
 let packActual = 2;
 
 /* Advanced Matching + Conversions API (Meta) */
@@ -227,6 +228,17 @@ function envioActual(){
   return r && r.value === 'prioritario' ? ENVIO_PRIORITARIO : 0;
 }
 
+function pagoOnlineActivo(){
+  const chk = document.querySelector('input[name="pago"]:checked');
+  return !!(chk && chk.value === 'online');
+}
+
+function totalActual(){
+  const p = packData();
+  const base = pagoOnlineActivo() ? Math.round(p.precio * (1 - DESCUENTO_ONLINE)) : p.precio;
+  return base + envioActual();
+}
+
 function actualizarResumen(){
   const p = packData();
   const sub = $('#resNombre');
@@ -236,13 +248,19 @@ function actualizarResumen(){
   const tS  = $('#tSubtotal');
   const tE  = $('#tEnvio');
   const tT  = $('#tTotal');
+  const online = pagoOnlineActivo();
+  const desc = online ? Math.round(p.precio * DESCUENTO_ONLINE) : 0;
   if (sub) sub.textContent = p.nombre;
   if (det) det.textContent = p.detalle;
   if (mon) mon.textContent = cop(p.precio);
   if (ri)  ri.src = 'assets/img/pack-oferta-' + p.unidades + '.jpg?v=2';
   if (tS)  tS.textContent  = cop(p.precio);
+  const rowD = $('#rowDescuento');
+  const tD = $('#tDescuento');
+  if (rowD) rowD.hidden = !online;
+  if (tD) tD.textContent = '-' + cop(desc);
   if (tE)  tE.textContent  = envioActual() > 0 ? cop(envioActual()) : 'Gratis';
-  if (tT)  tT.textContent  = cop(p.precio + envioActual());
+  if (tT)  tT.textContent  = cop(p.precio - desc + envioActual());
   const stPack = $('#stickyPack');
   const stPrecio = $('#stickyPrecio');
   const stAntes = $('#stickyAntes');
@@ -251,11 +269,18 @@ function actualizarResumen(){
   if (stAntes) stAntes.textContent = cop(p.antes);
   const pMon = $('#pagoMonto');
   const pPack = $('#pagoPackTxt');
-  if (pMon) pMon.textContent = cop(p.precio + envioActual());
+  if (pMon) pMon.textContent = cop(p.precio - desc + envioActual());
   if (pPack) pPack.textContent = '(pack de ' + p.unidades + ' tarro' + (p.unidades > 1 ? 's' : '') + ')';
+  const aH = $('#pagoAhorro');
+  if (aH) aH.textContent = cop(Math.round(p.precio * DESCUENTO_ONLINE));
 }
 
 function initPago(){
+  const ejCont = $('#pagoEjemplos');
+  if (ejCont) ejCont.innerHTML = Object.values(PACKS).map(p => {
+    const d = Math.round(p.precio * (1 - DESCUENTO_ONLINE));
+    return `<div><span>Pack de ${p.unidades} tarro${p.unidades > 1 ? 's' : ''}</span><b>${cop(d)}</b><small>· prioritario: ${cop(d + ENVIO_PRIORITARIO)}</small></div>`;
+  }).join('');
   $$('input[name="pago"]').forEach(r => r.addEventListener('change', () => {
     const chk = document.querySelector('input[name="pago"]:checked');
     const online = !!(chk && chk.value === 'online');
@@ -357,9 +382,10 @@ function initFormulario(){
 
     const p = packData();
     const envio = envioActual();
-    const total = p.precio + envio;
     const pagoRadio = document.querySelector('input[name="pago"]:checked');
     const pagoOnline = !!(pagoRadio && pagoRadio.value === 'online');
+    const desc = pagoOnline ? Math.round(p.precio * DESCUENTO_ONLINE) : 0;
+    const total = p.precio - desc + envio;
 
     await tipificarTelefono();
     const eventID = numeroPedido();
@@ -383,10 +409,13 @@ function initFormulario(){
     if (packActual === 3) lineas.push('- Regalo sorpresa incluido');
     if ($('#fReto') && $('#fReto').checked) lineas.push('- Me uno al reto de las 21 noches (envíenme el checklist)');
     lineas.push(
-      `*Envío:* ${envio > 0 ? 'Prioritario — ' + cop(envio) : 'Gratis'}`,
+      `*Envío:* ${envio > 0 ? 'Prioritario — ' + cop(envio) : 'Gratis'}`
+    );
+    if (pagoOnline) lineas.push('- Descuento 10% por pago online: -' + cop(desc));
+    lineas.push(
       `*TOTAL:* ${cop(total)}`,
       '',
-      pagoOnline ? '*Método de pago:* Pago online — Mercado Pago (monto a pagar: ' + cop(total) + ')' : '*Método de pago:* Contraentrega (pago al recibir)',
+      pagoOnline ? '*Método de pago:* Pago online — Mercado Pago (monto a pagar: ' + cop(total) + ' · 10% de descuento incluido)' : '*Método de pago:* Contraentrega (pago al recibir)',
       '',
       pagoOnline ? 'Confirmo mi pedido: pagaré online y enviaré el comprobante a mi asesor por WhatsApp.' : 'Confirmo que recibiré y pagaré mi pedido en la entrega.'
     );

@@ -28,7 +28,7 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Product","name":"CANDELA Crema anticelulítica y para estrías con efecto calor 300ml","brand":{"@type":"Brand","name":"CANDELA"},"description":"Crema reafirmante termogénica con extracto de pimienta rosa que ayuda a atenuar estrías rojas y blancas (incl. estrías postparto), la apariencia de la celulitis (piel de naranja) y la flacidez.","category":"Cosmética corporal","offers":{"@type":"AggregateOffer","priceCurrency":"COP","lowPrice":"69900","highPrice":"99900","offerCount":"3"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"1343"}}
 </script>
-<link rel="stylesheet" href="assets/css/style.css?v=4">
+<link rel="stylesheet" href="assets/css/style.css?v=5">
 
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -493,7 +493,7 @@ src="https://www.facebook.com/tr?id=1283443887279567&ev=PageView&noscript=1"
     <div class="oferta-cta reveal">
       <button class="btn" style="font-size:17px;padding:20px 44px" onclick="irAlPedido()">Pedir ahora — pagas al recibir <span class="flecha">→</span></button>
       <small>🚚 Envío gratis · 💵 Pagas al recibir · 📲 Confirmación por WhatsApp · 🎁 Regalo sorpresa</small>
-      <small>💳 ¿Prefieres pagar online de una vez? <a href="https://link.mercadopago.com.co/ziayiki" target="_blank" rel="noopener" onclick="if(window.fbq)fbq('trackCustom','PagoOnline',{ubicacion:'oferta'});if(window.gtag)gtag('event','pago_online');window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'pago_online'});" style="color:var(--rojo);font-weight:700;text-decoration:underline">Paga seguro con Mercado Pago aquí</a></small>
+      <small>💳 ¿Prefieres pagar online de una vez? <a href="https://link.mercadopago.com.co/ziayiki" target="_blank" rel="noopener" onclick="if(window.fbq)fbq('trackCustom','PagoOnline',{ubicacion:'oferta'});if(window.gtag)gtag('event','pago_online');window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'pago_online'});" style="color:var(--rojo);font-weight:700;text-decoration:underline">Paga con Mercado Pago aquí y obtén <b>10% de descuento</b></a></small>
     </div>
   </div>
 </section>
@@ -540,9 +540,14 @@ src="https://www.facebook.com/tr?id=1283443887279567&ev=PageView&noscript=1"
             <label><input type="radio" name="pago" value="contraentrega" checked> <span>💵 <b>Contraentrega</b> — pagas al recibir tu pedido</span></label>
             <label><input type="radio" name="pago" value="online"> <span>💳 <b>Pago online</b> — paga de una vez con Mercado Pago</span></label>
             <div class="pago-online-info" id="pagoOnlineInfo" hidden>
-              <p><b>⚠ Importante:</b> al abrir el enlace, Mercado Pago te pedirá <b>diligenciar el monto</b>. Escribe el valor exacto de tu pack: <span class="pago-precio" id="pagoMonto">$89.900</span> <b id="pagoPackTxt">(pack de 2 tarros)</b>. Guarda el comprobante y envíalo a tu asesor por WhatsApp.</p>
-              <p class="pago-ejemplo"><b>Ejemplo:</b> si elegiste el <b>pack de 2 tarros</b> ($89.900), en el campo de monto de Mercado Pago escribes <b>89.900</b>. Si tu pack es el de 3 ($99.900), escribes <b>99.900</b>.</p>
-              <a class="btn pago-btn" href="https://link.mercadopago.com.co/ziayiki" target="_blank" rel="noopener" onclick="if(window.fbq)fbq('trackCustom','PagoOnline',{ubicacion:'form'});if(window.gtag)gtag('event','pago_online');window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'pago_online'});">Pagar ahora con Mercado Pago →</a>
+              <b class="pago-tag">🔥 10% DE DESCUENTO por pagar online — te ahorras <span id="pagoAhorro">$8.990</span></b>
+              <p><b>⚠ Importante:</b> al abrir el enlace, Mercado Pago te pedirá <b>diligenciar el monto</b>. Escribe el valor exacto de tu pack con el 10% de descuento ya incluido: <span class="pago-precio" id="pagoMonto">$80.910</span> <b id="pagoPackTxt">(pack de 2 tarros)</b>. Guarda el comprobante y envíalo a tu asesor por WhatsApp.</p>
+              <div class="pago-ejemplos">
+                <b>Valores exactos con el 10% incluido:</b>
+                <div id="pagoEjemplos"></div>
+                <small>El valor con "prioritario" suma el envío de $9.900. El envío estándar es gratis.</small>
+              </div>
+              <a class="btn pago-btn" href="https://link.mercadopago.com.co/ziayiki" target="_blank" rel="noopener" onclick="if(window.fbq)fbq('trackCustom','PagoOnline',{ubicacion:'form'});if(window.gtag)gtag('event','pago_online');window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'pago_online'});">Pagar ahora con Mercado Pago (10% off) →</a>
             </div>
           </div>
 
@@ -576,6 +581,7 @@ src="https://www.facebook.com/tr?id=1283443887279567&ev=PageView&noscript=1"
 
           <div class="cod-totales">
             <div><span>Subtotal</span><span id="tSubtotal">$89.900</span></div>
+            <div id="rowDescuento" hidden><span>💳 Descuento por pagar online (10%)</span><span id="tDescuento">-$8.990</span></div>
             <div><span>Envío</span><span id="tEnvio">Gratis</span></div>
             <div class="tot-final"><span id="tTotalLbl">Total a pagar al recibir</span><span id="tTotal">$99.900</span></div>
           </div>
@@ -593,7 +599,7 @@ src="https://www.facebook.com/tr?id=1283443887279567&ev=PageView&noscript=1"
       <button class="btn cod-enviar" type="submit"><span id="btnEnviarTxt">Enviar mi pedido · Pagas al recibir</span> 🔥</button>
       <p class="cod-aviso">Sin tarjeta, sin anticipos, sin riesgo. Si tu tarro llega dañado, lo reponemos sin costo (garantía de 30 días).</p>
       <p class="cod-aviso">¿Dudas antes de pedir o necesitas PQRS? Habla con un asesor humano por WhatsApp: <a href="https://wa.me/573504379692" target="_blank" rel="noopener" style="text-decoration:underline">+57 350 437 9692</a>. Pedidos: <a href="https://wa.me/573504379870" target="_blank" rel="noopener" style="text-decoration:underline">+57 350 437 9870</a>.</p>
-      <p class="cod-aviso">💳 También puedes pagar online de una vez: <a href="https://link.mercadopago.com.co/ziayiki" target="_blank" rel="noopener" onclick="if(window.fbq)fbq('trackCustom','PagoOnline',{ubicacion:'pedido'});if(window.gtag)gtag('event','pago_online');window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'pago_online'});" style="color:var(--rojo);font-weight:700;text-decoration:underline">enlace seguro de Mercado Pago</a>. Guarda el comprobante y envíalo a tu asesor por WhatsApp.</p>
+      <p class="cod-aviso">💳 También puedes pagar online de una vez con <b>10% de descuento</b>: <a href="https://link.mercadopago.com.co/ziayiki" target="_blank" rel="noopener" onclick="if(window.fbq)fbq('trackCustom','PagoOnline',{ubicacion:'pedido'});if(window.gtag)gtag('event','pago_online');window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'pago_online'});" style="color:var(--rojo);font-weight:700;text-decoration:underline">enlace seguro de Mercado Pago</a>. Diligencia el monto de tu pack con el descuento y envía el comprobante a tu asesor por WhatsApp.</p>
         </form>
       </div>
     </div>
@@ -615,7 +621,7 @@ src="https://www.facebook.com/tr?id=1283443887279567&ev=PageView&noscript=1"
       <div class="ficha-row reveal"><b>Uso recomendado</b><p>Ritual de 5 minutos mañana y noche en abdomen, flancos, muslos, glúteos, caderas y brazos. Evita el rostro, los senos y las zonas sensibles.</p></div>
       <div class="ficha-row reveal"><b>¿Cuánto rinde?</b><p>1 tarro ≈ 1 mes de ritual constante. El pack de 2 dura 2 meses y el de 3 (que incluye el regalo sorpresa) mejora el precio por tarro.</p></div>
       <div class="ficha-row decision reveal"><b>Qué incluye tu pedido</b><p>Tus tarros CANDELA nuevo sellado, el regalo sorpresa (pack de 3) y la confirmación + número de guía por WhatsApp.</p></div>
-      <div class="ficha-row decision reveal"><b>Envío y pago</b><p>Gratis a toda Colombia (2 a 5 días hábiles) · opcional prioritario $9.900 · <strong>pagas al recibir</strong> (sin tarjeta ni anticipos) o paga online de una vez desde el <a href="https://link.mercadopago.com.co/ziayiki" target="_blank" rel="noopener" style="text-decoration:underline">enlace de Mercado Pago</a>.</p></div>
+      <div class="ficha-row decision reveal"><b>Envío y pago</b><p>Gratis a toda Colombia (2 a 5 días hábiles) · opcional prioritario $9.900 · <strong>pagas al recibir</strong> (sin tarjeta ni anticipos) o paga online de una vez con <strong>10% de descuento</strong> desde el <a href="https://link.mercadopago.com.co/ziayiki" target="_blank" rel="noopener" style="text-decoration:underline">enlace de Mercado Pago</a>.</p></div>
       <div class="ficha-row decision reveal"><b>Garantías</b><p>Reposición sin costo por defectos durante <strong>30 días</strong> y derecho de retracto de 5 días hábiles. Detalles completos en <a href="garantias.html" style="text-decoration:underline">garantías y retracto</a>.</p></div>
       <div class="ficha-row reveal"><b>Precauciones</b><p>Solo uso externo. No aplicar sobre piel irritada o heridas; evitar el contacto con los ojos. Mantener fuera del alcance de los niños. Si estás embarazada o en lactancia, consulta primero con tu médico.</p></div>
     </div>
@@ -661,7 +667,7 @@ src="https://www.facebook.com/tr?id=1283443887279567&ev=PageView&noscript=1"
       </div>
       <div class="faq-item reveal">
         <button class="faq-q">¿Cómo pago mi pedido? <span class="mas">+</span></button>
-        <div class="faq-a"><p>Tienes dos opciones: <b>pago contraentrega</b>, recibes tu pedido en casa y pagas en ese momento, en efectivo o con los medios que acepte el transportador; o <b>pago online</b> desde nuestro <a href="https://link.mercadopago.com.co/ziayiki" target="_blank" rel="noopener" style="text-decoration:underline">enlace seguro de Mercado Pago</a> antes del despacho. En ningún caso pedimos anticipos ni datos de tarjeta en este sitio.</p></div>
+        <div class="faq-a"><p>Tienes dos opciones: <b>pago contraentrega</b>, recibes tu pedido en casa y pagas en ese momento, en efectivo o con los medios que acepte el transportador; o <b>pago online</b> desde nuestro <a href="https://link.mercadopago.com.co/ziayiki" target="_blank" rel="noopener" style="text-decoration:underline">enlace seguro de Mercado Pago</a> antes del despacho, con un <b>10% de descuento</b> sobre el valor de tu pack. En ningún caso pedimos anticipos ni datos de tarjeta en este sitio.</p></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-q">¿Cuánto tarda el envío? <span class="mas">+</span></button>
@@ -680,7 +686,7 @@ src="https://www.facebook.com/tr?id=1283443887279567&ev=PageView&noscript=1"
 {"@type":"Question","name":"¿Sirve si tuve un embarazo o cambié de peso?","acceptedAnswer":{"@type":"Answer","text":"Sí. Candela es especialmente popular para atenuar estrías postparto y por cambios de peso, ayudando a devolver elasticidad y uniformidad a la piel del abdomen. Si estás lactando, consulta primero con tu médico."}},
 {"@type":"Question","name":"¿Cómo recibo la nueva presentación?","acceptedAnswer":{"@type":"Answer","text":"Recibes el tarro de 300ml de la nueva presentación de Candela: tapa rosada, etiqueta con lote y fecha visibles y el producto sellado de fábrica. Si tu pedido llegara deteriorado, lo reponemos sin costo (consulta garantías y retracto)."}},
 {"@type":"Question","name":"¿Puedo usarla si tengo la piel sensible?","acceptedAnswer":{"@type":"Answer","text":"La fórmula está pensada para todo tipo de piel, pero por el efecto calor recomendamos hacer una prueba en una pequeña zona del antebrazo 24 horas antes. No la apliques sobre piel irritada o heridas y evita el contacto con los ojos."}},
-{"@type":"Question","name":"¿Cómo pago mi pedido?","acceptedAnswer":{"@type":"Answer","text":"Tienes dos opciones: pago contraentrega, recibes tu pedido en casa y pagas en ese momento, en efectivo o con los medios que acepte el transportador; o pago online desde nuestro enlace seguro de Mercado Pago antes del despacho. En ningún caso pedimos anticipos ni datos de tarjeta en este sitio."}},
+{"@type":"Question","name":"¿Cómo pago mi pedido?","acceptedAnswer":{"@type":"Answer","text":"Tienes dos opciones: pago contraentrega, recibes tu pedido en casa y pagas en ese momento, en efectivo o con los medios que acepte el transportador; o pago online desde nuestro enlace seguro de Mercado Pago antes del despacho, con un 10% de descuento sobre el valor de tu pack. En ningún caso pedimos anticipos ni datos de tarjeta en este sitio."}},
 {"@type":"Question","name":"¿Cuánto tarda el envío?","acceptedAnswer":{"@type":"Answer","text":"El envío es gratis a toda Colombia y tarda entre 2 y 5 días hábiles según tu ciudad. Con envío prioritario priorizamos tu despacho. Recibirás la guía por WhatsApp."}}
 ]}
 </script>
@@ -742,6 +748,6 @@ src="https://www.facebook.com/tr?id=1283443887279567&ev=PageView&noscript=1"
   <a class="btn" href="#pedido" onclick="pedirDesdeSticky(event)">Pedir ahora 🔥</a>
 </div>
 
-<script src="assets/js/main.js?v=12"></script>
+<script src="assets/js/main.js?v=13"></script>
 </body>
 </html>
