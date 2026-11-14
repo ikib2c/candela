@@ -286,6 +286,8 @@ function actualizarResumen(){
   if (dRow) dRow.hidden = envio === 0;
   const dE = $('#dEnvio');
   if (dE) dE.textContent = cop(envio);
+  const pBtn = $('#pagoBtnTxt');
+  if (pBtn) pBtn.textContent = 'Pagar ' + cop(pBase + envio) + ' con Mercado Pago · 10% OFF →';
   const aH = $('#pagoAhorro');
   if (aH) aH.textContent = cop(desc);
 }
