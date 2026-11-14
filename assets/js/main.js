@@ -249,6 +249,30 @@ function actualizarResumen(){
   if (stPack) stPack.textContent = 'PACK DE ' + p.unidades + ' · HOY';
   if (stPrecio) stPrecio.textContent = cop(p.precio);
   if (stAntes) stAntes.textContent = cop(p.antes);
+  const pMon = $('#pagoMonto');
+  const pPack = $('#pagoPackTxt');
+  if (pMon) pMon.textContent = cop(p.precio + envioActual());
+  if (pPack) pPack.textContent = '(pack de ' + p.unidades + ' tarro' + (p.unidades > 1 ? 's' : '') + ')';
+}
+
+function initPago(){
+  $$('input[name="pago"]').forEach(r => r.addEventListener('change', () => {
+    const chk = document.querySelector('input[name="pago"]:checked');
+    const online = !!(chk && chk.value === 'online');
+    const info = $('#pagoOnlineInfo');
+    if (info) info.hidden = !online;
+    const cpTxt = $('#fCompromisoTxt');
+    if (cpTxt) cpTxt.textContent = online
+      ? 'Confirmo mi pedido: pagaré online por Mercado Pago el monto de mi pack y enviaré el comprobante a mi asesor por WhatsApp.'
+      : 'Me comprometo a recibir y pagar mi pedido en la entrega. Tendré el dinero disponible o dejaré el pago con quien reciba por mí.';
+    const bTxt = $('#btnEnviarTxt');
+    if (bTxt) bTxt.textContent = online ? 'Enviar mi pedido · Pago online' : 'Enviar mi pedido · Pagas al recibir';
+    const pp3 = $('#pp3Txt');
+    if (pp3) pp3.textContent = online ? 'Pagas online' : 'Pagas al recibir';
+    const tLbl = $('#tTotalLbl');
+    if (tLbl) tLbl.textContent = online ? 'Total a pagar online' : 'Total a pagar al recibir';
+    actualizarResumen();
+  }));
 }
 
 function initEnvio(){
@@ -334,6 +358,8 @@ function initFormulario(){
     const p = packData();
     const envio = envioActual();
     const total = p.precio + envio;
+    const pagoRadio = document.querySelector('input[name="pago"]:checked');
+    const pagoOnline = !!(pagoRadio && pagoRadio.value === 'online');
 
     await tipificarTelefono();
     const eventID = numeroPedido();
@@ -360,13 +386,13 @@ function initFormulario(){
       `*Envío:* ${envio > 0 ? 'Prioritario — ' + cop(envio) : 'Gratis'}`,
       `*TOTAL:* ${cop(total)}`,
       '',
-      '*Método de pago:* Contraentrega (pago al recibir)',
+      pagoOnline ? '*Método de pago:* Pago online — Mercado Pago (monto a pagar: ' + cop(total) + ')' : '*Método de pago:* Contraentrega (pago al recibir)',
       '',
-      'Confirmo que recibiré y pagaré mi pedido en la entrega.'
+      pagoOnline ? 'Confirmo mi pedido: pagaré online y enviaré el comprobante a mi asesor por WhatsApp.' : 'Confirmo que recibiré y pagaré mi pedido en la entrega.'
     );
     const mensajePedido = encodeURIComponent(lineas.join('\n'));
 
-    track('Purchase', { pack: p, envio: envio, transaction_id: eventID });
+    track('Purchase', { pack: p, envio: envio, pago: pagoOnline ? 'online' : 'contraentrega', transaction_id: eventID });
     enviarCAPI('Purchase', eventID, phHashActual, total, ['candela-300ml-' + p.unidades + '-tarros'], p.unidades);
 
     const p3 = document.querySelector('#pasosPedido .pp:nth-child(3)');
@@ -529,6 +555,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initGaleria();
   initBundles();
   initEnvio();
+  initPago();
   actualizarResumen();
   actualizarPasos();
   initFormulario();

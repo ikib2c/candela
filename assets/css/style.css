@@ -282,6 +282,17 @@ section{padding:84px 0}
 .cod-envio label:has(input:checked){border-color:var(--rojo);background:rgba(211,30,60,.05)}
 .cod-envio input{accent-color:var(--rojo)}
 .cod-envio .pre{margin-left:auto;font-weight:700;font-size:13px}
+.cod-pago{display:grid;gap:8px;margin-bottom:24px}
+.cod-pago>b{font-size:14px;color:var(--vino)}
+.cod-pago>label{display:flex;align-items:center;gap:12px;border:1.5px solid rgba(72,16,31,.12);border-radius:var(--r-sm);padding:12px 14px;cursor:pointer;font-size:13.5px;font-weight:500;transition:border-color .2s,background .2s}
+.cod-pago>label:has(input:checked){border-color:var(--rojo);background:rgba(211,30,60,.05)}
+.cod-pago input{accent-color:var(--rojo)}
+.pago-online-info{border:1.5px dashed var(--rojo);background:rgba(211,30,60,.05);border-radius:var(--r-sm);padding:12px 14px;display:grid;gap:8px;font-size:12.5px;color:var(--vino-soft)}
+.pago-online-info p{margin:0}
+.pago-online-info b{color:var(--vino)}
+.pago-precio{font:400 22px var(--ff-display);color:var(--rojo)}
+.pago-ejemplo{background:var(--crema-2);border-radius:10px;padding:8px 12px}
+.pago-btn{font-size:13.5px;padding:12px 18px;text-align:center}
 .cod-campos{display:grid;gap:16px}
 .fila{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .campo label{display:block;font:600 11px var(--ff-cuerpo);letter-spacing:.14em;text-transform:uppercase;color:var(--vino-soft);margin-bottom:7px}
@@ -442,6 +453,10 @@ footer .copy{opacity:.6;font-size:11.5px}
 .cod-envio label{padding:14px 16px;border-radius:12px;transition:border-color .2s,background .2s,box-shadow .2s}
 .cod-envio label:hover{border-color:rgba(211,30,60,.35)}
 .cod-envio label:has(input:checked){box-shadow:0 6px 16px rgba(211,30,60,.12)}
+.cod-pago>label{padding:14px 16px;border-radius:12px;transition:border-color .2s,background .2s,box-shadow .2s}
+.cod-pago>label:hover{border-color:rgba(211,30,60,.35)}
+.cod-pago>label:has(input:checked){box-shadow:0 6px 16px rgba(211,30,60,.12)}
+.pago-online-info{border-radius:12px;background:#FDF3F4}
 .campo input,.campo select,.campo textarea{background:#FDF9F8;padding:14px 15px;border-radius:12px}
 .campo input:hover:not(:focus),.campo select:hover:not(:focus){border-color:rgba(211,30,60,.3)}
 .campo input:focus,.campo select:focus,.campo textarea:focus{background:#fff;border-color:var(--rojo);box-shadow:0 0 0 4px rgba(211,30,60,.09)}
