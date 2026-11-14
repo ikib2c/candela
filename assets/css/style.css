@@ -292,12 +292,12 @@ section{padding:84px 0}
 .pago-online-info b{color:var(--vino)}
 .pago-precio{font:400 22px var(--ff-display);color:var(--rojo)}
 .pago-tag{display:inline-block;background:var(--rojo);color:#fff;font-size:12px;font-weight:700;letter-spacing:.03em;padding:7px 12px;border-radius:999px}
-.pago-ejemplos{background:var(--crema-2);border-radius:10px;padding:10px 12px;display:grid;gap:8px;font-size:12.5px}
-.pago-ejemplos>div{display:grid;grid-template-columns:1fr auto;gap:2px 8px;align-items:baseline}
-.pago-ejemplos>div span{grid-column:1;color:var(--vino-soft)}
-.pago-ejemplos>div b{grid-column:2;color:var(--rojo);text-align:right;white-space:nowrap}
-.pago-ejemplos>div small{grid-column:1/-1;color:var(--vino-soft)}
-.pago-ejemplos small{color:var(--vino-soft)}
+.pago-desglose{background:#fff;border:1.5px dashed rgba(211,30,60,.3);border-radius:10px;padding:10px 12px;display:grid;gap:6px;font-size:12.5px;color:var(--vino-soft)}
+.pago-desglose>div{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.pago-desglose>div b{color:var(--vino);white-space:nowrap}
+.pago-desglose .d-total{border-top:1px dashed rgba(211,30,60,.3);padding-top:8px}
+.pago-desglose .d-total span{font-weight:700;color:var(--vino)}
+.pago-desglose .d-total b{font:400 24px var(--ff-display);color:var(--rojo)}
 .pago-btn{font-size:13.5px;padding:12px 18px;text-align:center}
 .cod-campos{display:grid;gap:16px}
 .fila{display:grid;grid-template-columns:1fr 1fr;gap:16px}

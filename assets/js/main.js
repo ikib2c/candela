@@ -276,18 +276,21 @@ function actualizarResumen(){
   if (stAntes) stAntes.textContent = cop(p.antes);
   const pMon = $('#pagoMonto');
   const pPack = $('#pagoPackTxt');
-  if (pMon) pMon.textContent = cop(p.precio - desc + envioActual());
-  if (pPack) pPack.textContent = '(pack de ' + p.unidades + ' tarro' + (p.unidades > 1 ? 's' : '') + ')';
+  const pBase = precioOnline(p);
+  const envio = envioActual();
+  if (pMon) pMon.textContent = cop(pBase + envio);
+  if (pPack) pPack.textContent = 'Pack de ' + p.unidades + ' tarro' + (p.unidades > 1 ? 's' : '') + ' con 10% de descuento';
+  const dP = $('#dPack');
+  if (dP) dP.textContent = cop(pBase);
+  const dRow = $('#dEnvioRow');
+  if (dRow) dRow.hidden = envio === 0;
+  const dE = $('#dEnvio');
+  if (dE) dE.textContent = cop(envio);
   const aH = $('#pagoAhorro');
   if (aH) aH.textContent = cop(desc);
 }
 
 function initPago(){
-  const ejCont = $('#pagoEjemplos');
-  if (ejCont) ejCont.innerHTML = Object.values(PACKS).map(p => {
-    const d = precioOnline(p);
-    return `<div><span>Pack de ${p.unidades} tarro${p.unidades > 1 ? 's' : ''}</span><b>${cop(d)}</b><small>· prioritario: ${cop(d + ENVIO_PRIORITARIO)}</small></div>`;
-  }).join('');
   $$('input[name="pago"]').forEach(r => r.addEventListener('change', () => {
     const chk = document.querySelector('input[name="pago"]:checked');
     const online = !!(chk && chk.value === 'online');
