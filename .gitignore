@@ -9,4 +9,7 @@
 !/robots.txt
 !/.gitignore
 !/assets/
+!/CNAME
+!/deploy/
+!/deploy/capi-worker.js
 /assets/css/*.map

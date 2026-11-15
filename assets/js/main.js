@@ -18,12 +18,32 @@ const DESCUENTO_ONLINE = 0.10;
 let packActual = 2;
 
 /* Advanced Matching + Conversions API (Meta) */
-const PIXEL_ID = '1283443887279567';
-/* Sin backend no se puede llamar a la API de Conversiones directamente: al configurar
-   un proxy propio (Cloudflare Worker / Make / función serverless) que reenvíe a
-   https://graph.facebook.com/{PIXEL_ID}/events con el access token, escríbelo aquí.
-   El token de acceso NUNCA va en este archivo (es secreto de servidor). */
+const PIXEL_ID = '2230714121127146';
+const DOMINIO = 'https://cremacelulitis.com/';
+/* Conversions API: dataset de Meta (Propietario: Ziay). El endpoint debe ser un
+   proxy propio (Cloudflare Worker listo en deploy/capi-worker.js) que reenvíe a
+   https://graph.facebook.com/v21.0/{DATASET}/events. El token de acceso NUNCA va
+   en este archivo: se guarda como secreto del worker (wrangler secret put). */
+const CAPI_DATASET = '895125782528202';
 const CAPI_ENDPOINT = '';
+
+/* Señales de Meta para CAPI/EMQ: cookie _fbp y _fbc (derivada de ?fbclid) */
+let fbpActual = '';
+let fbcActual = '';
+function leerCookie(nombre){
+  const m = document.cookie.match('(?:^|;\\s*)' + nombre + '=([^;]*)');
+  return m ? decodeURIComponent(m[1]) : '';
+}
+function initSenalesMeta(){
+  fbpActual = leerCookie('_fbp');
+  const fbclid = new URLSearchParams(location.search).get('fbclid');
+  if (fbclid){
+    fbcActual = 'fb.1.' + Date.now() + '.' + fbclid;
+    document.cookie = '_fbc=' + fbcActual + ';max-age=7776000;path=/;SameSite=Lax';
+  } else {
+    fbcActual = leerCookie('_fbc');
+  }
+}
 
 const $  = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
@@ -92,31 +112,46 @@ async function hashSHA256(texto) {
 }
 
 let phHashActual = null;
-let phHashDe = '';
+let identidadDe = '';
 
+/* Advanced Matching ampliado: celular (ph) + nombre (fn) + ciudad (ct) +
+   departamento (st), hasheados SHA-256. Mejora el match quality (EMQ) del
+   Pixel y la calidad de eventos de la CAPI. */
 async function tipificarTelefono() {
-  const campo = $('#fTelefono');
-  if (!campo) return phHashActual;
-  const norm = normalizarTelefono(campo.value);
-  if (!norm || norm === phHashDe || typeof fbq !== 'function') return phHashActual;
-  const h = await hashSHA256(norm);
-  if (!h) return phHashActual;
-  phHashDe = norm;
-  phHashActual = h;
-  fbq('init', PIXEL_ID, { ph: h });
-  return h;
+  if (typeof fbq !== 'function') return phHashActual;
+  const norm = normalizarTelefono($('#fTelefono') ? $('#fTelefono').value : '');
+  const nombre = ($('#fNombre') && $('#fNombre').value || '').trim().toLowerCase();
+  const ciudad = ($('#fCiudad') && $('#fCiudad').value || '').trim().toLowerCase();
+  const depto = ($('#fDepartamento') && $('#fDepartamento').value || '').trim().toLowerCase();
+  const clave = norm + '|' + nombre + '|' + ciudad + '|' + depto;
+  if (!clave.replace(/\|/g, '') || clave === identidadDe) return phHashActual;
+  const datos = {};
+  if (norm){ const h = await hashSHA256(norm); if (h){ phHashActual = h; datos.ph = h; } }
+  if (nombre){ const h = await hashSHA256(nombre); if (h) datos.fn = h; }
+  if (ciudad){ const h = await hashSHA256(ciudad); if (h) datos.ct = h; }
+  if (depto){ const h = await hashSHA256(depto); if (h) datos.st = h; }
+  if (!Object.keys(datos).length) return phHashActual;
+  identidadDe = clave;
+  fbq('init', PIXEL_ID, datos);
+  return phHashActual;
 }
 
 /* Conversions API (servidor): sin CAPI_ENDPOINT solo devuelve el payload
-   (estándar Meta: data[].event_name/event_id/user_data.ph/custom_data). */
+   (estándar Meta: data[].event_name/event_id/user_data/custom_data). El worker
+   de deploy/capi-worker.js completa el token como secreto. */
 async function enviarCAPI(evento, eventID, phHash, valor, contentIds, numItems) {
+  const user_data = phHash ? { ph: [phHash] } : {};
+  if (fbpActual) user_data.fbp = fbpActual;
+  if (fbcActual) user_data.fbc = fbcActual;
+  if (navigator.userAgent) user_data.client_user_agent = navigator.userAgent;
   const payload = {
     data: [{
       event_name: evento,
       event_time: Math.floor(Date.now() / 1000),
       event_id: eventID,
+      event_source_url: DOMINIO,
       action_source: 'website',
-      user_data: phHash ? { ph: [phHash] } : {},
+      user_data: user_data,
       custom_data: { currency: 'COP', value: valor, content_ids: contentIds, num_items: numItems }
     }]
   };
@@ -316,13 +351,55 @@ function actualizarResumen(){
   if (pBtn) pBtn.textContent = 'Pagar ' + cop(pBase + envio) + ' con Mercado Pago · 10% OFF →';
   const aH = $('#pagoAhorro');
   if (aH) aH.textContent = cop(desc);
+  refrescarDatosPago();
+}
+
+/* ============ Mensaje "Ya pagué" con los datos del formulario ============
+   Si el cliente ya llenó sus datos, el mensaje viaja completo (nombre, celular,
+   dirección y monto) para que el asesor cruze el pago de Mercado Pago sin
+   volver a preguntar nada. Si no los llenó, viaja la plantilla para que los
+   diligencie en WhatsApp (ruta de rescate documentada en FAQ/SOP). */
+function mensajeComprobante(eventID, total){
+  const val = id => { const e = $('#' + id); return e ? e.value.trim() : ''; };
+  const p = packData();
+  const monto = cop(total || (precioOnline(p) + envioActual()));
+  const lineas = [
+    '*Ya pagué online — CANDELA*',
+    'Adjunto mi comprobante de pago.',
+    ''
+  ];
+  if (eventID) lineas.push('*N.º de pedido:* ' + eventID);
+  lineas.push('*Monto pagado:* ' + monto + ' (10% de descuento incluido)');
+  lineas.push('');
+  lineas.push('*Mis datos de envío:*');
+  lineas.push('Nombre completo: ' + val('fNombre'));
+  lineas.push('Celular: ' + val('fTelefono'));
+  lineas.push('Departamento: ' + val('fDepartamento'));
+  lineas.push('Ciudad: ' + val('fCiudad'));
+  lineas.push('Dirección: ' + val('fDireccion'));
+  const nota = val('fNota');
+  if (nota) lineas.push('Referencia: ' + nota);
+  lineas.push('');
+  lineas.push('¡Gracias!');
+  return lineas.join('\n');
+}
+
+function refrescarDatosPago(eventID, total){
+  const exDatos = $('#datosPagoLink');
+  if (exDatos) exDatos.href = `https://wa.me/${WHATSAPP_PEDIDOS}?text=${encodeURIComponent(mensajeComprobante(eventID, total))}`;
 }
 
 function initPago(){
-  /* Ruta de rescate: cliente que pagó online sin llenar el formulario */
-  const datosPago = '*Ya pagué online — CANDELA*\nAdjunto mi comprobante de pago.\n\n*Mis datos de envío:*\nNombre completo: \nCelular: \nDepartamento: \nCiudad: \nDirección: \nMonto pagado: ';
+  refrescarDatosPago();
+  /* El enlace "Ya pagué" se recalcula al instante del clic: aunque el cliente
+     escriba sus datos y pague sin enviar el formulario, el mensaje llega lleno. */
   const exDatos = $('#datosPagoLink');
-  if (exDatos) exDatos.href = `https://wa.me/${WHATSAPP_PEDIDOS}?text=${encodeURIComponent(datosPago)}`;
+  if (exDatos) exDatos.addEventListener('click', () => refrescarDatosPago());
+  /* Recordatorio universal en todos los enlaces de Mercado Pago del sitio:
+     tras pagar hay que enviar el comprobante (o los datos si no envió pedido). */
+  $$('a[href*="link.mercadopago.com.co"]').forEach(a => a.addEventListener('click', () => {
+    toast('Después de pagar toca "Ya pagué · enviar comprobante" 📲');
+  }));
   $$('input[name="pago"]').forEach(r => r.addEventListener('change', () => {
     const chk = document.querySelector('input[name="pago"]:checked');
     const online = !!(chk && chk.value === 'online');
@@ -478,8 +555,11 @@ function initFormulario(){
       if (pagoOnline){
         const exPagar = $('#exitoPagar');
         if (exPagar) exPagar.href = LINK_MP;
+        /* El comprobante viaja con el N.º de pedido, el monto y TODOS los datos
+           que el cliente acaba de diligenciar: cero re-escritura, cero datos perdidos. */
         const exComp = $('#exitoComprobante');
-        if (exComp) exComp.href = `https://wa.me/${WHATSAPP_PEDIDOS}?text=${encodeURIComponent('*Comprobante de pago — CANDELA*\n*N.º de pedido:* ' + eventID + '\nHola, ya realicé el pago online de ' + cop(total) + ' (10% de descuento incluido). Adjunto mi comprobante. ¡Gracias!')}`;
+        if (exComp) exComp.href = `https://wa.me/${WHATSAPP_PEDIDOS}?text=${encodeURIComponent(mensajeComprobante(eventID, total))}`;
+        refrescarDatosPago(eventID, total);
         if (exTxt) exTxt.textContent = 'Tu pedido ya llegó a WhatsApp. Ahora paga tu pack con el 10% de descuento (se abrió Mercado Pago en una pestaña nueva; si no abrió, usa el botón):';
         if (acc) acc.hidden = false;
         overlay.classList.add('show');
@@ -659,6 +739,7 @@ function initAngulo(){
 /* ============ Inicio ============ */
 document.addEventListener('DOMContentLoaded', () => {
   initAngulo();
+  initSenalesMeta();
   initGaleria();
   initBundles();
   initEnvio();
