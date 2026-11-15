@@ -547,3 +547,73 @@ footer .copy{opacity:.6;font-size:11.5px}
 .cod-compromiso.campo-error{border-color:var(--rojo)}
 .campo-err{display:block;font:600 11.5px var(--ff-cuerpo);color:var(--rojo);margin-top:5px}
 .cod-compromiso .campo-err{color:var(--rojo-oscuro)}
+
+/* ============ Primera seccion espejo (ref: Nevora product hero nov 2026) ============ */
+.prod-grid{display:grid;grid-template-columns:1fr 1.04fr;gap:46px;align-items:start}
+.prod-media{position:relative}
+.hero-foto{position:relative}
+.prod-badge{position:absolute;left:14px;bottom:14px;z-index:2;background:var(--vino);color:#fff;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:7px 13px;border-radius:999px;box-shadow:var(--sombra);transform:rotate(-2deg)}
+.prod-info{display:block}
+.prod-rating{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:var(--vino-soft);margin:0 0 12px}
+.prod-rating b{color:var(--vino)}
+.prod-minibens{list-style:none;margin:0 0 18px;padding:0;display:flex;gap:8px;flex-wrap:wrap}
+.prod-minibens li{background:#fff;border:1px solid rgba(72,16,31,.12);border-radius:var(--r-pill);padding:7px 14px;font-size:12.5px;font-weight:600;color:var(--vino)}
+.reloj-oferta{background:#fff;border:1.5px solid rgba(211,30,60,.22);border-radius:var(--r-md);padding:14px 16px;margin:0 0 16px;box-shadow:0 8px 22px rgba(211,30,60,.08)}
+.reloj-main{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.reloj-label{display:flex;align-items:center;gap:10px;min-width:0}
+.reloj-pulso{flex:none;width:10px;height:10px;border-radius:50%;background:var(--rojo);box-shadow:0 0 0 0 rgba(211,30,60,.5);animation:reloj-pulso 1.6s infinite}
+@keyframes reloj-pulso{70%{box-shadow:0 0 0 9px rgba(211,30,60,0)}100%{box-shadow:0 0 0 0 rgba(211,30,60,0)}}
+.reloj-copy{display:grid;min-width:0}
+.reloj-eyebrow{font-size:10px;font-weight:700;letter-spacing:.22em;color:var(--rojo)}
+.reloj-oferta-txt{font-size:13.5px;font-weight:600;color:var(--vino);line-height:1.3}
+.reloj-oferta-txt strong{color:var(--rojo)}
+.reloj-digits{display:flex;align-items:center;gap:6px;flex:none}
+.reloj-unit{display:grid;justify-items:center;gap:2px;background:var(--crema-2);border-radius:10px;padding:7px 9px;min-width:54px}
+.reloj-num{font:400 22px/1 var(--ff-display);color:var(--rojo);font-variant-numeric:tabular-nums}
+.reloj-unit small{font-size:9px;font-weight:700;letter-spacing:.16em;color:var(--vino-soft)}
+.reloj-sep{font:400 22px/1 var(--ff-display);color:var(--vino-soft)}
+.reloj-track{margin-top:12px;height:5px;border-radius:var(--r-pill);background:rgba(211,30,60,.12);overflow:hidden}
+.reloj-fill{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--rojo),var(--pimienta));transform-origin:left;transition:transform 1s linear}
+.pack-hero{display:grid;gap:12px;margin:2px 0 0}
+.pack-hero-row{position:relative;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;background:#fff;border:2px solid rgba(72,16,31,.10);border-radius:var(--r-md);padding:14px 16px;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .2s}
+.pack-hero-row:hover{transform:translateY(-2px);box-shadow:var(--sombra)}
+.pack-hero-row:focus-visible{outline:3px solid var(--oro);outline-offset:3px}
+.pack-hero-row.sel{border-color:var(--rojo);box-shadow:0 12px 30px rgba(211,30,60,.16);animation:glow-oferta 3.2s ease-in-out infinite}
+.pack-hero-row .ph-radio{width:20px;height:20px;border-radius:50%;border:2px solid rgba(72,16,31,.25);display:grid;place-items:center;transition:border-color .2s}
+.pack-hero-row.sel .ph-radio{border-color:var(--rojo)}
+.pack-hero-row.sel .ph-radio::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--rojo);animation:pop .4s cubic-bezier(.34,1.56,.64,1)}
+.ph-info{min-width:0}
+.ph-info b{display:block;font:400 19px/1.1 var(--ff-display);text-transform:uppercase;color:var(--vino)}
+.ph-info small{display:block;font-size:11.5px;color:var(--vino-soft);font-weight:500}
+.ph-precio{text-align:right}
+.ph-precio b{display:block;font:400 24px/1 var(--ff-display);color:var(--rojo)}
+.ph-precio s{font-size:11.5px;color:var(--vino-soft)}
+.ph-cinta{position:absolute;top:-11px;right:14px;background:var(--rojo);color:#fff;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:var(--r-pill);box-shadow:var(--sombra)}
+.ph-cinta.oro{background:var(--oro);color:var(--vino)}
+.ph-cinta.suave{background:#fff;color:var(--vino-soft);border:1px solid rgba(72,16,31,.15)}
+.ph-nota{font-size:12.5px;color:var(--vino-soft);margin:10px 0 16px}
+.ph-nota b{color:var(--exito)}
+.prod-cta{width:100%;font-size:17px;padding:18px 22px;background:linear-gradient(135deg,#E8324E,var(--rojo) 55%,#B3182F);box-shadow:0 14px 30px rgba(211,30,60,.35);animation:latido 1.4s ease-in-out infinite;transform-origin:center}
+.mp-strip{margin-top:16px;border-top:1px solid rgba(72,16,31,.10);padding-top:13px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;font-size:12.5px;color:var(--vino-soft)}
+.mp-strip a{display:inline-flex;align-items:center;gap:7px}
+.mp-strip a:hover{text-decoration:underline}
+.mp-code{border:1px solid var(--vino);color:var(--vino);font:700 11px var(--ff-cuerpo);letter-spacing:.06em;padding:2px 8px;border-radius:6px;background:#fff}
+.mp-off{background:var(--exito);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){
+  .prod-cta{animation:none}
+  .reloj-pulso{animation:none}
+  .reloj-fill{transition:none}
+  .pack-hero-row.sel{animation:none}
+}
+@media(max-width:900px){
+  .prod-grid{grid-template-columns:1fr;gap:38px}
+  .prod-media{max-width:440px;margin:0 auto;width:100%}
+}
+@media(max-width:480px){
+  .pack-hero-row{grid-template-columns:auto 1fr;padding:12px 13px;gap:10px}
+  .ph-precio{grid-column:2;text-align:left;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .ph-precio b{font-size:21px}
+  .ph-cinta{right:8px;top:-10px}
+  .reloj-main{flex-wrap:wrap}
+  .prod-badge{left:10px;bottom:10px;font-size:10px;padding:6px 11px;transform:rotate(-2deg)}
+}

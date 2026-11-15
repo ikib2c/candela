@@ -165,33 +165,59 @@ function initGaleria(){
   });
 }
 
-/* ============ Selector de packs ============ */
+/* ============ Selector de packs ============
+   Dos espejos sincronizados: .bundle (sección #oferta) y .pack-hero-row
+   (buy box del héroe). La lógica de elección es compartida; solo el
+   auto-scroll al formulario cambia (desde el héroe no se empuja). */
+function sincronizarPacks(n){
+  $$('.bundle').forEach(x => {
+    const on = parseInt(x.dataset.pack, 10) === n;
+    x.classList.toggle('sel', on);
+    x.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+  $$('.pack-hero-row').forEach(x => {
+    const on = parseInt(x.dataset.pack, 10) === n;
+    x.classList.toggle('sel', on);
+    x.setAttribute('aria-checked', on ? 'true' : 'false');
+  });
+}
+
+function elegirPack(n, { autoScroll = true } = {}){
+  packActual = n;
+  sincronizarPacks(n);
+  actualizarResumen();
+  track('AddToCart', { pack: PACKS[packActual] });
+  addCartOrigen = packActual;
+  const p = PACKS[packActual];
+  const ahorro = p.antes - p.precio;
+  toast('¡Buena elección! Ahorras ' + cop(ahorro) + (p.unidades === 3 ? ' + regalo sorpresa 🎁' : ' 🎉'));
+  flashSticky();
+  actualizarPasos();
+  if (autoScroll){
+    const pedido = document.querySelector('#pedido');
+    if (pedido) setTimeout(() => pedido.scrollIntoView({ behavior: 'smooth', block: 'start' }), 400);
+  }
+}
+
 function initBundles(){
   $$('.bundle').forEach(b => {
     b.tabIndex = 0;
     b.setAttribute('role', 'button');
     b.setAttribute('aria-pressed', b.classList.contains('sel') ? 'true' : 'false');
-    const elegir = () => {
-      $$('.bundle').forEach(x => { x.classList.remove('sel'); x.setAttribute('aria-pressed', 'false'); });
-      b.classList.add('sel');
-      b.setAttribute('aria-pressed', 'true');
-      packActual = parseInt(b.dataset.pack, 10);
-      actualizarResumen();
-      track('AddToCart', { pack: PACKS[packActual] });
-      addCartOrigen = packActual;
-      const p = PACKS[packActual];
-      const ahorro = p.antes - p.precio;
-      toast('¡Buena elección! Ahorras ' + cop(ahorro) + (p.unidades === 3 ? ' + regalo sorpresa 🎁' : ' 🎉'));
-      flashSticky();
-      actualizarPasos();
-      const pedido = document.querySelector('#pedido');
-      if (pedido) setTimeout(() => pedido.scrollIntoView({ behavior: 'smooth', block: 'start' }), 400);
-    };
+    const elegir = () => elegirPack(parseInt(b.dataset.pack, 10));
     b.addEventListener('click', elegir);
     b.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); elegir(); }
     });
   });
+  $$('.pack-hero-row').forEach(r => {
+    const elegir = () => elegirPack(parseInt(r.dataset.pack, 10), { autoScroll: false });
+    r.addEventListener('click', elegir);
+    r.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); elegir(); }
+    });
+  });
+  sincronizarPacks(packActual);
 }
 
 function packData(){
@@ -494,6 +520,25 @@ function initFaq(){
   });
 }
 
+/* ============ Reloj de oferta del héroe (30 min por visita, espejo del offer-clock) ============ */
+function initRelojOferta(){
+  const min = document.querySelector('[data-reloj-min]');
+  const seg = document.querySelector('[data-reloj-seg]');
+  const fill = document.querySelector('[data-reloj-fill]');
+  if (!min || !seg) return;
+  const TOTAL = 30 * 60;
+  let rest = TOTAL;
+  const pinta = () => {
+    min.textContent = String(Math.floor(rest / 60)).padStart(2, '0');
+    seg.textContent = String(rest % 60).padStart(2, '0');
+    if (fill) fill.style.transform = 'scaleX(' + (rest / TOTAL) + ')';
+  };
+  pinta();
+  setInterval(() => {
+    if (rest > 0){ rest--; pinta(); }
+  }, 1000);
+}
+
 /* ============ Cuenta regresiva diaria (regalo sorpresa) ============ */
 function initCuentaRegresiva(){
   const el = $('#cuentaRegresiva');
@@ -629,6 +674,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFormulario();
   initFaq();
   initCuentaRegresiva();
+  initRelojOferta();
   initReveal();
   initVuelo();
   const anio = $('#anio');
