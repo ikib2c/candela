@@ -59,11 +59,14 @@ const GA4_EVENTOS = {
   Purchase: 'purchase'
 };
 
-function track(metaEvento, { pack, envio = 0, transaction_id } = {}) {
+function track(metaEvento, { pack, envio = 0, transaction_id, valor, pago } = {}) {
   const p = pack || PACKS[packActual];
-  const value = p.precio + envio;
+  /* valor: monto REAL de la transacción. En Purchase online el cliente paga el
+     pack con 10% de descuento (+ envío prioritario si aplica): reportar a Meta
+     el precio de lista inflaría los ingresos y sesgaría el ROAS. */
+  const value = typeof valor === 'number' && !isNaN(valor) ? valor : (p.precio + envio);
   const itemId = 'candela-300ml-' + p.unidades + '-tarros';
-  const item = { item_id: itemId, item_name: p.nombre, item_category: 'Crema corporal', price: p.precio, quantity: 1 };
+  const item = { item_id: itemId, item_name: p.nombre, item_category: 'Crema corporal', price: value, quantity: p.unidades };
   const eventoGa4 = GA4_EVENTOS[metaEvento] || metaEvento.toLowerCase();
 
   if (typeof fbq === 'function') {
@@ -75,6 +78,8 @@ function track(metaEvento, { pack, envio = 0, transaction_id } = {}) {
       content_name: p.nombre,
       num_items: p.unidades
     };
+    /* Param custom para conversiones/segmentos por método de pago */
+    if (pago) params.pago = pago;
     if (transaction_id) fbq('track', metaEvento, params, { eventID: transaction_id });
     else fbq('track', metaEvento, params);
   }
@@ -540,7 +545,7 @@ function initFormulario(){
     );
     const mensajePedido = encodeURIComponent(lineas.join('\n'));
 
-    track('Purchase', { pack: p, envio: envio, pago: pagoOnline ? 'online' : 'contraentrega', transaction_id: eventID });
+    track('Purchase', { pack: p, envio: envio, pago: pagoOnline ? 'online' : 'contraentrega', transaction_id: eventID, valor: total });
     enviarCAPI('Purchase', eventID, phHashActual, total, ['candela-300ml-' + p.unidades + '-tarros'], p.unidades);
 
     const p3 = document.querySelector('#pasosPedido .pp:nth-child(3)');
