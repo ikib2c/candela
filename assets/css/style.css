@@ -84,7 +84,7 @@ header{position:sticky;top:0;z-index:80;background:rgba(255,246,243,.92);backdro
 .btn:hover .flecha{transform:translateX(4px)}
 
 /* ============ Héroe ============ */
-.hero{position:relative;padding:64px 0 40px;overflow:hidden}
+.hero{position:relative;padding:64px 0 40px;overflow:hidden;overflow:clip}
 .hero-fondo{position:absolute;inset:0;z-index:-1}
 .hero-fondo .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5}
 .hero-fondo .b1{width:560px;height:560px;background:var(--pimienta-claro);top:-180px;right:-120px}
@@ -616,4 +616,14 @@ footer .copy{opacity:.6;font-size:11.5px}
   .ph-cinta{right:8px;top:-10px}
   .reloj-main{flex-wrap:wrap}
   .prod-badge{left:10px;bottom:10px;font-size:10px;padding:6px 11px;transform:rotate(-2deg)}
+}
+
+/* ============ Compra espejo: columna de imagen fija en desktop (ref sticky de Nevora) ============
+   La foto y sus miniaturas se quedan visibles mientras el buy box (texto + packs)
+   hace scroll; al agotarse la sección, la imagen se va con el resto de la landing.
+   Nota: overflow:clip en .hero permite el sticky sin dejar de recortar los blobs. */
+@media (min-width:901px){
+  .prod-media{position:sticky;top:84px}
+  .hero-foto{width:fit-content;max-width:100%;margin:0 auto}
+  .hero-foto img{width:auto;height:auto;max-width:100%;max-height:calc(100vh - 330px);aspect-ratio:1/1;margin:0 auto}
 }
