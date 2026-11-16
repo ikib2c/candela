@@ -13,4 +13,5 @@
 !/deploy/
 !/deploy/capi-worker.js
 !/deploy/wrangler.toml
+/deploy/.wrangler/
 /assets/css/*.map
