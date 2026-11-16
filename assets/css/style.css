@@ -4,6 +4,24 @@
    Tipografía: Anton (display) + Poppins (cuerpo) + Caveat (acentos)
    ============================================================ */
 
+/* --- Fuentes autoalojadas (subset latin woff2): quita Google Fonts del
+   camino crítico y elimina la dependencia externa. Los fallbacks ajustados
+   (Arial/Roboto con métricas medidas en Chrome: Δancho 0.00% Δalto 0.00px
+   contra cada fuente real) hacen que el swap fallback→webfont no mueva ni
+   un pixel: CLS de fuentes ≈ 0 en desktop y móvil. --- */
+@font-face{font-family:"Anton";font-style:normal;font-weight:400;font-display:swap;src:url("../fonts/anton-400.woff2") format("woff2")}
+@font-face{font-family:"Poppins";font-style:normal;font-weight:400;font-display:swap;src:url("../fonts/poppins-400.woff2") format("woff2")}
+@font-face{font-family:"Poppins";font-style:normal;font-weight:500;font-display:swap;src:url("../fonts/poppins-500.woff2") format("woff2")}
+@font-face{font-family:"Poppins";font-style:normal;font-weight:600;font-display:swap;src:url("../fonts/poppins-600.woff2") format("woff2")}
+@font-face{font-family:"Poppins";font-style:normal;font-weight:700;font-display:swap;src:url("../fonts/poppins-700.woff2") format("woff2")}
+@font-face{font-family:"Caveat";font-style:normal;font-weight:600;font-display:swap;src:url("../fonts/caveat-600.woff2") format("woff2")}
+@font-face{font-family:"Anton Fallback";font-style:normal;font-weight:400;src:local("Arial"),local("Roboto"),local("Helvetica Neue");size-adjust:81.1%;ascent-override:145.5%;descent-override:40.69%;line-gap-override:0%}
+@font-face{font-family:"Poppins Fallback";font-style:normal;font-weight:400;src:local("Arial"),local("Roboto"),local("Helvetica Neue");size-adjust:103.96%;ascent-override:101%;descent-override:33.67%;line-gap-override:9.62%}
+@font-face{font-family:"Poppins Fallback";font-style:normal;font-weight:500;src:local("Arial"),local("Roboto"),local("Helvetica Neue");size-adjust:105.6%;ascent-override:99.43%;descent-override:33.14%;line-gap-override:9.47%}
+@font-face{font-family:"Poppins Fallback";font-style:normal;font-weight:600;src:local("Arial"),local("Roboto"),local("Helvetica Neue");size-adjust:106.75%;ascent-override:98.36%;descent-override:32.79%;line-gap-override:9.37%}
+@font-face{font-family:"Poppins Fallback";font-style:normal;font-weight:700;src:local("Arial"),local("Roboto"),local("Helvetica Neue");size-adjust:108.07%;ascent-override:97.16%;descent-override:32.39%;line-gap-override:9.25%}
+@font-face{font-family:"Caveat Fallback";font-style:normal;font-weight:600;src:local("Comic Sans MS"),local("Chalkboard SE"),local("Comic Neue");size-adjust:73.97%;ascent-override:129.78%;descent-override:40.56%;line-gap-override:0%}
+
 :root{
   --rojo:#D31E3C;
   --rojo-oscuro:#A3122B;
@@ -17,9 +35,9 @@
   --exito:#1E9E6A;
   --blanco:#FFFFFF;
 
-  --ff-display:"Anton", sans-serif;
-  --ff-cuerpo:"Poppins", sans-serif;
-  --ff-mano:"Caveat", cursive;
+  --ff-display:"Anton","Anton Fallback",sans-serif;
+  --ff-cuerpo:"Poppins","Poppins Fallback",Arial,sans-serif;
+  --ff-mano:"Caveat","Caveat Fallback",cursive;
 
   --r-sm:10px;
   --r-md:18px;
