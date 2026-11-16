@@ -3,7 +3,7 @@
    (indicativo de país + número, sin espacios ni símbolos).
    WHATSAPP_PEDIDOS: recibe los pedidos enviados desde el formulario.
    WHATSAPP_ATENCION: información, PQRS, reclamos y asesor humano. */
-const WHATSAPP_PEDIDOS = '573504379870';
+const WHATSAPP_PEDIDOS = '573504379692';
 const WHATSAPP_ATENCION = '573504379692';
 const LINK_MP = 'https://link.mercadopago.com.co/ziayiki';
 
