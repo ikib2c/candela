@@ -20,12 +20,13 @@ let packActual = 2;
 /* Advanced Matching + Conversions API (Meta) */
 const PIXEL_ID = '2230714121127146';
 const DOMINIO = 'https://cremacelulitis.com/';
-/* Conversions API: dataset de Meta (Propietario: Ziay). El endpoint debe ser un
-   proxy propio (Cloudflare Worker listo en deploy/capi-worker.js) que reenvíe a
-   https://graph.facebook.com/v21.0/{DATASET}/events. El token de acceso NUNCA va
+/* Conversions API: endpoint del PIXEL 2230714121127146 (Meta lo enruta al
+   dataset del pixel: dedup Pixel↔CAPI garantizada). El proxy propio (Cloudflare
+   Worker desplegado en deploy/capi-worker.js) reenvía a
+   https://graph.facebook.com/v21.0/{id}/events. El token de acceso NUNCA va
    en este archivo: se guarda como secreto del worker (wrangler secret put). */
-const CAPI_DATASET = '895125782528202';
-const CAPI_ENDPOINT = '';
+const CAPI_DATASET = '2230714121127146';
+const CAPI_ENDPOINT = 'https://candela-capi.ikitienda.workers.dev';
 
 /* Señales de Meta para CAPI/EMQ: cookie _fbp y _fbc (derivada de ?fbclid) */
 let fbpActual = '';

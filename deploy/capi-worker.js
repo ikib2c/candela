@@ -12,7 +12,10 @@
 
    Verifica la configuración sin gastar eventos: añade el header
    "x-test-event-code: TEST12345" (código del Test Events de Events Manager). */
-const DATASET_ID = '895125782528202';
+/* Endpoint del PIXEL (Meta enruta los eventos al dataset del pixel -> dedup
+   Pixel↔CAPI garantizada). El dataset 895125782528202 "Ziay" es del tracking
+   VIEJO: el token no tiene permisos sobre él (verificado contra Graph API). */
+const DATASET_ID = '2230714121127146';
 const ORIGEN_PERMITIDO = 'https://cremacelulitis.com';
 
 export default {

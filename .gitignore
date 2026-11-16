@@ -12,4 +12,5 @@
 !/CNAME
 !/deploy/
 !/deploy/capi-worker.js
+!/deploy/wrangler.toml
 /assets/css/*.map
